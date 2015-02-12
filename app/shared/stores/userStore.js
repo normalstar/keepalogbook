@@ -4,15 +4,24 @@
 
 'use strict';
 
+var Immutable = require('immutable');
+
 var Store = require('utils/Store');
 var assign = require('lodash/object/assign');
 var { ACTION_TYPES } = require('constants/appConstants');
 
-var user = {};
+var _user = Immutable.Map({
+  auth: {}
+});
+
 var actions = {};
 
 actions[ACTION_TYPES.RECEIVE_AUTH] = function(action) {
-  console.log('hi receive auth', action);
+  _user = _user.set('auth', action.auth);
+};
+
+actions[ACTION_TYPES.RECEIVE_LOGGED_OUT] = function() {
+  _user = _user.set('auth', null);
 };
 
 var userStore = new Store(actions);
@@ -23,7 +32,7 @@ assign(userStore, {
   },
 
   get: function() {
-    return user;
+    return _user;
   }
 });
 

@@ -25,10 +25,12 @@ var Front = React.createClass({
 
   componentWillMount: function() {
     // Check logged in or not status and redirect if necessary
+    console.log('mounted front', this.state.user.get('auth'));
   },
 
   componentDidUpdate: function() {
     // Check logged in or not status and redirect if necessary
+    console.log('updated front', this.state.user.get('auth'));
   },
 
   render: function() {

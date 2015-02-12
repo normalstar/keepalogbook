@@ -13,18 +13,19 @@ module.exports = {
    * When App component loads we'll start listening for auth status.
    */
   loadApp: function() {
-    function isLoggedIn(authData) {
-      console.log('logged in with data:', authData);
+    function logIn(authData) {
       appDispatcher.handleAction({
         type: ACTION_TYPES.RECEIVE_AUTH,
         auth: authData
       });
     }
 
-    function isLoggedOut() {
-      console.log('logged out');
+    function logOut() {
+      appDispatcher.handleAction({
+        type: ACTION_TYPES.RECEIVE_LOGGED_OUT
+      });
     }
 
-    firebaseUtils.listenToAuthStatus(isLoggedIn, isLoggedOut);
+    firebaseUtils.listenToAuthStatus(logIn, logOut);
   }
 };
