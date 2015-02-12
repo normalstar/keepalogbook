@@ -21,6 +21,11 @@ module.exports = function(options) {
         require('fs').writeFileSync(path.join(__dirname, 'build', 'stats.json'), JSON.stringify(jsonStats));
       });
     },
+
+    new webpack.DefinePlugin({
+      __CONFIG__: options.config
+    }),
+
     new webpack.PrefetchPlugin('react'),
     new webpack.PrefetchPlugin('react/lib/ReactComponentBrowserEnvironment')
   ];
