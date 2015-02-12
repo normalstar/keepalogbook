@@ -1,7 +1,7 @@
 'use strict';
 
 var { Dispatcher } = require('flux');
-var assign = require('object-assign');
+var assign = require('lodash/object/assign');
 
 module.exports = assign(new Dispatcher(), {
   handleAction: function(action) {

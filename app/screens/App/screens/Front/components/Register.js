@@ -13,11 +13,19 @@ var Register = React.createClass({
     frontActionCreators.authorizeWithFacebook();
   },
 
+  handleClickTwitterRegister: function(e) {
+    e.preventDefault();
+    frontActionCreators.authorizeWithTwitter();
+  },
+
   render: function() {
     return (
       <div>
         <a href="#" onClick={this.handleClickFacebookRegister}>
           Register with Facebook
+        </a>
+        <a href="#" onClick={this.handleClickTwitterRegister}>
+          Register with Twitter
         </a>
       </div>
     );
