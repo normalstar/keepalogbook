@@ -5,7 +5,7 @@
 'use strict';
 
 var React = require('react/addons');
-var frontActionCreators = require('actions/frontActionCreators');
+var frontActionCreators = require('../actions/frontActionCreators');
 
 var Register = React.createClass({
   handleClickFacebookRegister: function(e) {
