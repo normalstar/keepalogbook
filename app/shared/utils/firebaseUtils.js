@@ -5,7 +5,8 @@
 'use strict';
 
 var Firebase = require('firebase');
-var firebaseUrl = __CONFIG__.firebase;
+var firebaseUrl = __FIREBASE__;
+var RSVP = require('rsvp');
 
 module.exports = {
   /**
@@ -20,12 +21,16 @@ module.exports = {
 
   authorizeWithFacebook: function() {
     var ref = new Firebase(firebaseUrl);
-    ref.authWithOAuthPopup('facebook', function(error, authData) {
-      if (error) {
-        console.log('Login Failed!', error);
-      } else {
-        console.log('Authenticated successfully with payload:', authData);
-      }
+    var promise = new RSVP.Promise(function(resolve, reject) {
+      ref.authWithOAuthPopup('facebook', function(error, authData) {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(authData);
+        }
+      });
     });
+
+    return promise;
   }
 };

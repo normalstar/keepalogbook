@@ -84,7 +84,8 @@
 
     // Custom Globals
     "globals"       : {
-      "__CONFIG__": false
+      "__FIREBASE__": false,
+      "__DEV__": false
     }        // additional predefined global variables
 }
 

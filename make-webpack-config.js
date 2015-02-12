@@ -23,7 +23,7 @@ module.exports = function(options) {
     },
 
     new webpack.DefinePlugin({
-      __CONFIG__: options.config
+      __FIREBASE__: JSON.stringify(options.config.firebase)
     }),
 
     new webpack.PrefetchPlugin('react'),
