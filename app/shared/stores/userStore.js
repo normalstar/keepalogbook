@@ -11,18 +11,21 @@ var assign = require('lodash/object/assign');
 var { ACTION_TYPES } = require('constants/appConstants');
 
 var _user = Immutable.Map({
-  auth: {}
+  auth: Immutable.Map({}),
+  username: '',
+  redirectFromAuth: false
 });
 
 var actions = {};
 
 actions[ACTION_TYPES.RECEIVE_AUTH] = function(action) {
-  _user = _user.set('auth', action.auth);
+  _user = _user.set('auth', Immutable.fromJS(action.auth));
 };
 
 actions[ACTION_TYPES.RECEIVE_LOGGED_OUT] = function() {
-  _user = _user.set('auth', null);
+  _user = _user.set('auth', Immutable.Map({}));
 };
+
 
 var userStore = new Store(actions);
 

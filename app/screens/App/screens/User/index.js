@@ -1,23 +1,19 @@
-/**
- * This is the route handler for front page.
- */
-
 'use strict';
 
 var React = require('react/addons');
 var { PureRenderMixin } = React.addons;
-var Front = null;
+var User = null;
 
 var StoresMixin = require('mixins/StoresMixin');
 var userStore = require('stores/userStore');
 
-var FrontHandler = React.createClass({
+var UserHandler = React.createClass({
   statics: {
     willTransitionTo: function(transition, params, query, callback) {
       require.ensure([], function() {
-        Front = require('./components/Front');
+        User = require('./components/User');
         callback();
-      }, 'front');
+      }, 'user');
     }
   },
 
@@ -33,9 +29,9 @@ var FrontHandler = React.createClass({
 
   render: function() {
     return (
-      <Front user={this.state.user} />
+      <User user={this.state.user} />
     );
   }
 });
 
-module.exports = FrontHandler;
+module.exports = UserHandler;

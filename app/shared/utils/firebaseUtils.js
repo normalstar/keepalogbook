@@ -63,5 +63,41 @@ module.exports = {
         loggedOutCallback();
       }
     });
+  },
+
+  /**
+   * Check value from ref once.
+   *
+   * @param path
+   * @return {Promise}
+   */
+  getValue: function(path) {
+    var ref = new Firebase(firebaseUrl + path);
+
+    var promise = new RSVP.Promise(function(resolve, reject) {
+      ref.once('value', function(snapshot) {
+        resolve(snapshot.val());
+      }, function(error) {
+        reject(error);
+      });
+    });
+
+    return promise;
+  },
+
+  set: function(path, value) {
+    var ref = new Firebase(firebaseUrl + path);
+
+    var promise = new RSVP.Promise(function(resolve, reject) {
+      ref.set(value, function(error) {
+        if (error) {
+          reject();
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    return promise;
   }
 };
