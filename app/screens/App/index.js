@@ -16,7 +16,7 @@ var AppHandler = React.createClass({
     return (
       <div>
         App!
-	<RouteHandler />
+        <RouteHandler />
       </div>
     );
   }

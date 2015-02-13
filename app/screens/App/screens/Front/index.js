@@ -12,8 +12,6 @@ var Outside = require('components/Outside');
 var Register = require('./components/Register');
 var frontActionCreators = require('./actions/frontActionCreators');
 
-require('normalize-css/normalize.css');
-
 var FrontHandler = React.createClass({
   mixins: [StoresMixin, PureRenderMixin],
 
