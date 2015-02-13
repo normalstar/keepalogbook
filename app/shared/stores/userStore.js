@@ -6,39 +6,46 @@
 
 var Immutable = require('immutable');
 
+var userUtils = require('utils/userUtils');
 var Store = require('utils/Store');
 var assign = require('lodash/object/assign');
 var { ACTION_TYPES } = require('constants/appConstants');
 
 var _user = Immutable.Map({
-  auth: Immutable.Map({}),
-  username: '',
-  redirectFromAuth: false
+  user: null,
+  auth: null
 });
 
 var actions = {};
 
 actions[ACTION_TYPES.RECEIVE_AUTH] = function(action) {
-  _user = _user.set('auth', Immutable.fromJS(action.auth));
+  var user = userUtils.getUserFromRawAuth(action.auth);
+  _user = _user.merge({auth: action.auth, user: user});
 };
 
 actions[ACTION_TYPES.RECEIVE_LOGGED_OUT] = function() {
-  _user = _user.set('auth', Immutable.Map({}));
+  _user = _user.merge({auth: null, user: null});
 };
 
+actions[ACTION_TYPES.RECEIVE_CREATE_NEW_USER_SUCCESS] = function(action) {
+  _user = _user.merge({user: action.newUserData});
+};
 
-var userStore = new Store(actions);
+actions[ACTION_TYPES.RECEIVE_USER_DOESNT_EXIST] = function() {
+  _user = _user.mergeIn(['user'], {meta: {needToCreate: true}});
+};
 
-assign(userStore, {
-  initialize: function() {
-    console.log('initialize user store');
-  },
+actions[ACTION_TYPES.RECEIVE_USER_META] = function(action) {
+  _user = _user.updateIn(['user', 'meta'], action.meta);
+};
+
+module.exports = assign(new Store(actions), {
+  initialize: function() {},
 
   get: function() {
     return _user;
   }
 });
 
-module.exports = userStore;
 
 

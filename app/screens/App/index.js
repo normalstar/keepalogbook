@@ -7,19 +7,19 @@ var appActionCreators = require('actions/appActionCreators');
 
 require('normalize-css/normalize.css');
 
-var App = React.createClass({
+var AppHandler = React.createClass({
   componentWillMount: function() {
     appActionCreators.loadApp();
   },
 
   render: function() {
     return (
-      <div className="app">
+      <div>
         App!
-        <RouteHandler />
+	<RouteHandler />
       </div>
     );
   }
 });
 
-module.exports = App;
+module.exports = AppHandler;

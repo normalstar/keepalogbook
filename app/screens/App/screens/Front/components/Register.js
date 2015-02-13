@@ -5,17 +5,17 @@
 'use strict';
 
 var React = require('react/addons');
-var frontActionCreators = require('../actions/frontActionCreators');
+var outsideActionCreators = require('../actions/frontActionCreators');
 
 var Register = React.createClass({
   handleClickFacebookRegister: function(e) {
     e.preventDefault();
-    frontActionCreators.authorizeWithFacebook();
+    outsideActionCreators.authorizeWithFacebook();
   },
 
   handleClickTwitterRegister: function(e) {
     e.preventDefault();
-    frontActionCreators.authorizeWithTwitter();
+    outsideActionCreators.authorizeWithTwitter();
   },
 
   render: function() {

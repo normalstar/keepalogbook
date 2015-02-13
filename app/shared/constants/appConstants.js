@@ -5,15 +5,9 @@ module.exports = {
     RECEIVE_AUTH: null,
     RECEIVE_LOGGED_OUT: null,
 
-    // Front
-    RECEIVE_HAS_USERNAME: null,
-    RECEIVE_HAS_NO_USERNAME: null,
-
-    // ChooseUsername
-    CHANGE_NEW_USERNAME: null,
-    SUBMIT_NEW_USERNAME: null,
-
-    // User
-    LOAD_USER_PAGE: null
+    // userActionCreators
+    RECEIVE_CREATE_NEW_USER_SUCCESS: null,
+    RECEIVE_USER_DOESNT_EXIST: null,
+    RECEIVE_USER_META: null
   })
 };

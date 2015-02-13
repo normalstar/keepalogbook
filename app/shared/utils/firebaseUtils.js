@@ -48,6 +48,11 @@ module.exports = {
     return createAuthWithPopupPromise('twitter');
   },
 
+  unauth: function() {
+    var ref = new Firebase(firebaseUrl);
+    ref.unauth();
+  },
+
   /**
    * listenToAuthStatus
    *

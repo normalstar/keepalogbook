@@ -1,23 +1,21 @@
 'use strict';
 
 var React = require('react/addons');
-var { PureRenderMixin } = React.addons;
 var { PropTypes } = React;
 
-var User = React.createClass({
+var Outside = React.createClass({
   propTypes: {
-    user: PropTypes.object
+    children: PropTypes.any.isRequired
   },
-
-  mixins: [PureRenderMixin],
 
   render: function() {
     return (
       <div>
-        User!
+        Outside!
+        {this.props.children}
       </div>
     );
   }
 });
 
-module.exports = User;
+module.exports = Outside;
