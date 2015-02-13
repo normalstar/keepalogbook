@@ -1,7 +1,5 @@
 'use strict';
 
-var assign = require('lodash/object/assign');
-
 /**
  * Make unique id prettier
  *
@@ -33,10 +31,10 @@ module.exports = {
   getUserFromRawAuth: function(rawAuth) {
     var userId = getUserIdFromUid(rawAuth.uid);
 
-    return assign({
+    return {
       dataUrl: '/' + userId,
       userId: userId
-    }, rawAuth);
+    };
   },
 
   getNewUserData: function(user, auth) {

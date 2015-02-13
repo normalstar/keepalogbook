@@ -59,6 +59,11 @@ var FrontHandler = React.createClass({
   render: function() {
     var content = this.state.user.get('auth') ?
       <Inside user={this.state.user}>
+        <div>
+          Logged in as
+          {' '}
+          {this.state.user.getIn(['user', 'meta', 'displayName'])}
+        </div>
         <FrontDay user={this.state.user} />
         <RouteHandler />
         <a href="#" onClick={this.handleClickLogOut}>

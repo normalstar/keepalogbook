@@ -36,7 +36,7 @@ actions[ACTION_TYPES.RECEIVE_USER_DOESNT_EXIST] = function() {
 };
 
 actions[ACTION_TYPES.RECEIVE_USER_META] = function(action) {
-  _user = _user.updateIn(['user', 'meta'], action.meta);
+  _user = _user.updateIn(['user'], {meta: action.meta});
 };
 
 module.exports = assign(new Store(actions), {
