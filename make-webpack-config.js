@@ -2,7 +2,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function(options) {
   options = options || {};
@@ -26,6 +26,7 @@ module.exports = function(options) {
       __FIREBASE__: JSON.stringify(options.config.firebase)
     }),
 
+    new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(ja)$/),
     new webpack.PrefetchPlugin('react'),
     new webpack.PrefetchPlugin('react/lib/ReactComponentBrowserEnvironment')
   ];

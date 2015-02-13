@@ -11,6 +11,7 @@ var Inside = require('components/Inside');
 var Outside = require('components/Outside');
 
 var Register = require('./components/Register');
+var FrontDay = require('./components/FrontDay');
 var frontActionCreators = require('./actions/frontActionCreators');
 
 var FrontHandler = React.createClass({
@@ -26,7 +27,7 @@ var FrontHandler = React.createClass({
 
   /**
    * If not logged in don't do anything. If logged in, query data and put in
-   * store. If user doesn't exist, create new user.
+   * store. If user doesn't exist, create new user. This is pretty gross.
    */
   componentDidUpdate: function() {
     if (!this.state.user.get('user')) {
@@ -58,6 +59,7 @@ var FrontHandler = React.createClass({
   render: function() {
     var content = this.state.user.get('auth') ?
       <Inside user={this.state.user}>
+        <FrontDay user={this.state.user} />
         <RouteHandler />
         <a href="#" onClick={this.handleClickLogOut}>
           Logout

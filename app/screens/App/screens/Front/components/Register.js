@@ -1,21 +1,17 @@
-/**
- * Register buttons.
- */
-
 'use strict';
 
 var React = require('react/addons');
-var outsideActionCreators = require('../actions/frontActionCreators');
+var frontActionCreators = require('../actions/frontActionCreators');
 
 var Register = React.createClass({
   handleClickFacebookRegister: function(e) {
     e.preventDefault();
-    outsideActionCreators.authorizeWithFacebook();
+    frontActionCreators.authorizeWithFacebook();
   },
 
   handleClickTwitterRegister: function(e) {
     e.preventDefault();
-    outsideActionCreators.authorizeWithTwitter();
+    frontActionCreators.authorizeWithTwitter();
   },
 
   render: function() {
