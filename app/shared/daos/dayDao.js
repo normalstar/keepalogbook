@@ -9,10 +9,14 @@ module.exports = {
    * @param {Object} user
    * @param {string} user.dataUrl
    */
-  getDay: function(dayKey, user) {
-    firebaseUtils.listenChildAdded(user.dataUrl + '/data/' + dayKey, function(log) {
+  listenToDay: function(dayKey, user) {
+    firebaseUtils.listenToChildAdded(user.dataUrl + '/data/' + dayKey, function(log) {
       dayActionCreators.receiveDayLog(log);
     });
+  },
+
+  stopListeningToDay: function(dayKey, user) {
+    firebaseUtils.stopListeningToChildAdded(user.dataUrl + '/data/' + dayKey);
   },
 
   /**

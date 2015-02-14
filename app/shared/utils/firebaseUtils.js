@@ -94,12 +94,40 @@ module.exports = {
    * @param {string} path
    * @param {Function} callback
    */
-  listenChildAdded: function(path, callback) {
+  listenToValue: function(path, callback) {
+    var ref = new Firebase(firebaseUrl + path);
+
+    ref.on('value', function(snapshot) {
+      callback(snapshot.val());
+    });
+  },
+
+  /**
+   * @param {string} path
+   */
+  stopListeningToValue: function(path) {
+    var ref = new Firebase(firebaseUrl + path);
+    ref.off('value');
+  },
+
+  /**
+   * @param {string} path
+   * @param {Function} callback
+   */
+  listenToChildAdded: function(path, callback) {
     var ref = new Firebase(firebaseUrl + path);
 
     ref.on('child_added', function(snapshot) {
       callback(snapshot.val());
     });
+  },
+
+  /**
+   * @param {string} path
+   */
+  stopListeningToChildAdded: function(path) {
+    var ref = new Firebase(firebaseUrl + path);
+    ref.off('child_added');
   },
 
   /**
