@@ -11,6 +11,7 @@ module.exports = {
     RECEIVE_USER_META: null,
 
     // day
-    RECEIVE_DAY: null
+    RECEIVE_DAY: null,
+    RECEIVE_DAY_LOG: null
   })
 };

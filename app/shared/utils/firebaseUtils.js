@@ -25,7 +25,7 @@ function createAuthWithPopupPromise(type) {
 
 module.exports = {
   /**
-   * Add trailing slash to path.
+   * Make sure to add trailing slash to path.
    *
    * @param {string} [path]
    * @return {FirebaseRef}
@@ -90,6 +90,23 @@ module.exports = {
     return promise;
   },
 
+  /**
+   * @param {string} path
+   * @param {Function} callback
+   */
+  listenChildAdded: function(path, callback) {
+    var ref = new Firebase(firebaseUrl + path);
+
+    ref.on('child_added', function(snapshot) {
+      callback(snapshot.val());
+    });
+  },
+
+  /**
+   * @param {string} path
+   * @param {Object} value
+   * @return {Promise}
+   */
   set: function(path, value) {
     var ref = new Firebase(firebaseUrl + path);
 
@@ -98,11 +115,43 @@ module.exports = {
         if (error) {
           reject();
         } else {
-          resolve();
+          resolve(value);
         }
       });
     });
 
     return promise;
+  },
+
+  /**
+   * @param {string} path
+   * @param {Object} value
+   * @return {Promise}
+   */
+  update: function(path, value) {
+    var ref = new Firebase(firebaseUrl + path);
+
+    var promise = new RSVP.Promise(function(resolve, reject) {
+      ref.update(value, function(error) {
+        if (error) {
+          reject();
+        } else {
+          resolve(value);
+        }
+      });
+    });
+
+    return promise;
+  },
+
+  /**
+   * @param {string} path
+   * @param {Object|string} value
+   * @return {string} - Key of pushed id
+   */
+  push: function(path, value) {
+    var ref = new Firebase(firebaseUrl + path);
+    ref.push(value);
+    return ref.key();
   }
 };
