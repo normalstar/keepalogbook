@@ -25,39 +25,6 @@ var FrontHandler = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    if (this.state.user.get('user') && !this.state.user.getIn(['user', 'meta'])) {
-      return frontActionCreators.getUserMeta(this.state.user.get('user').toJS());
-    }
-  },
-
-  /**
-   * If not logged in don't do anything. If logged in, query data and put in
-   * store. If user doesn't exist, create new user. This is pretty gross.
-   */
-  componentDidUpdate: function() {
-    if (!this.state.user.get('user')) {
-      return;
-    }
-
-    // Query and save to store
-    if (this.state.user.get('user') && !this.state.user.getIn(['user', 'meta'])) {
-      return frontActionCreators.getUserMeta(this.state.user.get('user').toJS());
-    }
-
-    // If queried and still doesn't exist, create user. This will never be the
-    // case on mount so we only need to check on update.
-    if (this.state.user.get('user') &&
-        this.state.user.getIn(['user', 'meta']) &&
-        this.state.user.getIn(['user', 'meta', 'needToCreate'])) {
-
-      frontActionCreators.createUser(
-        this.state.user.get('user').toJS(),
-        this.state.user.get('auth').toJS()
-      );
-    }
-  },
-
   handleClickLogOut: function(e) {
     e.preventDefault();
     frontActionCreators.logOut();
@@ -77,7 +44,7 @@ var FrontHandler = React.createClass({
           Logout
         </a>
       </Inside> :
-      <Outside user={this.state.user}>
+      <Outside>
         <RouteHandler />
         <Register />
       </Outside>;

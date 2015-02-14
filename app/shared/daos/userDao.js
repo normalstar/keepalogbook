@@ -1,24 +1,25 @@
 'use strict';
 
 var firebaseUtils = require('utils/firebaseUtils');
-var userActionCreators = require('actions/userActionCreators');
+var userServerActionCreators = require('actions/userServerActionCreators');
 var userUtils = require('utils/userUtils');
 
 module.exports = {
-  createUser: function(user, auth) {
-    var data = userUtils.getNewUserData(user, auth);
-    return firebaseUtils.set(user.dataUrl, data).then(function() {
-      userActionCreators.receiveCreateNewUserSuccess(data);
+  listenToUserMeta: function(user, auth) {
+    return firebaseUtils.listenToValue(user.dataUrl + '/meta', function(meta) {
+      if (meta) {
+        userServerActionCreators.receiveUserMeta(meta);
+      } else {
+        // Create new user
+        var data = userUtils.getNewUserData(user, auth);
+        return firebaseUtils.set(user.dataUrl, data).then(function() {
+          userServerActionCreators.receiveCreateNewUserSuccess(data);
+        });
+      }
     });
   },
 
-  getUserMeta: function(user) {
-    return firebaseUtils.getValue(user.dataUrl + '/meta').then(function(meta) {
-      if (meta) {
-        userActionCreators.receiveUserMeta(meta);
-      } else {
-        userActionCreators.receiveUserDoesntExist();
-      }
-    });
+  stopListeningToUserMeta: function(user) {
+    return firebaseUtils.stopListeningToValue(user.dataUrl + '/meta');
   }
 };

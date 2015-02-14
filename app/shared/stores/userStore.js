@@ -31,10 +31,6 @@ actions[ACTION_TYPES.RECEIVE_CREATE_NEW_USER_SUCCESS] = function(action) {
   _user = _user.merge({user: action.newUserData});
 };
 
-actions[ACTION_TYPES.RECEIVE_USER_DOESNT_EXIST] = function() {
-  _user = _user.mergeIn(['user'], {meta: {needToCreate: true}});
-};
-
 actions[ACTION_TYPES.RECEIVE_USER_META] = function(action) {
   _user = _user.updateIn(['user'], function(userData) {
     return userData.merge({meta: action.meta});
