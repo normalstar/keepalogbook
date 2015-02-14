@@ -45,7 +45,8 @@ var FrontHandler = React.createClass({
       return frontActionCreators.getUserMeta(this.state.user.get('user').toJS());
     }
 
-    // If queried and still doesn't exist, create user
+    // If queried and still doesn't exist, create user. This will never be the
+    // case on mount so we only need to check on update.
     if (this.state.user.get('user') &&
         this.state.user.getIn(['user', 'meta']) &&
         this.state.user.getIn(['user', 'meta', 'needToCreate'])) {
