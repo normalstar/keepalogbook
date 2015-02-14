@@ -12,7 +12,7 @@ var Outside = require('components/Outside');
 
 var Register = require('./components/Register');
 var FrontDay = require('./components/FrontDay');
-var frontActionCreators = require('./actions/frontActionCreators');
+var frontViewActionCreators = require('./actions/frontViewActionCreators');
 
 var FrontHandler = React.createClass({
   mixins: [StoresMixin, PureRenderMixin],
@@ -27,7 +27,7 @@ var FrontHandler = React.createClass({
 
   handleClickLogOut: function(e) {
     e.preventDefault();
-    frontActionCreators.logOut();
+    frontViewActionCreators.logOut();
   },
 
   render: function() {

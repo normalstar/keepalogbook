@@ -1,7 +1,7 @@
 'use strict';
 
 var firebaseUtils = require('utils/firebaseUtils');
-var dayActionCreators = require('actions/dayActionCreators');
+var dayServerActionCreators = require('actions/dayServerActionCreators');
 
 module.exports = {
   /**
@@ -11,7 +11,7 @@ module.exports = {
    */
   listenToDay: function(dayKey, user) {
     firebaseUtils.listenToChildAdded(user.dataUrl + '/data/' + dayKey, function(log) {
-      dayActionCreators.receiveDayLog(log);
+      dayServerActionCreators.receiveDayLog(log);
     });
   },
 

@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var { RouteHandler } = require('react-router');
 
-var appActionCreators = require('actions/appActionCreators');
+var appViewActionCreators = require('actions/appViewActionCreators');
 var userStore = require('stores/userStore');
 
 require('normalize-css/normalize.css');
@@ -17,7 +17,7 @@ var AppHandler = React.createClass({
   },
 
   componentWillMount: function() {
-    appActionCreators.loadApp();
+    appViewActionCreators.loadApp();
   },
 
   render: function() {
