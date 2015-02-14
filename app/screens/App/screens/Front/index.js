@@ -25,6 +25,12 @@ var FrontHandler = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    if (this.state.user.get('user') && !this.state.user.getIn(['user', 'meta'])) {
+      return frontActionCreators.getUserMeta(this.state.user.get('user').toJS());
+    }
+  },
+
   /**
    * If not logged in don't do anything. If logged in, query data and put in
    * store. If user doesn't exist, create new user. This is pretty gross.
@@ -36,7 +42,7 @@ var FrontHandler = React.createClass({
 
     // Query and save to store
     if (this.state.user.get('user') && !this.state.user.getIn(['user', 'meta'])) {
-      frontActionCreators.getUserMeta(this.state.user.get('user').toJS());
+      return frontActionCreators.getUserMeta(this.state.user.get('user').toJS());
     }
 
     // If queried and still doesn't exist, create user

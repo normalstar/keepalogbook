@@ -4,5 +4,6 @@
  */
 
 module.exports = {
-  firebase: ''
+  firebase: '',
+  dev: true
 };

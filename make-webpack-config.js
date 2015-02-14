@@ -23,7 +23,8 @@ module.exports = function(options) {
     },
 
     new webpack.DefinePlugin({
-      __FIREBASE__: JSON.stringify(options.config.firebase)
+      __FIREBASE__: JSON.stringify(options.config.firebase),
+      __DEV__: JSON.stringify(options.config.dev)
     }),
 
     new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(ja)$/),

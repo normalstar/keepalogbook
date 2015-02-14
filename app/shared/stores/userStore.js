@@ -36,16 +36,16 @@ actions[ACTION_TYPES.RECEIVE_USER_DOESNT_EXIST] = function() {
 };
 
 actions[ACTION_TYPES.RECEIVE_USER_META] = function(action) {
-  _user = _user.updateIn(['user'], {meta: action.meta});
+  _user = _user.updateIn(['user'], function(userData) {
+    return userData.merge({meta: action.meta});
+  });
 };
 
 module.exports = assign(new Store(actions), {
-  initialize: function() {},
+  initialize: function() {
+  },
 
   get: function() {
     return _user;
   }
 });
-
-
-

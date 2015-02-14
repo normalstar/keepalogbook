@@ -6,17 +6,25 @@ var userDao = require('daos/userDao');
 module.exports = {
   authorizeWithFacebook: function() {
     firebaseUtils.authorizeWithFacebook().then(function(authData) {
-      console.log('Successful Facebook auth:', authData);
+      if (__DEV__) {
+        console.log('Successful Facebook auth:', authData);
+      }
     }, function(error) {
-      console.log('Failed Facebook auth:', error);
+      if (__DEV__) {
+        console.log('Failed Facebook auth:', error);
+      }
     });
   },
 
   authorizeWithTwitter: function() {
     firebaseUtils.authorizeWithTwitter().then(function(authData) {
-      console.log('Successful Twitter auth:', authData);
+      if (__DEV__) {
+        console.log('Successful Twitter auth:', authData);
+      }
     }, function(error) {
-      console.log('Failed Twitter auth:', error);
+      if (__DEV__) {
+        console.log('Failed Twitter auth:', error);
+      }
     });
   },
 

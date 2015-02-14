@@ -16,7 +16,7 @@ module.exports = {
     return firebaseUtils.getValue(user.dataUrl + '/meta').then(function(meta) {
       if (meta) {
         userActionCreators.receiveUserMeta(meta);
-      } {
+      } else {
         userActionCreators.receiveUserDoesntExist();
       }
     });
