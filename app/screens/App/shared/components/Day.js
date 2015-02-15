@@ -7,6 +7,7 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
+var { map } = require('utils/fpUtils').fp;
 
 var StoresMixin = require('mixins/StoresMixin');
 var dayStore = require('stores/dayStore');
@@ -23,16 +24,27 @@ var Day = React.createClass({
     day: dayStore.get()
   },
 
-  /**
-   * Query if day exists.
-   */
   componentWillMount: function() {
 
   },
 
+  componentWillUnmount: function() {
+  },
+
   render: function() {
+    var logs = map(function(log) {
+      return (
+        <div>
+          {log}
+        </div>
+      );
+    }, this.state.day.get('logs').toArray());
+
     return (
-      <div>Day</div>
+      <div>
+        Day
+        {logs}
+      </div>
     );
   }
 });

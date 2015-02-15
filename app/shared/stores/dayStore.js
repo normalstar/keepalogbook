@@ -1,18 +1,21 @@
 'use strict';
 
 var Immutable = require('immutable');
+var compose = require('lodash/function/compose');
 
-var dayUtils = require('utils/dayUtils');
+var logUtils = require('utils/logUtils');
 var Store = require('utils/Store');
 var assign = require('lodash/object/assign');
 var { ACTION_TYPES } = require('constants/appConstants');
 
-var _day = Immutable.Map({});
+var _day = Immutable.Map({
+  logs: Immutable.List()
+});
 
 var actions = {};
 
-actions[ACTION_TYPES.RECEIVE_DAY] = function(action) {
-  _day = _day.merge(dayUtils.convertRawDay(action.rawDay, action.dateKey));
+actions[ACTION_TYPES.RECEIVE_DAY_LOG] = function(action) {
+  _day = compose(_day.logs.push, logUtils.convertRawLog)(action.rawLog);
 };
 
 module.exports = assign(new Store(actions), {
