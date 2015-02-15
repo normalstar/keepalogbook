@@ -6,33 +6,19 @@ var dayDao = require('daos/dayDao');
 
 module.exports = {
   /**
-   * @param {string} dayKey
-   * @param {Object} user
-   * @param {string} user.dataUrl
-   * @param {Object|string} data
+   * @param {Object} day
+   * @param {string} day.dataDataUrl
    */
-  createLog: function(dayKey, user, data) {
-    dayDao.createLog(dayKey, user, data);
+  listenToDay: function(day) {
+    dayDao.listenToDay(day);
   },
 
   /**
-   * @param {string} dayKey
-   * @param {Object} user
-   * @param {string} user.dataUrl
-   * @param {Object|string} data
+   * @param {Object} day
+   * @param {string} day.dataDataUrl
    */
-  listenToDay: function(dayKey, user) {
-    dayDao.listenToDay(dayKey, user);
-  },
-
-  /**
-   * @param {string} dayKey
-   * @param {Object} user
-   * @param {string} user.dataUrl
-   * @param {Object|string} data
-   */
-  stopListeningToDay: function(dayKey, user) {
-    dayDao.stopListeningToDay(dayKey, user);
+  stopListeningToDay: function(day) {
+    dayDao.stopListeningToDay(day);
   },
 
   /**
@@ -46,17 +32,18 @@ module.exports = {
   },
 
   /**
-   * @param {string} dayKey
-   * @param {Object} user
+   * @param {Object} day
+   * @param {string} day.dataDataUrl
+   * @param {string} day.daysDataUrl
    * @param {string} data
    * @param {number} currentCount - Count *before* adding this new one
    * @return {Promise}
    */
-  submitCurrentLog: function(dayKey, user, data, currentCount) {
+  submitCurrentLog: function(day, data, currentCount) {
     appDispatcher.handleAction({
       type: ACTION_TYPES.SUBMIT_CURRENT_LOG
     });
 
-    return dayDao.createLog(dayKey, user, data, currentCount);
+    return dayDao.createLog(day, data, currentCount);
   }
 };

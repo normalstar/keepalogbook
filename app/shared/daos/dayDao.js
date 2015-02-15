@@ -5,36 +5,36 @@ var dayServerActionCreators = require('actions/dayServerActionCreators');
 
 module.exports = {
   /**
-   * @param {string} dayKey
-   * @param {Object} user
-   * @param {string} user.dataUrl
+   * @param {Object} day
+   * @param {string} day.dataDataUrl
    */
-  listenToDay: function(dayKey, user) {
-    firebaseUtils.listenToChildAdded(user.dataUrl + '/data/' + dayKey, function(logSnapshot) {
+  listenToDay: function(day) {
+    firebaseUtils.listenToChildAdded(day.dataDataUrl, function(logSnapshot) {
       dayServerActionCreators.receiveAddedLog(logSnapshot);
     });
   },
 
   /**
-   * @param {string} dayKey
-   * @param {Object} user
-   * @param {string} user.dataUrl
+   * @param {Object} day
+   * @param {string} day.dataDataUrl
    */
-  stopListeningToDay: function(dayKey, user) {
-    firebaseUtils.stopListeningToChildAdded(user.dataUrl + '/data/' + dayKey);
+  stopListeningToDay: function(day) {
+    firebaseUtils.stopListeningToChildAdded(day.dataDataUrl);
   },
 
   /**
    * First add to user > data > dayKey. Then update count in user > day >
    * dayKey. If neither exist create them.
    *
-   * @param {string} dayKey
-   * @param {Object} user
-   * @param {string} user.dataUrl
+   * @param {Object} day
+   * @param {string} day.dataDataUrl
+   * @param {string} day.daysDataUrl
+   * @param {string} data
+   * @param {number} currentCount
    * @return {Promise}
    */
-  createLog: function(dayKey, user, data, currentCount) {
-    firebaseUtils.push(user.dataUrl + '/data/' + dayKey, data);
-    return firebaseUtils.update(user.dataUrl + '/days/' + dayKey, {count: currentCount + 1});
+  createLog: function(day, data, currentCount) {
+    firebaseUtils.push(day.dataDataUrl, data);
+    return firebaseUtils.update(day.daysDataUrl, {count: currentCount + 1});
   }
 };

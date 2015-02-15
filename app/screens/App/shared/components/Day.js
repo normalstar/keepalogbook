@@ -8,42 +8,23 @@ var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 
-var StoresMixin = require('mixins/StoresMixin');
-var dayStore = require('stores/dayStore');
 var dayViewActionCreators = require('actions/dayViewActionCreators');
 
 var Log = require('components/Log');
 
 var Day = React.createClass({
   propTypes: {
-    user: PropTypes.object.isRequired,
-    dayKey: PropTypes.string.isRequired
+    day: PropTypes.object.isRequired
   },
 
-  mixins: [StoresMixin, PureRenderMixin],
-
-  stores: [dayStore],
-
-  getStateFromStores: function() {
-    return {
-      day: dayStore.get()
-    };
-  },
+  mixins: [PureRenderMixin],
 
   componentWillMount: function() {
-    dayStore.initialize();
-
-    dayViewActionCreators.listenToDay(
-      this.props.dayKey,
-      this.props.user.get('user').toJS()
-    );
+    dayViewActionCreators.listenToDay(this.props.day.get('day').toJS());
   },
 
   componentWillUnmount: function() {
-    dayViewActionCreators.stopListeningToDay(
-      this.props.dayKey,
-      this.props.user.get('user').toJS()
-    );
+    dayViewActionCreators.stopListeningToDay(this.props.day.get('day').toJS());
   },
 
   handleChangeCurrentLog: function(e) {
@@ -56,16 +37,15 @@ var Day = React.createClass({
   handleKeyDownCurrentLog: function(e) {
     if (e.keyCode === 13) {
       dayViewActionCreators.submitCurrentLog(
-        this.props.dayKey,
-        this.props.user.get('user').toJS(),
-        this.state.day.get('currentLog'),
-        this.state.day.get('logs').size
+        this.props.day.get('day').toJS(),
+        this.props.day.get('currentLog'),
+        this.props.day.get('logs').size
       );
     }
   },
 
   render: function() {
-    var logs = this.state.day.get('logs').map(function(log) {
+    var logs = this.props.day.get('logs').map(function(log) {
       return (
         <Log key={log.get('key')}
           log={log}
@@ -78,7 +58,7 @@ var Day = React.createClass({
         <div>Day</div>
         {logs}
         <div>
-          <input value={this.state.day.get('currentLog')}
+          <input value={this.props.day.get('currentLog')}
             onChange={this.handleChangeCurrentLog}
             onKeyDown={this.handleKeyDownCurrentLog}
           />
