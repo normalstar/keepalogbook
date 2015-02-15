@@ -10,8 +10,8 @@ module.exports = {
    * @param {string} user.dataUrl
    */
   listenToDay: function(dayKey, user) {
-    firebaseUtils.listenToChildAdded(user.dataUrl + '/data/' + dayKey, function(log) {
-      dayServerActionCreators.receiveDayLog(log);
+    firebaseUtils.listenToChildAdded(user.dataUrl + '/data/' + dayKey, function(logSnapshot) {
+      dayServerActionCreators.receiveDayLog(logSnapshot);
     });
   },
 
@@ -33,13 +33,13 @@ module.exports = {
 
     firebaseUtils.push(user.dataUrl + '/data/' + dayKey, data);
 
-    return firebaseUtils.getValue(dayUrl, function(value) {
-      if (!value) {
+    return firebaseUtils.getValue(dayUrl, function(snapshot) {
+      if (snapshot.value === null) {
         // Create
         return firebaseUtils.set(dayUrl, {count: 0});
       } else {
         // Update
-        var updatedCount = value.count + 1;
+        var updatedCount = snapshot.value.count + 1;
         return firebaseUtils.update(dayUrl, {count: updatedCount});
       }
     });

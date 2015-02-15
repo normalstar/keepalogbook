@@ -6,9 +6,9 @@ var userUtils = require('utils/userUtils');
 
 module.exports = {
   listenToUserMeta: function(user, auth) {
-    return firebaseUtils.listenToValue(user.dataUrl + '/meta', function(meta) {
-      if (meta) {
-        userServerActionCreators.receiveUserMeta(meta);
+    return firebaseUtils.listenToValue(user.dataUrl + '/meta', function(metaSnapshot) {
+      if (metaSnapshot.value !== null) {
+        userServerActionCreators.receiveUserMeta(metaSnapshot.value);
       } else {
         // Create new user
         var data = userUtils.getNewUserData(user, auth);

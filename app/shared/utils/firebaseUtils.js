@@ -70,6 +70,8 @@ module.exports = {
     });
   },
 
+  // Receive data
+
   /**
    * Check value from ref once.
    *
@@ -81,7 +83,7 @@ module.exports = {
 
     var promise = new RSVP.Promise(function(resolve, reject) {
       ref.once('value', function(snapshot) {
-        resolve(snapshot.val());
+        resolve({key: snapshot.key(), value: snapshot.val()});
       }, function(error) {
         reject(error);
       });
@@ -98,7 +100,7 @@ module.exports = {
     var ref = new Firebase(firebaseUrl + path);
 
     ref.on('value', function(snapshot) {
-      callback(snapshot.val());
+      callback({key: snapshot.key(), value: snapshot.val()});
     });
   },
 
@@ -118,7 +120,7 @@ module.exports = {
     var ref = new Firebase(firebaseUrl + path);
 
     ref.on('child_added', function(snapshot) {
-      callback(snapshot.val());
+      callback({key: snapshot.key(), value: snapshot.val()});
     });
   },
 
@@ -129,6 +131,8 @@ module.exports = {
     var ref = new Firebase(firebaseUrl + path);
     ref.off('child_added');
   },
+
+  // Write data
 
   /**
    * @param {string} path

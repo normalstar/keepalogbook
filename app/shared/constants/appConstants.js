@@ -10,6 +10,8 @@ module.exports = {
 
     // day
     RECEIVE_DAY_LOG: null,
-    CREATE_LOG: null
+    CREATE_LOG: null,
+    CHANGE_CURRENT_LOG: null,
+    SUBMIT_CURRENT_LOG: null
   })
 };
