@@ -43,7 +43,7 @@ var FrontHandler = React.createClass({
         </a>
       </Inside> :
       <Outside>
-        <RouteHandler />
+        <RouteHandler user={this.state.user} />
         <Register />
       </Outside>;
 

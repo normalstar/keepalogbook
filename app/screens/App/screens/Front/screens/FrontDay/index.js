@@ -11,6 +11,10 @@ var FrontDayHandler = React.createClass({
   },
 
   render: function() {
+    if (!this.props.user.get('auth')) {
+      return null;
+    }
+
     return (
       <div>
         Front day
