@@ -7,9 +7,9 @@ module.exports = {
   /**
    * @param {Object|string} log
    */
-  receiveDayLog: function(rawLog) {
+  receiveAddedLog: function(rawLog) {
     appDispatcher.handleAction({
-      type: ACTION_TYPES.RECEIVE_DAY_LOG,
+      type: ACTION_TYPES.RECEIVE_ADDED_LOG,
       rawLog: rawLog
     });
   }

@@ -11,7 +11,7 @@ module.exports = {
    */
   listenToDay: function(dayKey, user) {
     firebaseUtils.listenToChildAdded(user.dataUrl + '/data/' + dayKey, function(logSnapshot) {
-      dayServerActionCreators.receiveDayLog(logSnapshot);
+      dayServerActionCreators.receiveAddedLog(logSnapshot);
     });
   },
 

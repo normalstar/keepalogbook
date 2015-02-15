@@ -9,10 +9,11 @@ module.exports = {
     RECEIVE_USER_META: null,
 
     // day
-    RECEIVE_DAY_LOG: null,
-    CREATE_LOG: null,
+    RECEIVE_ADDED_LOG: null,
+    RECEIVE_REMOVED_LOG: null,
+    RECEIVE_CHANGED_LOG: null,
+
     CHANGE_CURRENT_LOG: null,
     SUBMIT_CURRENT_LOG: null,
-    REMOVE_LOG: null
   })
 };

@@ -18,7 +18,7 @@ var _day = getFreshDay();
 
 var actions = {};
 
-actions[ACTION_TYPES.RECEIVE_DAY_LOG] = function(action) {
+actions[ACTION_TYPES.RECEIVE_ADDED_LOG] = function(action) {
   var converted = logUtils.convertRawLog(action.rawLog);
   _day = _day.update('logs', function(logs) {
     return logs.push(converted);
