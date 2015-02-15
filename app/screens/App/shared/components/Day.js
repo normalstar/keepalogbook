@@ -57,7 +57,8 @@ var Day = React.createClass({
       dayViewActionCreators.submitCurrentLog(
         this.props.dayKey,
         this.props.user.get('user').toJS(),
-        this.state.day.get('currentLog')
+        this.state.day.get('currentLog'),
+        this.state.day.get('logs').size
       );
     }
   },

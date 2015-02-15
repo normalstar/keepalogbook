@@ -46,13 +46,17 @@ module.exports = {
   },
 
   /**
-   * @param {string} value
+   * @param {string} dayKey
+   * @param {Object} user
+   * @param {string} data
+   * @param {number} currentCount - Count *before* adding this new one
+   * @return {Promise}
    */
-  submitCurrentLog: function(dayKey, user, data) {
-    dayDao.createLog(dayKey, user, data);
-
+  submitCurrentLog: function(dayKey, user, data, currentCount) {
     appDispatcher.handleAction({
       type: ACTION_TYPES.SUBMIT_CURRENT_LOG
     });
+
+    return dayDao.createLog(dayKey, user, data, currentCount);
   }
 };

@@ -73,26 +73,6 @@ module.exports = {
   // Receive data
 
   /**
-   * Check value from ref once.
-   *
-   * @param path
-   * @return {Promise}
-   */
-  getValue: function(path) {
-    var ref = new Firebase(firebaseUrl + path);
-
-    var promise = new RSVP.Promise(function(resolve, reject) {
-      ref.once('value', function(snapshot) {
-        resolve({key: snapshot.key(), value: snapshot.val()});
-      }, function(error) {
-        reject(error);
-      });
-    });
-
-    return promise;
-  },
-
-  /**
    * @param {string} path
    * @param {Function} callback
    */
