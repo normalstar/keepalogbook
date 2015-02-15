@@ -11,7 +11,6 @@ var Inside = require('components/Inside');
 var Outside = require('components/Outside');
 
 var Register = require('./components/Register');
-var FrontDay = require('./components/FrontDay');
 var frontViewActionCreators = require('./actions/frontViewActionCreators');
 
 var FrontHandler = React.createClass({
@@ -38,8 +37,7 @@ var FrontHandler = React.createClass({
           {' '}
           {this.state.user.getIn(['user', 'meta', 'displayName'])}
         </div>
-        <FrontDay user={this.state.user} />
-        <RouteHandler />
+        <RouteHandler user={this.state.user} />
         <a href="#" onClick={this.handleClickLogOut}>
           Logout
         </a>

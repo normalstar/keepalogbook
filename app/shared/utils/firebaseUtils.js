@@ -158,6 +158,26 @@ module.exports = {
 
   /**
    * @param {string} path
+   * @return {Promise}
+   */
+  remove: function(path) {
+    var ref = new Firebase(firebaseUrl + path);
+
+    var promise = new RSVP.Promise(function(resolve, reject) {
+      ref.remove(function(error) {
+        if (error) {
+          reject();
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    return promise;
+  },
+
+  /**
+   * @param {string} path
    * @param {Object|string} value
    * @return {string} - Key of pushed id
    */

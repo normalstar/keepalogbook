@@ -1,5 +1,7 @@
 'use strict';
 
+var Immutable = require('immutable');
+
 module.exports = {
   /**
    * convertRawLog
@@ -10,6 +12,6 @@ module.exports = {
    * @return {Object}
    */
   convertRawLog: function(rawLog) {
-    return rawLog;
+    return Immutable.Map(rawLog);
   }
 };

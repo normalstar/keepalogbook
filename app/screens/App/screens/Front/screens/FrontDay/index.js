@@ -5,7 +5,7 @@ var dateUtils = require('utils/dateUtils');
 var Day = require('components/Day');
 var { PropTypes } = React;
 
-var FrontDay = React.createClass({
+var FrontDayHandler = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired
   },
@@ -22,4 +22,4 @@ var FrontDay = React.createClass({
   }
 });
 
-module.exports = FrontDay;
+module.exports = FrontDayHandler;

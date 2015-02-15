@@ -7,11 +7,12 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
-var { map } = require('utils/fpUtils').fp;
 
 var StoresMixin = require('mixins/StoresMixin');
 var dayStore = require('stores/dayStore');
 var dayViewActionCreators = require('actions/dayViewActionCreators');
+
+var Log = require('components/Log');
 
 var Day = React.createClass({
   propTypes: {
@@ -64,17 +65,17 @@ var Day = React.createClass({
   },
 
   render: function() {
-    var logs = map(function(log) {
+    var logs = this.state.day.get('logs').map(function(log) {
       return (
-        <div key={log.key}>
-          {log.value}
-        </div>
+        <Log key={log.get('key')}
+          log={log}
+        />
       );
-    }, this.state.day.get('logs').toArray());
+    }).toArray();
 
     return (
       <div>
-        Day
+        <div>Day</div>
         {logs}
         <div>
           <input value={this.state.day.get('currentLog')}
