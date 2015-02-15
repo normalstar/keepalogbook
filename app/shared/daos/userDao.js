@@ -12,9 +12,7 @@ module.exports = {
       } else {
         // Create new user
         var data = userUtils.getNewUserData(user, auth);
-        return firebaseUtils.set(user.dataUrl, data).then(function() {
-          userServerActionCreators.receiveCreateNewUserSuccess(data);
-        });
+        return firebaseUtils.set(user.dataUrl, data);
       }
     });
   },

@@ -6,7 +6,6 @@ module.exports = {
     RECEIVE_LOGGED_OUT: null,
 
     // user
-    RECEIVE_CREATE_NEW_USER_SUCCESS: null,
     RECEIVE_USER_META: null,
 
     // day
