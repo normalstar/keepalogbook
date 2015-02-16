@@ -4,6 +4,6 @@ var firebaseUtils = require('utils/firebaseUtils');
 
 module.exports = {
   removeLog: function(log) {
-    // return firebaseUtils.remove();
+    return firebaseUtils.remove(log.dataUrl);
   }
 };
