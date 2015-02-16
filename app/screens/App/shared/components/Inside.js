@@ -10,18 +10,18 @@ var Inside = React.createClass({
     children: PropTypes.any.isRequired
   },
 
-  componentWillMount: function() {
+  componentWillMount() {
     userViewActionCreators.listenToUserMeta(
       this.props.user.get('user').toJS(),
       this.props.user.get('auth').toJS()
     );
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     userViewActionCreators.stopListeningToUserMeta(this.props.user.get('user').toJS());
   },
 
-  render: function() {
+  render() {
     return (
       <div>
         Inside!

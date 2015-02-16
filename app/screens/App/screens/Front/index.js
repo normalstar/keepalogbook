@@ -18,18 +18,18 @@ var FrontHandler = React.createClass({
 
   stores: [userStore],
 
-  getStateFromStores: function() {
+  getStateFromStores() {
     return {
       user: userStore.get()
     };
   },
 
-  handleClickLogOut: function(e) {
+  handleClickLogOut(e) {
     e.preventDefault();
     frontViewActionCreators.logOut();
   },
 
-  render: function() {
+  render() {
     var content = this.state.user.get('auth') ?
       <Inside user={this.state.user}>
         <div>
