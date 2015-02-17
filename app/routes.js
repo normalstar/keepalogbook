@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 var React = require('react/addons');
 var { Route, DefaultRoute } = require('react-router');
 

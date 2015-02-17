@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var assign = require('lodash/object/assign');
@@ -5,7 +9,7 @@ var uniqueId = require('lodash/utility/uniqueId');
 var Dispatcher = require('./Dispatcher');
 var { EventEmitter } = require('events');
 
-var Store = function(dispatchTypes) {
+var Store = function(dispatchTypes: {[key:string]: Function}) {
   this.setMaxListeners(0);
   this.changeEvent = uniqueId('store_');
   this.dispatchToken = Dispatcher.register(function(payload) {
