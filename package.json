@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-server": "webpack-dev-server --content-base build/ --config webpack-dev-server.config.js --hot --progress --colors --port 2992 --inline",
     "build": "webpack --config webpack-production.config.js --progress --profile --colors",
-    "start-dev": "node lib/server-development",
-    "build-index": "node lib/server-build"
+    "start-dev": "node server-development",
+    "build-index": "node server-build"
   },
   "repository": {
     "type": "git",

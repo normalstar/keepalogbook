@@ -6,13 +6,13 @@ module.exports = function(options) {
   var path = require('path');
   var fs = require('fs');
   var app = express();
-  var html = fs.readFileSync(path.resolve(__dirname, '../app/simple.html'), 'utf-8');
+  var html = fs.readFileSync(path.resolve(__dirname, './app/simple.html'), 'utf-8');
 
   function renderApplication(path, scriptUrl, styleUrl, commonsUrl, callback) {
     callback(null, html.replace('SCRIPT_URL', scriptUrl).replace('STYLE_URL', styleUrl));
   }
 
-  var stats = require('../build/stats.json');
+  var stats = require('./build/stats.json');
   var publicPath = stats.publicPath;
   var SCRIPT_URL = publicPath + [].concat(stats.assetsByChunkName.main)[0];
 
@@ -20,23 +20,23 @@ module.exports = function(options) {
   var COMMONS_URL = '';
 
   if (options.build) {
-    fs.readdirSync(path.resolve(__dirname, '../build/public')).forEach(function(filename) {
+    fs.readdirSync(path.resolve(__dirname, './build/public')).forEach(function(filename) {
       if (stats.assetsByChunkName.main.indexOf(filename) > -1) {
         return;
       }
-      fs.unlink(path.resolve(__dirname, '../build/public') + '/' + filename, function(err) {
+      fs.unlink(path.resolve(__dirname, './build/public') + '/' + filename, function(err) {
         if (err) { throw err; }
         console.log('Deleted ' + filename);
       });
     });
 
     renderApplication('', SCRIPT_URL, STYLE_URL, COMMONS_URL, function(err, html) {
-      fs.writeFile(path.resolve(__dirname, '../build/index.html'), html, function(err) {
+      fs.writeFile(path.resolve(__dirname, './build/index.html'), html, function(err) {
         if (err) {
           console.log(err);
         } else {
           console.log('Built index');
-          fs.unlink(path.resolve(__dirname, '../build/stats.json'), function (err) {
+          fs.unlink(path.resolve(__dirname, './build/stats.json'), function (err) {
             if (err) { throw err; }
             console.log('Deleted stats.json');
           });
