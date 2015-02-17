@@ -2,6 +2,6 @@ build
 node_modules
 *.log
 *DS_Store
-app/bower_components
+bower_components
 config/devConfig.js
 config/buildConfig.js
