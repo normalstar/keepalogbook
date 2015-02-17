@@ -76,7 +76,7 @@ module.exports = function(options) {
     },
     resolve: {
       root: path.join(__dirname, 'app'),
-      modulesDirectories: ['node_modules', 'bower_components']
+      modulesDirectories: ['node_modules', 'bower_components', 'shared']
     },
     plugins: plugins,
     devServer: {

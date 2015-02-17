@@ -7,13 +7,13 @@
 var Immutable = require('immutable');
 var assign = require('lodash/object/assign');
 
-var LogUtils = require('../Log/LogUtils');
 var Store = require('../Store');
 var ActionTypes = require('../ActionTypes');
 var Dispatcher = require('../Dispatcher');
 
 var UserStore = require('../User/UserStore');
 var DayUtils = require('../Day/DayUtils');
+var LogUtils = require('../Log/LogUtils');
 
 var _dayKey: string = '';
 var _user: ?Immutable.Map = null;

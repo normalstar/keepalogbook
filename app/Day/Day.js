@@ -9,10 +9,10 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
-var Textarea = require('react-textarea-autosize');
 
 var DayViewActionCreators = require('./DayViewActionCreators');
 var Log = require('../Log/Log');
+var WriteLog = require('../Log/WriteLog');
 
 var Day = React.createClass({
   propTypes: {
@@ -33,17 +33,12 @@ var Day = React.createClass({
     DayViewActionCreators.changeCurrentLog(e.target.value);
   },
 
-  /**
-   * Submit on enter
-   */
-  handleKeyDownCurrentLog(e: Object) {
-    if (e.keyCode === 13 && e.shiftKey) {
-      DayViewActionCreators.submitCurrentLog(
-        this.props.day.get('day'),
-        this.props.day.get('currentLog'),
-        this.props.day.get('logs').size
-      );
-    }
+  handleFinishCurrentLog() {
+    DayViewActionCreators.submitCurrentLog(
+      this.props.day.get('day'),
+      this.props.day.get('currentLog'),
+      this.props.day.get('logs').size
+    );
   },
 
   render(): any {
@@ -57,11 +52,10 @@ var Day = React.createClass({
       <div>
         {logs}
         <div>
-          <Textarea value={this.props.day.get('currentLog')}
+          <WriteLog value={this.props.day.get('currentLog')}
             onChange={this.handleChangeCurrentLog}
-            onKeyDown={this.handleKeyDownCurrentLog}
-          >
-          </Textarea>
+            onFinish={this.handleFinishCurrentLog}
+          />
         </div>
       </div>
     );

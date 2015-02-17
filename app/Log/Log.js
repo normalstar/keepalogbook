@@ -9,9 +9,12 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
+var WriteLog = require('./WriteLog');
 
 var LogViewActionCreators = require('./LogViewActionCreators');
 var inputUtils = require('../shared/inputUtils');
+
+require('./Log.less');
 
 var Log = React.createClass({
   propTypes: {
@@ -34,19 +37,17 @@ var Log = React.createClass({
     LogViewActionCreators.changeEditingLog(this.props.log, e.target.value);
   },
 
-  handleKeyDownValue(e: Object) {
-    if (e.keyCode === 13) {
-      LogViewActionCreators.submitCurrentLog(this.props.log);
-    }
+  handleFinishEditing() {
+    LogViewActionCreators.submitCurrentLog(this.props.log);
   },
 
   render(): any {
     var log = this.props.log;
     var content = log.get('isEditing') ?
       <div>
-        <input value={log.get('editingValue')}
+        <WriteLog value={log.get('editingValue')}
           onChange={this.handleChangeValue}
-          onKeyDown={this.handleKeyDownValue}
+          onFinish={this.handleFinishEditing}
         />
         {' '}
         <a href="#" onClick={this.handleToggleEdit}>Cancel</a>
@@ -60,9 +61,8 @@ var Log = React.createClass({
       </div>;
 
     return (
-      <div>
+      <div className="log">
         {content}
-        {' '}
       </div>
     );
   }

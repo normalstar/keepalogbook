@@ -12,6 +12,7 @@ var compose = require('lodash/function/compose');
 var StoresMixin = require('../StoresMixin');
 var DayStore = require('../Day/DayStore');
 var Day = require('../Day/Day');
+var DayHeader = require('../Day/DayHeader');
 var dateUtils = require('../shared/dateUtils');
 
 var DayHandler = React.createClass({
@@ -47,11 +48,14 @@ var DayHandler = React.createClass({
   },
 
   render(): any {
-    var displayDate = compose(dateUtils.formatMoment('ll'), dateUtils.parseDayKey);
+    var displayDate = compose(dateUtils.formatMoment('LL'), dateUtils.parseDayKey);
 
     return (
       <div>
-        {displayDate(this.state.day.getIn(['day', 'dayKey']))}
+        <DayHeader
+          displayDate={displayDate(this.state.day.getIn(['day', 'dayKey']))}
+          isToday={false}
+        />
         <Day day={this.state.day} />
       </div>
     );

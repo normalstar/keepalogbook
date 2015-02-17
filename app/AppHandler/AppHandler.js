@@ -11,6 +11,7 @@ var AppHandlerActionCreators = require('./AppHandlerViewActionCreators');
 var UserStore = require('../User/UserStore');
 
 require('normalize-css/normalize.css');
+require('./AppHandler.less');
 
 var AppHandler = React.createClass({
   statics: {
@@ -26,8 +27,7 @@ var AppHandler = React.createClass({
 
   render(): any {
     return (
-      <div>
-        App!
+      <div className="app-handler">
         <RouteHandler />
       </div>
     );
