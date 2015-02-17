@@ -70,7 +70,7 @@ function toggleEditLog(action: {log: Immutable.Map}) {
   _day = _day.updateIn(['logs', index], function(log) {
     return log.merge({
       isEditing: !log.get('isEditing'),
-      editingValue: log.get('value')
+      editingValue: log.get('log')
     });
   });
 }

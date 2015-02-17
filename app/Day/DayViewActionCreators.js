@@ -28,7 +28,12 @@ function submitCurrentLog(day: Object, data: string, currentCount: number): Prom
     type: ActionTypes.SUBMIT_CURRENT_LOG
   });
 
-  return DayAPIUtils.createLog(day.toJS(), data, currentCount);
+  var dataToSave = {
+    log: data,
+    ts: new Date().getTime()
+  };
+
+  return DayAPIUtils.createLog(day.toJS(), dataToSave, currentCount);
 }
 
 module.exports = {

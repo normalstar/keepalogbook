@@ -28,7 +28,7 @@ function changeEditingLog(log: Object, value: string) {
   });
 }
 
-function submitCurrentLog(log: Object) {
+function submitEditingLog(log: Object) {
   Dispatcher.handleAction({
     type: ActionTypes.SUBMIT_EDITING_LOG,
     log
@@ -42,5 +42,5 @@ module.exports = {
   removeLog,
   toggleEditLog,
   changeEditingLog,
-  submitCurrentLog
+  submitEditingLog
 };

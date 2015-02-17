@@ -38,7 +38,7 @@ var Log = React.createClass({
   },
 
   handleFinishEditing() {
-    LogViewActionCreators.submitCurrentLog(this.props.log);
+    LogViewActionCreators.submitEditingLog(this.props.log);
   },
 
   render(): any {
@@ -53,7 +53,7 @@ var Log = React.createClass({
         <a href="#" onClick={this.handleToggleEdit}>Cancel</a>
       </div>:
       <div>
-        <div dangerouslySetInnerHTML={{__html: inputUtils.nl2br(log.get('value'))}}>
+        <div dangerouslySetInnerHTML={{__html: inputUtils.nl2br(log.get('log'))}}>
         </div>
         <a href="#" onClick={this.handleClickRemove}>Remove</a>
         {' '}

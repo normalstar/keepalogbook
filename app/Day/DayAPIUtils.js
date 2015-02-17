@@ -29,7 +29,7 @@ function stopListeningToDay(day: Day) {
  * First add to user > data > dayKey. Then update count in user > day >
  * dayKey. If neither exist create them.
  */
-function createLog(day: Day, data: string, currentCount: number): Promise {
+function createLog(day: Day, data: LogToSave, currentCount: number): Promise {
   firebaseUtils.push(day.dataDataUrl, data);
   return firebaseUtils.update(day.daysDataUrl, {count: currentCount + 1});
 }

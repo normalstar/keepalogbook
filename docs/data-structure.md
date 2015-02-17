@@ -9,8 +9,15 @@
 
     data: {
       "20150201": {
-        "pushedUniqueId1": "Thing you did",
-        "pushedUniqueId2": "Another thing you did",
+        "pushedUniqueId1": {
+          "log": "Thing you did",
+          "ts": 13513525223
+        }
+
+        "pushedUniqueId2": {
+          "log": "Another thing you did",
+          "stamp": 13513525223
+        },
         ...
       },
 
