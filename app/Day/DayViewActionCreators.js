@@ -8,12 +8,12 @@ var Dispatcher = require('../Dispatcher');
 var ActionTypes = require('../ActionTypes');
 var DayAPIUtils = require('./DayAPIUtils');
 
-function listenToDay(day: Day) {
-  DayAPIUtils.listenToDay(day);
+function listenToDay(day: Object) {
+  DayAPIUtils.listenToDay(day.toJS());
 }
 
-function stopListeningToDay(day: Day) {
-  DayAPIUtils.stopListeningToDay(day);
+function stopListeningToDay(day: Object) {
+  DayAPIUtils.stopListeningToDay(day.toJS());
 }
 
 function changeCurrentLog(value: string) {

@@ -22,11 +22,11 @@ var Day = React.createClass({
   mixins: [PureRenderMixin],
 
   componentWillMount() {
-    DayViewActionCreators.listenToDay(this.props.day.get('day').toJS());
+    DayViewActionCreators.listenToDay(this.props.day.get('day'));
   },
 
   componentWillUnmount() {
-    DayViewActionCreators.stopListeningToDay(this.props.day.get('day').toJS());
+    DayViewActionCreators.stopListeningToDay(this.props.day.get('day'));
   },
 
   handleChangeCurrentLog(e: Object) {
@@ -47,13 +47,11 @@ var Day = React.createClass({
   },
 
   render(): any {
-    var logs = this.props.day.get('logs').map(function(log) {
-      return (
-        <Log key={log.get('key')}
-          log={log}
-        />
-      );
-    }).toArray();
+    var logs = this.props.day.get('logs').map(log =>
+      <Log key={log.get('key')}
+        log={log}
+      />
+    ).toArray();
 
     return (
       <div>

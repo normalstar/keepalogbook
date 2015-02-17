@@ -21,7 +21,7 @@ var Log = React.createClass({
 
   handleClickRemove(e: Object) {
     e.preventDefault();
-    LogViewActionCreators.removeLog(this.props.log.toJS());
+    LogViewActionCreators.removeLog(this.props.log);
   },
 
   handleToggleEdit(e: Object) {

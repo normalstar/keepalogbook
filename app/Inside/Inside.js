@@ -16,13 +16,13 @@ var Inside = React.createClass({
 
   componentWillMount() {
     UserViewActionCreators.listenToUserMeta(
-      this.props.user.get('user').toJS(),
-      this.props.user.get('auth').toJS()
+      this.props.user.get('user'),
+      this.props.user.get('auth')
     );
   },
 
   componentWillUnmount() {
-    UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user').toJS());
+    UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user'));
   },
 
   render(): any {
