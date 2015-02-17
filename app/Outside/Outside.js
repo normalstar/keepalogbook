@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var React = require('react/addons');
@@ -8,7 +12,7 @@ var Outside = React.createClass({
     children: PropTypes.any.isRequired
   },
 
-  render: function() {
+  render(): any {
     return (
       <div>
         Outside!

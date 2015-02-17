@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var React = require('react/addons');
@@ -16,18 +20,18 @@ var FrontHandler = React.createClass({
 
   stores: [UserStore],
 
-  getStateFromStores: function() {
+  getStateFromStores(): Object {
     return {
       user: UserStore.get()
     };
   },
 
-  handleClickLogOut: function(e) {
+  handleClickLogOut(e: Object) {
     e.preventDefault();
     FrontHandlerViewActionCreators.logOut();
   },
 
-  render: function() {
+  render(): any {
     var content = this.state.user.get('auth') ?
       <Inside user={this.state.user}>
         <div>

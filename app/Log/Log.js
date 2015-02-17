@@ -1,5 +1,7 @@
 /**
  * A single log in a day
+ *
+ * @flow
  */
 
 'use strict';
@@ -15,13 +17,13 @@ var Log = React.createClass({
 
   mixins: [PureRenderMixin],
 
-  handleClickRemove: function(e) {
+  handleClickRemove(e: Object) {
     e.preventDefault();
 
 
   },
 
-  render: function() {
+  render(): any {
     return (
       <div>
         {this.props.log.get('value')}

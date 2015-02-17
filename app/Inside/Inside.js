@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var React = require('react/addons');
@@ -10,18 +14,18 @@ var Inside = React.createClass({
     children: PropTypes.any.isRequired
   },
 
-  componentWillMount: function() {
+  componentWillMount() {
     UserViewActionCreators.listenToUserMeta(
       this.props.user.get('user').toJS(),
       this.props.user.get('auth').toJS()
     );
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user').toJS());
   },
 
-  render: function() {
+  render(): any {
     return (
       <div>
         Inside!

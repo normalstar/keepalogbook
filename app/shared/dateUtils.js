@@ -1,23 +1,23 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var moment = require('moment');
 var curry = require('lodash/function/curry');
 
-/**
- * @param {string} formatString
- * @param {Moment} momentDate
- * @return {string}
- */
-function formatMomentDef(formatString, momentDate) {
+function formatMomentDef(formatString: string, momentDate): string {
   return momentDate.format(formatString);
 }
 
 var formatMoment = curry(formatMomentDef);
 
-module.exports = {
-  formatMoment: formatMoment,
+function getCurrentDayKey(): string {
+  return formatMoment('YYYYMMDD', moment());
+}
 
-  getCurrentDayKey: function() {
-    return formatMoment('YYYYMMDD', moment());
-  }
+module.exports = {
+  formatMoment,
+  getCurrentDayKey
 };

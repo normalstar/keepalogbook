@@ -1,5 +1,7 @@
 /**
  * Some convenience functions for firebase.
+ *
+ * @flow
  */
 
 'use strict';
@@ -8,7 +10,7 @@ var Firebase = require('firebase');
 var firebaseUrl = __FIREBASE__;
 var RSVP = require('rsvp');
 
-function createAuthWithPopupPromise(type) {
+function createAuthWithPopupPromise(type: string): Promise {
   var ref = new Firebase(firebaseUrl);
   var promise = new RSVP.Promise(function(resolve, reject) {
     ref.authWithOAuthPopup(type, function(error, authData) {
@@ -30,7 +32,7 @@ module.exports = {
    * @param {string} [path]
    * @return {FirebaseRef}
    */
-  createRef: function(path) {
+  createRef: function(path: ?string) {
     return new Firebase(firebaseUrl + (path || ''));
   },
 
@@ -59,7 +61,7 @@ module.exports = {
    * @param {Function} loggedInCallback
    * @param {Function} loggedOutCallback
    */
-  listenToAuthStatus: function(loggedInCallback, loggedOutCallback) {
+  listenToAuthStatus: function(loggedInCallback: any, loggedOutCallback: any) {
     var ref = new Firebase(firebaseUrl);
     ref.onAuth(function(authData) {
       if (authData) {
@@ -76,7 +78,7 @@ module.exports = {
    * @param {string} path
    * @param {Function} callback
    */
-  listenToValue: function(path, callback) {
+  listenToValue: function(path: string, callback: any) {
     var ref = new Firebase(firebaseUrl + path);
 
     ref.on('value', function(snapshot) {
@@ -87,7 +89,7 @@ module.exports = {
   /**
    * @param {string} path
    */
-  stopListeningToValue: function(path) {
+  stopListeningToValue: function(path: string) {
     var ref = new Firebase(firebaseUrl + path);
     ref.off('value');
   },
@@ -96,7 +98,7 @@ module.exports = {
    * @param {string} path
    * @param {Function} callback
    */
-  listenToChildAdded: function(path, callback) {
+  listenToChildAdded: function(path: string, callback: Function) {
     var ref = new Firebase(firebaseUrl + path);
 
     ref.on('child_added', function(snapshot) {
@@ -107,7 +109,7 @@ module.exports = {
   /**
    * @param {string} path
    */
-  stopListeningToChildAdded: function(path) {
+  stopListeningToChildAdded: function(path: string) {
     var ref = new Firebase(firebaseUrl + path);
     ref.off('child_added');
   },
@@ -119,7 +121,7 @@ module.exports = {
    * @param {Object} value
    * @return {Promise}
    */
-  set: function(path, value) {
+  set: function(path: string, value: Object) {
     var ref = new Firebase(firebaseUrl + path);
 
     var promise = new RSVP.Promise(function(resolve, reject) {
@@ -140,7 +142,7 @@ module.exports = {
    * @param {Object} value
    * @return {Promise}
    */
-  update: function(path, value) {
+  update: function(path: string, value: Object) {
     var ref = new Firebase(firebaseUrl + path);
 
     var promise = new RSVP.Promise(function(resolve, reject) {
@@ -160,7 +162,7 @@ module.exports = {
    * @param {string} path
    * @return {Promise}
    */
-  remove: function(path) {
+  remove: function(path: string) {
     var ref = new Firebase(firebaseUrl + path);
 
     var promise = new RSVP.Promise(function(resolve, reject) {
@@ -181,7 +183,7 @@ module.exports = {
    * @param {Object|string} value
    * @return {string} - Key of pushed id
    */
-  push: function(path, value) {
+  push: function(path: string, value: Object|string) {
     var ref = new Firebase(firebaseUrl + path);
     ref.push(value);
     return ref.key();

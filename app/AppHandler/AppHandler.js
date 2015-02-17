@@ -14,17 +14,17 @@ require('normalize-css/normalize.css');
 
 var AppHandler = React.createClass({
   statics: {
-    willTransitionTo: function(transition, params, query, callback) {
+    willTransitionTo(transition, params, query, callback) {
       UserStore.initialize();
       callback();
     }
   },
 
-  componentWillMount: function() {
+  componentWillMount() {
     AppHandlerActionCreators.loadApp();
   },
 
-  render: function(): any {
+  render(): any {
     return (
       <div>
         App!

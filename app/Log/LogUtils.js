@@ -2,16 +2,10 @@
 
 var Immutable = require('immutable');
 
+function convertRawLog(rawLog: RawLog): Immutable.Map {
+  return Immutable.Map(rawLog);
+}
+
 module.exports = {
-  /**
-   * convertRawLog
-   *
-   * @param {Object} rawLog
-   * @param {string} rawLog.key
-   * @param {string} rawLog.value
-   * @return {Object}
-   */
-  convertRawLog: function(rawLog) {
-    return Immutable.Map(rawLog);
-  }
+  convertRawLog
 };

@@ -6,11 +6,11 @@
 
 var UserAPIUtils = require('./UserAPIUtils');
 
-function listenToUserMeta(user: User, auth: Auth): Promise {
+function listenToUserMeta(user: User, auth: Auth) {
   return UserAPIUtils.listenToUserMeta(user, auth);
 }
 
-function stopListeningToUserMeta(user: User): Promise {
+function stopListeningToUserMeta(user: User) {
   return UserAPIUtils.stopListeningToUserMeta(user);
 }
 

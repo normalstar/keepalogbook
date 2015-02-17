@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var React = require('react/addons');
@@ -15,7 +19,7 @@ var FrontDayHandler = React.createClass({
   },
 
   statics: {
-    willTransitionTo: function(transition, params, query, callback) {
+    willTransitionTo(transition, params, query, callback) {
       DayStore.initialize(dateUtils.getCurrentDayKey());
       callback();
     }
@@ -25,13 +29,13 @@ var FrontDayHandler = React.createClass({
 
   stores: [DayStore],
 
-  getStateFromStores: function() {
+  getStateFromStores(): Object {
     return {
       day: DayStore.get()
     };
   },
 
-  render: function() {
+  render(): any {
     // We only have to check for auth here because this is the default route.
     // Other components will be explicitly inside/outside.
     if (!this.props.user.get('auth')) {
