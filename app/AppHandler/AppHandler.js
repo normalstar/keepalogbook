@@ -1,9 +1,13 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var React = require('react/addons');
 var { RouteHandler } = require('react-router');
 
-var AppViewActionCreators = require('./AppHandlerViewActionCreators');
+var AppHandlerActionCreators = require('./AppHandlerViewActionCreators');
 var UserStore = require('../User/UserStore');
 
 require('normalize-css/normalize.css');
@@ -17,10 +21,10 @@ var AppHandler = React.createClass({
   },
 
   componentWillMount: function() {
-    AppViewActionCreators.loadApp();
+    AppHandlerActionCreators.loadApp();
   },
 
-  render: function() {
+  render: function(): any {
     return (
       <div>
         App!

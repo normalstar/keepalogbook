@@ -1,5 +1,7 @@
 /**
  * List of logs for a day.
+ *
+ * @flow
  */
 
 'use strict';
@@ -19,22 +21,22 @@ var Day = React.createClass({
 
   mixins: [PureRenderMixin],
 
-  componentWillMount: function() {
+  componentWillMount() {
     DayViewActionCreators.listenToDay(this.props.day.get('day').toJS());
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     DayViewActionCreators.stopListeningToDay(this.props.day.get('day').toJS());
   },
 
-  handleChangeCurrentLog: function(e) {
+  handleChangeCurrentLog(e: Object) {
     DayViewActionCreators.changeCurrentLog(e.target.value);
   },
 
   /**
    * Submit on enter
    */
-  handleKeyDownCurrentLog: function(e) {
+  handleKeyDownCurrentLog(e: Object) {
     if (e.keyCode === 13) {
       DayViewActionCreators.submitCurrentLog(
         this.props.day.get('day').toJS(),
@@ -44,7 +46,7 @@ var Day = React.createClass({
     }
   },
 
-  render: function() {
+  render(): any {
     var logs = this.props.day.get('logs').map(function(log) {
       return (
         <Log key={log.get('key')}

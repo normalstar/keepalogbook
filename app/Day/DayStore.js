@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var Immutable = require('immutable');
@@ -24,36 +28,40 @@ function getFreshDay() {
 
 var _day = getFreshDay();
 
-var actions = {};
-
-actions[ActionTypes.RECEIVE_ADDED_LOG] = function(action) {
+function receiveAddedLog(action: {rawLog: RawLog}) {
   var converted = LogUtils.convertRawLog(action.rawLog);
   _day = _day.update('logs', function(logs) {
     return logs.push(converted);
   });
-};
+}
 
-actions[ActionTypes.CHANGE_CURRENT_LOG] = function(action) {
+function changeCurrentLog(action: {value: string}) {
   _day = _day.set('currentLog', action.value);
-};
+}
 
-actions[ActionTypes.SUBMIT_CURRENT_LOG] = function() {
+function submitCurrentLog() {
   _day = _day.set('currentLog', '');
-};
+}
 
-actions[ActionTypes.RECEIVE_AUTH] = function() {
+function receiveAuth() {
   Dispatcher.waitFor([UserStore.dispatchToken]);
   _user = UserStore.get();
   _day = getFreshDay();
-};
+}
+
+var actions = {};
+actions[ActionTypes.RECEIVE_ADDED_LOG] = receiveAddedLog;
+actions[ActionTypes.CHANGE_CURRENT_LOG] = changeCurrentLog;
+actions[ActionTypes.SUBMIT_CURRENT_LOG] = submitCurrentLog;
+actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 
 module.exports = assign(new Store(actions), {
-  initialize: function(dayKey) {
+  initialize(dayKey: ?string) {
     _dayKey = dayKey || '';
     _day = getFreshDay();
   },
 
-  get: function() {
+  get() {
     return _day;
   }
 });
