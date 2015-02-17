@@ -2,8 +2,8 @@
 {
   "modifieduid1": { // Don't access this one because it gets big
     days: {
-      "20151201": {share: true, count: 3},
-      "20141105": {share: false, count: 2},
+      "20151201": {count: 3},
+      "20141105": {count: 2},
       ...
     },
 
