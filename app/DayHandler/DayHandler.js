@@ -7,20 +7,27 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
+var compose = require('lodash/function/compose');
 
 var StoresMixin = require('../StoresMixin');
 var DayStore = require('../Day/DayStore');
 var Day = require('../Day/Day');
 var dateUtils = require('../shared/dateUtils');
 
-var FrontDayHandler = React.createClass({
+var DayHandler = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired
   },
 
   statics: {
     willTransitionTo(transition, params, query, callback) {
-      DayStore.initialize(dateUtils.getCurrentDayKey());
+      var { year, month, day } = params;
+      var dayKey = year + month + day + '';
+      var isValidDayKey = dateUtils.parseDayKey(dayKey).isValid();
+      if (!isValidDayKey || year.length !== 4 || month.length !== 2 || day.length !== 2) {
+        transition.redirect('frontDay');
+      }
+      DayStore.initialize(dayKey);
       callback();
     }
   },
@@ -36,19 +43,15 @@ var FrontDayHandler = React.createClass({
   },
 
   render(): any {
-    // We only have to check for auth here because this is the default route.
-    // Other components will be explicitly inside/outside.
-    if (!this.props.user.get('auth')) {
-      return null;
-    }
+    var displayDate = compose(dateUtils.formatMoment('ll'), dateUtils.parseDayKey);
 
     return (
       <div>
-        {dateUtils.formatMoment('ll')(dateUtils.getCurrentMoment())}
+        {displayDate(this.state.day.getIn(['day', 'dayKey']))}
         <Day day={this.state.day} />
       </div>
     );
   }
 });
 
-module.exports = FrontDayHandler;
+module.exports = DayHandler;

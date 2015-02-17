@@ -11,6 +11,7 @@ var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 
 var LogViewActionCreators = require('./LogViewActionCreators');
+var inputUtils = require('../shared/inputUtils');
 
 var Log = React.createClass({
   propTypes: {
@@ -51,8 +52,8 @@ var Log = React.createClass({
         <a href="#" onClick={this.handleToggleEdit}>Cancel</a>
       </div>:
       <div>
-        {log.get('value')}
-        {' '}
+        <div dangerouslySetInnerHTML={{__html: inputUtils.nl2br(log.get('value'))}}>
+        </div>
         <a href="#" onClick={this.handleClickRemove}>Remove</a>
         {' '}
         <a href="#" onClick={this.handleToggleEdit}>Edit</a>

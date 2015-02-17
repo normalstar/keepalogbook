@@ -23,12 +23,12 @@ function changeCurrentLog(value: string) {
   });
 }
 
-function submitCurrentLog(day: Day, data: string, currentCount: number): Promise {
+function submitCurrentLog(day: Object, data: string, currentCount: number): Promise {
   Dispatcher.handleAction({
     type: ActionTypes.SUBMIT_CURRENT_LOG
   });
 
-  return DayAPIUtils.createLog(day, data, currentCount);
+  return DayAPIUtils.createLog(day.toJS(), data, currentCount);
 }
 
 module.exports = {

@@ -9,9 +9,9 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
+var Textarea = require('react-textarea-autosize');
 
 var DayViewActionCreators = require('./DayViewActionCreators');
-
 var Log = require('../Log/Log');
 
 var Day = React.createClass({
@@ -37,9 +37,9 @@ var Day = React.createClass({
    * Submit on enter
    */
   handleKeyDownCurrentLog(e: Object) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && e.shiftKey) {
       DayViewActionCreators.submitCurrentLog(
-        this.props.day.get('day').toJS(),
+        this.props.day.get('day'),
         this.props.day.get('currentLog'),
         this.props.day.get('logs').size
       );
@@ -55,13 +55,13 @@ var Day = React.createClass({
 
     return (
       <div>
-        <div>Day</div>
         {logs}
         <div>
-          <input value={this.props.day.get('currentLog')}
+          <Textarea value={this.props.day.get('currentLog')}
             onChange={this.handleChangeCurrentLog}
             onKeyDown={this.handleKeyDownCurrentLog}
-          />
+          >
+          </Textarea>
         </div>
       </div>
     );
