@@ -104,6 +104,22 @@ function update(path: string, value: Object|string): Promise {
   return promise;
 }
 
+function setAtPath(path: string, value: Object|string): Promise {
+  var ref = new Firebase(firebaseUrl + path);
+
+  var promise = new RSVP.Promise(function(resolve, reject) {
+    ref.set(value, function(error) {
+      if (error) {
+        reject();
+      } else {
+        resolve(value);
+      }
+    });
+  });
+
+  return promise;
+}
+
 function remove(path: string): Promise {
   var ref = new Firebase(firebaseUrl + path);
 
@@ -138,24 +154,8 @@ module.exports = {
   listenToChildAdded,
   stopListeningToChildAdded,
 
-  /**
-   * @todo Change this function name
-   */
-  set(path: string, value: Object|string): Promise {
-    var ref = new Firebase(firebaseUrl + path);
-
-    var promise = new RSVP.Promise(function(resolve, reject) {
-      ref.set(value, function(error) {
-        if (error) {
-          reject();
-        } else {
-          resolve(value);
-        }
-      });
-    });
-
-    return promise;
-  },
+  // Needed an alternate fn name or it broke
+  set: setAtPath,
 
   update,
   remove,
