@@ -1,5 +1,7 @@
 /**
  * All user stuff, including auth information.
+ *
+ * @flow
  */
 
 'use strict';
@@ -16,28 +18,31 @@ var _user = Immutable.Map({
   auth: null
 });
 
-var actions = {};
-
-actions[ActionTypes.RECEIVE_AUTH] = function(action) {
+function receiveAuth(action) {
   var user = UserUtils.getUserFromRawAuth(action.auth);
   _user = _user.merge({auth: action.auth, user: user});
-};
+}
 
-actions[ActionTypes.RECEIVE_LOGGED_OUT] = function() {
+function receiveLoggedOut() {
   _user = _user.merge({auth: null, user: null});
-};
+}
 
-actions[ActionTypes.RECEIVE_USER_META] = function(action) {
+function receiveUserMeta(action) {
   _user = _user.updateIn(['user'], function(userData) {
     return userData.merge({meta: action.meta});
   });
-};
+}
+
+var actions = {};
+actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
+actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;
+actions[ActionTypes.RECEIVE_USER_META] = receiveUserMeta;
 
 module.exports = assign(new Store(actions), {
-  initialize: function() {
+  initialize() {
   },
 
-  get: function() {
+  get() {
     return _user;
   }
 });

@@ -1,13 +1,20 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var UserAPIUtils = require('./UserAPIUtils');
 
-module.exports = {
-  listenToUserMeta: function(user, auth) {
-    return UserAPIUtils.listenToUserMeta(user, auth);
-  },
+function listenToUserMeta(user: User, auth: Auth): Promise {
+  return UserAPIUtils.listenToUserMeta(user, auth);
+}
 
-  stopListeningToUserMeta: function(user) {
-    return UserAPIUtils.stopListeningToUserMeta(user);
-  }
+function stopListeningToUserMeta(user: User): Promise {
+  return UserAPIUtils.stopListeningToUserMeta(user);
+}
+
+module.exports = {
+  listenToUserMeta,
+  stopListeningToUserMeta
 };

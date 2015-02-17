@@ -1,7 +1,10 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var firebaseUtils = require('../shared/firebaseUtils');
-var UserAPIUtils = require('../User/UserAPIUtils');
 
 module.exports = {
   authorizeWithFacebook: function() {
@@ -30,13 +33,5 @@ module.exports = {
 
   logOut: function() {
     firebaseUtils.unauth();
-  },
-
-  createUser: function(user, auth) {
-    return UserAPIUtils.createUser(user, auth);
-  },
-
-  getUserMeta: function(user) {
-    return UserAPIUtils.getUserMeta(user);
   }
 };

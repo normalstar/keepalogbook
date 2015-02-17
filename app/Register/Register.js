@@ -1,20 +1,24 @@
+/**
+ * @flow
+ */
+
 'use strict';
 
 var React = require('react/addons');
 var FrontHandlerViewActionCreators = require('../FrontHandler/FrontHandlerViewActionCreators');
 
 var Register = React.createClass({
-  handleClickFacebookRegister: function(e) {
+  handleClickFacebookRegister(e: Object) {
     e.preventDefault();
     FrontHandlerViewActionCreators.authorizeWithFacebook();
   },
 
-  handleClickTwitterRegister: function(e) {
+  handleClickTwitterRegister(e: Object) {
     e.preventDefault();
     FrontHandlerViewActionCreators.authorizeWithTwitter();
   },
 
-  render: function() {
+  render(): any {
     return (
       <div>
         <a href="#" onClick={this.handleClickFacebookRegister}>
