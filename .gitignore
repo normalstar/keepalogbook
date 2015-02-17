@@ -1,7 +1,6 @@
-build
-node_modules
+/node_modules
+/bower_components
+/config/devConfig.js
+/config/buildConfig.js
 *.log
 *DS_Store
-bower_components
-config/devConfig.js
-config/buildConfig.js
