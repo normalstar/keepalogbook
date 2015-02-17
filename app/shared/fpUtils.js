@@ -5,7 +5,7 @@
 
 'use strict';
 
-var _map = require('lodash/collection/map');
+var _findIndex = require('lodash/array/findIndex');
 var rearg = require('lodash/function/rearg');
 var curry = require('lodash/function/curry');
 var ary = require('lodash/function/ary');
@@ -22,8 +22,13 @@ function transformFp(func) {
 //   return curry(arried, 3);
 // }
 
+var isPropEq = curry(function(valueToCompare, prop, item) {
+  return valueToCompare === item[prop];
+});
+
 module.exports = {
   fp: {
-    map: transformFp(_map)
+    findIndex: transformFp(_findIndex),
+    isPropEq
   }
 };

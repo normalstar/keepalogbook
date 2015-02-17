@@ -11,10 +11,18 @@ function listenToDay(day: Day) {
   firebaseUtils.listenToChildAdded(day.dataDataUrl, function(logSnapshot) {
     DayServerActionCreators.receiveAddedLog(logSnapshot);
   });
+
+  firebaseUtils.listenToChildRemoved(day.dataDataUrl, function(logSnapshot) {
+    DayServerActionCreators.receiveRemovedLog(logSnapshot);
+  });
+
+  firebaseUtils.listenToChildChanged(day.dataDataUrl, function(logSnapshot) {
+    DayServerActionCreators.receiveChangedLog(logSnapshot);
+  });
 }
 
 function stopListeningToDay(day: Day) {
-  firebaseUtils.stopListeningToChildAdded(day.dataDataUrl);
+  firebaseUtils.stopListeningToChildren(day.dataDataUrl);
 }
 
 /**

@@ -19,7 +19,7 @@ function stopListeningToDay(day: Day) {
 function changeCurrentLog(value: string) {
   Dispatcher.handleAction({
     type: ActionTypes.CHANGE_CURRENT_LOG,
-    value: value
+    value
   });
 }
 

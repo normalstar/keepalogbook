@@ -9,6 +9,7 @@
 var Firebase = require('firebase');
 var firebaseUrl = __FIREBASE__;
 var RSVP = require('rsvp');
+var curry = require('lodash/function/curry');
 
 function createAuthWithPopup(type: string): Promise {
   var ref = new Firebase(firebaseUrl);
@@ -58,41 +59,41 @@ function listenToAuthStatus(loggedInCallback: Function, loggedOutCallback: Funct
 
 // Receive data
 
-function listenToValue(path: string, callback: Function) {
+var listenToType = curry(function(type, path, callback) {
   var ref = new Firebase(firebaseUrl + path);
 
-  ref.on('value', function(snapshot) {
+  ref.on(type, function(snapshot) {
     callback({key: snapshot.key(), value: snapshot.val()});
   });
-}
+});
 
-function stopListeningToValue(path: string) {
+var stopListeningToType = curry(function(type, path) {
   var ref = new Firebase(firebaseUrl + path);
-  ref.off('value');
-}
+  ref.off(type);
+});
 
-function listenToChildAdded(path: string, callback: Function) {
-  var ref = new Firebase(firebaseUrl + path);
+var listenToValue = listenToType('value');
+var stopListeningToValue = stopListeningToType('value');
+var listenToChildAdded = listenToType('child_added');
+var stopListeningToChildAdded = stopListeningToType('child_added');
+var listenToChildRemoved = listenToType('child_removed');
+var stopListeningToChildRemoved = stopListeningToType('child_removed');
+var listenToChildChanged = listenToType('child_changed');
+var stopListeningToChildChanged = stopListeningToType('child_changed');
 
-  ref.on('child_added', function(snapshot) {
-    callback({key: snapshot.key(), value: snapshot.val()});
-  });
-}
-
-function stopListeningToChildAdded(path: string) {
-  var ref = new Firebase(firebaseUrl + path);
-  ref.off('child_added');
+function stopListeningToChildren(path: string) {
+  stopListeningToChildAdded(path);
+  stopListeningToChildRemoved(path);
+  stopListeningToChildChanged(path);
 }
 
 // Write data
 
-// set() is in the object declaration.
-
-function update(path: string, value: Object|string): Promise {
+function setAtPath(path: string, value: Object|string): Promise {
   var ref = new Firebase(firebaseUrl + path);
 
   var promise = new RSVP.Promise(function(resolve, reject) {
-    ref.update(value, function(error) {
+    ref.set(value, function(error) {
       if (error) {
         reject();
       } else {
@@ -104,11 +105,14 @@ function update(path: string, value: Object|string): Promise {
   return promise;
 }
 
-function setAtPath(path: string, value: Object|string): Promise {
+/**
+ * Value has to be an object or this does nothing.
+ */
+function update(path: string, value: Object): Promise {
   var ref = new Firebase(firebaseUrl + path);
 
   var promise = new RSVP.Promise(function(resolve, reject) {
-    ref.set(value, function(error) {
+    ref.update(value, function(error) {
       if (error) {
         reject();
       } else {
@@ -153,10 +157,15 @@ module.exports = {
   stopListeningToValue,
   listenToChildAdded,
   stopListeningToChildAdded,
+  listenToChildRemoved,
+  stopListeningToChildRemoved,
+  listenToChildChanged,
+  stopListeningToChildChanged,
+
+  stopListeningToChildren,
 
   // Needed an alternate fn name or it broke
   set: setAtPath,
-
   update,
   remove,
   push
