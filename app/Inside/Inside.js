@@ -6,6 +6,8 @@
 
 var React = require('react/addons');
 var { PropTypes } = React;
+
+var InsideHeader = require('./InsideHeader');
 var UserViewActionCreators = require('../User/UserViewActionCreators');
 var FrontHandlerViewActionCreators = require('../FrontHandler/FrontHandlerViewActionCreators');
 
@@ -36,6 +38,8 @@ var Inside = React.createClass({
   render(): any {
     return (
       <div className="inside">
+        <InsideHeader />
+
         <div>
           {this.props.children}
         </div>

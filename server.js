@@ -46,6 +46,9 @@ module.exports = function(options) {
 
   } else {
 
+    app.use('/', express.static(path.join(__dirname, 'public'), {
+    }));
+
     app.get('/*', function(req, res) {
       renderApplication(req.path, SCRIPT_URL, STYLE_URL, COMMONS_URL, function(err, html) {
         res.contentType = 'text/html; charset=utf8';

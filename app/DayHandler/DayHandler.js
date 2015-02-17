@@ -48,7 +48,7 @@ var DayHandler = React.createClass({
   },
 
   render(): any {
-    var displayDate = compose(dateUtils.formatMoment('LL'), dateUtils.parseDayKey);
+    var displayDate = compose(dateUtils.formatMoment('dddd, LL'), dateUtils.parseDayKey);
 
     return (
       <div>

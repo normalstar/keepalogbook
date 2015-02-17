@@ -47,7 +47,7 @@ var FrontDayHandler = React.createClass({
     return (
       <div>
         <DayHeader
-          displayDate={dateUtils.formatMoment('LL')(dateUtils.getCurrentMoment())}
+          displayDate={dateUtils.formatMoment('dddd, LL')(dateUtils.getCurrentMoment())}
           isToday={true}
         />
 
