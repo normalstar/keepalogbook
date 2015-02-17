@@ -23,10 +23,14 @@ var DayHandler = React.createClass({
     willTransitionTo(transition, params, query, callback) {
       var { year, month, day } = params;
       var dayKey = year + month + day + '';
-      var isValidDayKey = dateUtils.parseDayKey(dayKey).isValid();
-      if (!isValidDayKey || year.length !== 4 || month.length !== 2 || day.length !== 2) {
+      var momentDate = dateUtils.parseDayKey(dayKey);
+      var isValidDayKey = momentDate.isValid();
+      var isInFuture = dateUtils.isInFuture(momentDate);
+
+      if (isInFuture || !isValidDayKey || year.length !== 4 || month.length !== 2 || day.length !== 2) {
         transition.redirect('frontDay');
       }
+
       DayStore.initialize(dayKey);
       callback();
     }

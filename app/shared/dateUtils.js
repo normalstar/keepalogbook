@@ -24,9 +24,17 @@ function parseDayKey(dayKey: string): any {
   return moment(dayKey, 'YYYYMMDD');
 }
 
+/**
+ * momentDate should only be specific down to the day
+ */
+function isInFuture(momentDate: Object): boolean {
+  return moment().isBefore(momentDate, 'day');
+}
+
 module.exports = {
   formatMoment,
   getCurrentMoment,
   getCurrentDayKey,
-  parseDayKey
+  parseDayKey,
+  isInFuture
 };
