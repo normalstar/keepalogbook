@@ -10,7 +10,7 @@ var Firebase = require('firebase');
 var firebaseUrl = __FIREBASE__;
 var RSVP = require('rsvp');
 
-function createAuthWithPopupPromise(type: string): Promise {
+function createAuthWithPopup(type: string): Promise {
   var ref = new Firebase(firebaseUrl);
   var promise = new RSVP.Promise(function(resolve, reject) {
     ref.authWithOAuthPopup(type, function(error, authData) {
@@ -33,11 +33,11 @@ function createRef(path: ?string) {
 }
 
 function authorizeWithFacebook(): Promise {
-  return createAuthWithPopupPromise('facebook');
+  return createAuthWithPopup('facebook');
 }
 
 function authorizeWithTwitter(): Promise {
-  return createAuthWithPopupPromise('twitter');
+  return createAuthWithPopup('twitter');
 }
 
 function unauth() {
