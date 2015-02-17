@@ -45,7 +45,7 @@ function unauth() {
   ref.unauth();
 }
 
-function listenToAuthStatus(loggedInCallback: any, loggedOutCallback: any) {
+function listenToAuthStatus(loggedInCallback: Function, loggedOutCallback: Function) {
   var ref = new Firebase(firebaseUrl);
   ref.onAuth(function(authData) {
     if (authData) {
@@ -58,7 +58,7 @@ function listenToAuthStatus(loggedInCallback: any, loggedOutCallback: any) {
 
 // Receive data
 
-function listenToValue(path: string, callback: any) {
+function listenToValue(path: string, callback: Function) {
   var ref = new Firebase(firebaseUrl + path);
 
   ref.on('value', function(snapshot) {

@@ -9,8 +9,8 @@ var UserServerActionCreators = require('./UserServerActionCreators');
 var UserUtils = require('./UserUtils');
 
 function listenToUserMeta(user: User, auth: Auth) {
-  return firebaseUtils.listenToValue(user.dataUrl + '/meta', function(metaSnapshot) {
-    if (metaSnapshot.value !== null) {
+  return firebaseUtils.listenToValue(user.dataUrl + '/meta', function(metaSnapshot?) {
+    if (metaSnapshot && metaSnapshot.value !== null) {
       UserServerActionCreators.receiveUserMeta(metaSnapshot.value);
     } else {
       // Create new user
