@@ -1,7 +1,7 @@
 'use strict';
 
-var firebaseUtils = require('utils/firebaseUtils');
-var userDao = require('daos/userDao');
+var firebaseUtils = require('../shared/firebaseUtils');
+var UserAPIUtils = require('../User/UserAPIUtils');
 
 module.exports = {
   authorizeWithFacebook: function() {
@@ -33,10 +33,10 @@ module.exports = {
   },
 
   createUser: function(user, auth) {
-    return userDao.createUser(user, auth);
+    return UserAPIUtils.createUser(user, auth);
   },
 
   getUserMeta: function(user) {
-    return userDao.getUserMeta(user);
+    return UserAPIUtils.getUserMeta(user);
   }
 };

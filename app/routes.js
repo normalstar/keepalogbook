@@ -1,9 +1,9 @@
 var React = require('react/addons');
 var { Route, DefaultRoute } = require('react-router');
 
-var AppHandler = require('./screens/App/index');
-var FrontHandler = require('./screens/App/screens/Front/index');
-var FrontDayHandler = require('./screens/App/screens/Front/screens/FrontDay');
+var AppHandler = require('./AppHandler/AppHandler');
+var FrontHandler = require('./FrontHandler/FrontHandler');
+var FrontDayHandler = require('./FrontDayHandler/FrontDayHandler');
 
 /**
  * Normally you would use a default route there where FrontHandler is but
