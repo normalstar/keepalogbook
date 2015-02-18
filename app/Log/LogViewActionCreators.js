@@ -13,6 +13,20 @@ function removeLog(log: Object): Promise {
   return LogAPIUtils.removeLog(log.toJS());
 }
 
+function toggleViewLogOptions(log: Object) {
+  Dispatcher.handleAction({
+    type: ActionTypes.TOGGLE_VIEW_LOG_OPTIONS,
+    log
+  });
+}
+
+function toggleConfirmRemoveLog(log: Object) {
+  Dispatcher.handleAction({
+    type: ActionTypes.TOGGLE_CONFIRM_REMOVE_LOG,
+    log
+  });
+}
+
 function toggleEditLog(log: Object) {
   Dispatcher.handleAction({
     type: ActionTypes.TOGGLE_EDIT_LOG,
@@ -40,6 +54,8 @@ function submitEditingLog(log: Object) {
 
 module.exports = {
   removeLog,
+  toggleViewLogOptions,
+  toggleConfirmRemoveLog,
   toggleEditLog,
   changeEditingLog,
   submitEditingLog

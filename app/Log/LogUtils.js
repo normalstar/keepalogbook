@@ -8,7 +8,9 @@ function convertRawLog(rawLog: RawLog, day: Day): Immutable.Map {
     dataUrl: day.dataDataUrl + '/' + rawLog.key,
     log: rawLog.value.log,
     isEditing: false,
-    editingValue: ''
+    editingValue: '',
+    isViewingOptions: false,
+    isConfirmingRemove: false
   });
 }
 

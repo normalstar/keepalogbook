@@ -71,12 +71,35 @@ function findLogIndexWithLog(log) {
   return _day.get('logs').indexOf(log);
 }
 
+function toggleViewLogOptions(action: {log: Immutable.Map}) {
+  var index = findLogIndexWithLog(action.log);
+  if (index === -1) { return; }
+
+  _day = _day.updateIn(['logs', index], function(log) {
+    return log.merge({
+      isViewingOptions: !log.get('isViewingOptions')
+    });
+  });
+}
+
+function toggleConfirmRemoveLog(action: {log: Immutable.Map}) {
+  var index = findLogIndexWithLog(action.log);
+  if (index === -1) { return; }
+
+  _day = _day.updateIn(['logs', index], function(log) {
+    return log.merge({
+      isConfirmingRemove: !log.get('isConfirmingRemove')
+    });
+  });
+}
+
 function toggleEditLog(action: {log: Immutable.Map}) {
   var index = findLogIndexWithLog(action.log);
   if (index === -1) { return; }
 
   _day = _day.updateIn(['logs', index], function(log) {
     return log.merge({
+      isViewingOptions: false,
       isEditing: !log.get('isEditing'),
       editingValue: log.get('log')
     });
@@ -93,7 +116,7 @@ function changeEditingLog(action: {log: Immutable.Map; value: string}) {
 }
 
 function submitEditingLog(action: {log: Immutable.Map}) {
-  var index = _day.get('logs').indexOf(action.log);
+  var index = findLogIndexWithLog(action.log);
   if (index === -1) { return; }
 
   _day = _day.updateIn(['logs', index], function(log) {
@@ -116,6 +139,8 @@ actions[ActionTypes.RECEIVE_REMOVED_LOG] = receiveRemovedLog;
 actions[ActionTypes.RECEIVE_CHANGED_LOG] = receiveChangedLog;
 actions[ActionTypes.CHANGE_CURRENT_LOG] = changeCurrentLog;
 actions[ActionTypes.SUBMIT_CURRENT_LOG] = submitCurrentLog;
+actions[ActionTypes.TOGGLE_VIEW_LOG_OPTIONS] = toggleViewLogOptions;
+actions[ActionTypes.TOGGLE_CONFIRM_REMOVE_LOG] = toggleConfirmRemoveLog;
 actions[ActionTypes.TOGGLE_EDIT_LOG] = toggleEditLog;
 actions[ActionTypes.CHANGE_EDITING_LOG] = changeEditingLog;
 actions[ActionTypes.SUBMIT_EDITING_LOG] = submitEditingLog;

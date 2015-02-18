@@ -1,0 +1,28 @@
+@import "~mixins";
+@import "~vars";
+
+
+.write-log-options {
+  margin-bottom: @base-spacing-unit * 1.5;
+}
+
+
+.write-log-options__save {
+  display: inline-block;
+  margin-right: @base-spacing-unit / 4;
+}
+
+
+.write-log-options__save-instructions {
+  .sans-serif();
+  .font-size(@h6-size);
+  display: inline-block;
+  color: lighten(gray, 35%);
+  margin-right: @base-spacing-unit;
+}
+
+
+.write-log-options__cancel {
+  display: inline-block;
+  float: right;
+}

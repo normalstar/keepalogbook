@@ -1,5 +1,53 @@
+@import "~mixins";
 @import "~vars";
 
 .log {
-  margin-bottom: @base-spacing-unit * 2;
+  margin-bottom: @base-spacing-unit;
+  position: relative;
+}
+
+
+.log__disc {
+  position: absolute;
+  top: @base-spacing-unit;
+  color: orange;
+  display: none;
+
+  .responsive(650px, {
+    display: block;
+    left: -@base-spacing-unit * 1.75;
+  })
+}
+
+
+.log__body-link {
+  .serif();
+  color: #444;
+  border: none;
+  display: block;
+  padding: @base-spacing-unit;
+  margin-top: -@base-spacing-unit;
+  margin-left: -@base-spacing-unit;
+}
+
+
+.log__body-link:hover {
+  background-color: lighten(orange, 36%);
+}
+
+
+.log__body-link--viewing-options {
+  background-color: lighten(orange, 42%);
+  color: rgba(0, 0, 0, 0.15);
+}
+
+
+.log__options {
+  position: absolute;
+  top: @base-spacing-unit / 2;
+}
+
+
+.log__options a {
+  margin-right: @base-spacing-unit / 4;
 }

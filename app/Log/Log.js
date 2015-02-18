@@ -8,9 +8,11 @@
 
 var React = require('react/addons');
 var { PropTypes } = React;
-var { PureRenderMixin } = React.addons;
-var WriteLog = require('./WriteLog');
+var { PureRenderMixin, classSet } = React.addons;
 
+var WriteLog = require('./WriteLog');
+var WriteLogOptions = require('./WriteLogOptions');
+var Btn = require('../shared/Btn');
 var LogViewActionCreators = require('./LogViewActionCreators');
 var inputUtils = require('../shared/inputUtils');
 
@@ -25,11 +27,18 @@ var Log = React.createClass({
 
   handleClickRemove(e: Object) {
     e.preventDefault();
+    LogViewActionCreators.toggleConfirmRemoveLog(this.props.log);
+  },
+
+  handleConfirmRemove(e: Object) {
+    e.preventDefault();
     LogViewActionCreators.removeLog(this.props.log);
   },
 
   handleToggleEdit(e: Object) {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     LogViewActionCreators.toggleEditLog(this.props.log);
   },
 
@@ -41,23 +50,65 @@ var Log = React.createClass({
     LogViewActionCreators.submitEditingLog(this.props.log);
   },
 
+  handleClickWholeLog(e: Object) {
+    e.preventDefault();
+    LogViewActionCreators.toggleViewLogOptions(this.props.log);
+  },
+
   render(): any {
     var log = this.props.log;
+
+    var classes = classSet({
+      "log__body-link": true,
+      "log__body-link--viewing-options": log.get('isViewingOptions')
+    });
+
+    var options = log.get('isViewingOptions') && !log.get('isConfirmingRemove') ?
+      <div className="log__options">
+        <Btn href="#" onClick={this.handleToggleEdit}>
+          Edit
+        </Btn>
+        {' '}
+        <Btn href="#"
+          onClick={this.handleClickRemove}
+          inverse={true}>
+          Remove
+        </Btn>
+      </div> : null;
+
+    var confirmRemove = log.get('isConfirmingRemove') ?
+      <div className="log__options">
+        <Btn href="#"
+          onClick={this.handleConfirmRemove}>
+          You sure? Super sure?
+        </Btn>
+        {' '}
+        <Btn href="#"
+          inverse={true}
+          onClick={this.handleClickRemove}>
+          Cancel
+        </Btn>
+      </div> : null;
+
     var content = log.get('isEditing') ?
       <div>
         <WriteLog value={log.get('editingValue')}
           onChange={this.handleChangeValue}
           onFinish={this.handleFinishEditing}
         />
-        {' '}
-        <a href="#" onClick={this.handleToggleEdit}>Cancel</a>
-      </div>:
+        <WriteLogOptions onSave={this.handleFinishEditing}
+          onCancel={this.handleToggleEdit}
+        />
+      </div> :
       <div>
-        <div dangerouslySetInnerHTML={{__html: inputUtils.nl2br(log.get('log'))}}>
-        </div>
-        <a href="#" onClick={this.handleClickRemove}>Remove</a>
-        {' '}
-        <a href="#" onClick={this.handleToggleEdit}>Edit</a>
+        <div className="log__disc" dangerouslySetInnerHTML={{__html: '&mdash;'}}></div>
+        <a className={classes}
+          href="#"
+          onClick={this.handleClickWholeLog}
+          dangerouslySetInnerHTML={{__html: inputUtils.nl2br(log.get('log'))}}>
+        </a>
+        {options}
+        {confirmRemove}
       </div>;
 
     return (
