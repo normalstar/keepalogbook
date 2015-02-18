@@ -8,17 +8,9 @@ var firebaseUtils = require('../shared/firebaseUtils');
 var DayServerActionCreators = require('./DayServerActionCreators');
 
 function listenToDay(day: Day) {
-  firebaseUtils.listenToChildAdded(day.dataDataUrl, function(logSnapshot) {
-    DayServerActionCreators.receiveAddedLog(logSnapshot);
-  });
-
-  firebaseUtils.listenToChildRemoved(day.dataDataUrl, function(logSnapshot) {
-    DayServerActionCreators.receiveRemovedLog(logSnapshot);
-  });
-
-  firebaseUtils.listenToChildChanged(day.dataDataUrl, function(logSnapshot) {
-    DayServerActionCreators.receiveChangedLog(logSnapshot);
-  });
+  firebaseUtils.listenToChildAdded(day.dataDataUrl, DayServerActionCreators.receiveAddedLog);
+  firebaseUtils.listenToChildRemoved(day.dataDataUrl, DayServerActionCreators.receiveRemovedLog);
+  firebaseUtils.listenToChildChanged(day.dataDataUrl, DayServerActionCreators.receiveChangedLog);
 }
 
 function stopListeningToDay(day: Day) {
