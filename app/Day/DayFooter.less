@@ -1,0 +1,36 @@
+@import "~vars";
+@import "~mixins";
+
+
+.day-footer {
+  margin-top: @base-spacing-unit;
+}
+
+
+.day-footer__link {
+  display: inline-block;
+  width: 50%;
+  font-size: 0;
+}
+
+
+.day-footer__link > a {
+  .font-size(@h6-size);
+}
+
+
+.day-footer__link--previous {
+  text-align: left;
+}
+
+
+.day-footer__link--next {
+  text-align: right;
+}
+
+
+.day-footer__link__label {
+  .sans-serif();
+  display: block;
+  .font-size(@milli-size);
+}

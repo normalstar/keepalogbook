@@ -9,12 +9,11 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
-var { Link } = require('react-router');
 
+var DayFooter = require('./DayFooter');
 var DayViewActionCreators = require('./DayViewActionCreators');
 var Log = require('../Log/Log');
 var WriteLog = require('../Log/WriteLog');
-var dateUtils = require('../shared/dateUtils');
 
 var Day = React.createClass({
   propTypes: {
@@ -42,24 +41,6 @@ var Day = React.createClass({
       />
     ).toArray();
 
-    var momentDate = dateUtils.parseDayKey(this.props.day.getIn(['day', 'dayKey']));
-    var prevDay = dateUtils.getPreviousDay(momentDate);
-    var prevParams = dateUtils.getDayParams(prevDay);
-    var prevLink = (
-      <Link to="day" params={prevParams}>
-        {dateUtils.formatMoment('ll')(prevDay)}
-      </Link>
-    );
-
-    var nextDay = dateUtils.getNextDay(momentDate);
-    var nextParams = dateUtils.getDayParams(nextDay);
-    var isInFuture = dateUtils.isInFuture(nextDay);
-    var nextLink = isInFuture ?
-      null :
-      <Link to="day" params={nextParams}>
-        {dateUtils.formatMoment('ll')(nextDay)}
-      </Link>;
-
     return (
       <div>
         {logs}
@@ -67,12 +48,10 @@ var Day = React.createClass({
           <WriteLog value={this.props.day.get('currentLog')}
             onChange={this.handleChangeCurrentLog}
             onFinish={this.handleFinishCurrentLog}
+            isNewLog={true}
           />
         </div>
-        <div>
-          {prevLink}
-          {nextLink}
-        </div>
+        <DayFooter day={this.props.day} />
       </div>
     );
   }
