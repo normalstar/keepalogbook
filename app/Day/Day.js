@@ -50,7 +50,23 @@ var Day = React.createClass({
       />
     ).toArray();
 
-    var yesterdayParams = dateUtils.getYesterdayLinkParams();
+    var momentDate = dateUtils.parseDayKey(this.props.day.getIn(['day', 'dayKey']));
+    var prevDay = dateUtils.getPreviousDay(momentDate);
+    var prevParams = dateUtils.getDayParams(prevDay);
+    var prevLink = (
+      <Link to="day" params={prevParams}>
+        {dateUtils.formatMoment('ll')(prevDay)}
+      </Link>
+    );
+
+    var nextDay = dateUtils.getNextDay(momentDate);
+    var nextParams = dateUtils.getDayParams(nextDay);
+    var isInFuture = dateUtils.isInFuture(nextDay);
+    var nextLink = isInFuture ?
+      null :
+      <Link to="day" params={nextParams}>
+        {dateUtils.formatMoment('ll')(nextDay)}
+      </Link>;
 
     return (
       <div>
@@ -62,9 +78,8 @@ var Day = React.createClass({
           />
         </div>
         <div>
-          <Link to="day" params={yesterdayParams}>
-            Yesterday
-          </Link>
+          {prevLink}
+          {nextLink}
         </div>
       </div>
     );

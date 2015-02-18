@@ -117,6 +117,12 @@ module.exports = assign(new Store(actions), {
   initialize(dayKey: ?string) {
     _dayKey = dayKey || '';
     _day = _day.merge(getFreshDay());
+    this.emitChange();
+  },
+
+  clear() {
+    _day = _day.clear();
+    this.emitChange();
   },
 
   get(): Immutable.Map {

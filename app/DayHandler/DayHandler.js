@@ -34,6 +34,15 @@ var DayHandler = React.createClass({
 
       DayStore.initialize(dayKey);
       callback();
+    },
+
+    // We want to unmount and mount Day component if you move away from this
+    // and before you transition to next one if same route since this component
+    // won't unmount. This way it will stop listening and listen to a new day.
+    // Grosser than I'd like.
+    willTransitionFrom(transition, component, callback) {
+      DayStore.clear();
+      callback();
     }
   },
 
@@ -48,6 +57,10 @@ var DayHandler = React.createClass({
   },
 
   render(): any {
+    if (!this.state.day.get('day')) {
+      return null;
+    }
+
     var displayDate = compose(dateUtils.formatMoment('dddd, LL'), dateUtils.parseDayKey);
 
     return (
