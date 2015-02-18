@@ -30,12 +30,7 @@ function authorizeWithTwitter() {
   });
 }
 
-function logOut() {
-  firebaseUtils.unauth();
-}
-
 module.exports = {
   authorizeWithFacebook,
-  authorizeWithTwitter,
-  logOut
+  authorizeWithTwitter
 };

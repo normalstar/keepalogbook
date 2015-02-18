@@ -9,10 +9,12 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
+var { Link } = require('react-router');
 
 var DayViewActionCreators = require('./DayViewActionCreators');
 var Log = require('../Log/Log');
 var WriteLog = require('../Log/WriteLog');
+var dateUtils = require('../shared/dateUtils');
 
 var Day = React.createClass({
   propTypes: {
@@ -48,6 +50,8 @@ var Day = React.createClass({
       />
     ).toArray();
 
+    var yesterdayParams = dateUtils.getYesterdayLinkParams();
+
     return (
       <div>
         {logs}
@@ -56,6 +60,11 @@ var Day = React.createClass({
             onChange={this.handleChangeCurrentLog}
             onFinish={this.handleFinishCurrentLog}
           />
+        </div>
+        <div>
+          <Link to="day" params={yesterdayParams}>
+            Yesterday
+          </Link>
         </div>
       </div>
     );

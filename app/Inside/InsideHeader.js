@@ -14,7 +14,7 @@ var InsideHeader = React.createClass({
   render(): any {
     return (
       <div className="inside-header">
-        <Link to="/" className="inside-header__link">
+        <Link to="frontDay" className="inside-header__link">
           <Logo maxHeight="18px" />
         </Link>
       </div>

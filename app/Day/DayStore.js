@@ -99,7 +99,7 @@ function submitEditingLog(action: {log: Immutable.Map}) {
 function receiveAuth() {
   Dispatcher.waitFor([UserStore.dispatchToken]);
   _user = UserStore.get();
-  _day = getFreshDay();
+  _day = _day.merge(getFreshDay());
 }
 
 var actions = {};
@@ -116,7 +116,7 @@ actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 module.exports = assign(new Store(actions), {
   initialize(dayKey: ?string) {
     _dayKey = dayKey || '';
-    _day = getFreshDay();
+    _day = _day.merge(getFreshDay());
   },
 
   get(): Immutable.Map {

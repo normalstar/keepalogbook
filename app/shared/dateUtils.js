@@ -31,10 +31,25 @@ function isInFuture(momentDate: Object): boolean {
   return moment().isBefore(momentDate, 'day');
 }
 
+function getYesterdayDayKey() {
+  return formatMoment('YYYYMMDD')(moment().subtract(1, 'days'));
+}
+
+function getYesterdayLinkParams(): Object {
+  var yesterday = moment().subtract(1, 'days');
+  return {
+    year: formatMoment('YYYY')(yesterday),
+    month: formatMoment('MM')(yesterday),
+    day: formatMoment('DD')(yesterday)
+  };
+}
+
 module.exports = {
   formatMoment,
   getCurrentMoment,
   getCurrentDayKey,
   parseDayKey,
-  isInFuture
+  isInFuture,
+  getYesterdayDayKey,
+  getYesterdayLinkParams
 };
