@@ -56,6 +56,7 @@ var DayHandler = React.createClass({
           displayDate={displayDate(this.state.day.getIn(['day', 'dayKey']))}
           isToday={false}
         />
+
         <Day day={this.state.day} />
       </div>
     );

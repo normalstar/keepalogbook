@@ -39,9 +39,15 @@ var FrontDayHandler = React.createClass({
 
   render(): any {
     // We only have to check for auth here because this is the default route.
-    // Other components will be explicitly inside/outside.
     if (!this.props.user.get('auth')) {
       return <Register />;
+    }
+
+    // If you log out and log in with a different account, user will update
+    // first sending an emitChange and the day will start with previous user.
+    // Weird.
+    if (this.state.day.getIn(['day', 'currentUserId']) !== this.props.user.getIn(['user', 'userId'])) {
+      return <div>Loading...</div>;
     }
 
     return (

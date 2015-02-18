@@ -13,6 +13,7 @@ function convertDataForDay(dayKey: string, user: Immutable.Map): Immutable.Map {
 
   return Immutable.Map({
     dayKey: dayKey,
+    currentUserId: user.getIn(['user', 'userId']),
     daysDataUrl: user.getIn(['user', 'dataUrl']) + '/days/' + dayKey,
     dataDataUrl: user.getIn(['user', 'dataUrl']) + '/data/' + dayKey
   });
