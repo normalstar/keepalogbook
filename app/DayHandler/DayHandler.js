@@ -29,7 +29,11 @@ var DayHandler = React.createClass({
       var isValidDayKey = momentDate.isValid();
       var isInFuture = dateUtils.isInFuture(momentDate);
 
-      if (isInFuture || !isValidDayKey || year.length !== 4 || month.length !== 2 || day.length !== 2) {
+      if (isInFuture ||
+          !isValidDayKey ||
+          year.length !== 4 ||
+          month.length !== 2 ||
+          day.length !== 2) {
         transition.redirect('frontDay');
       }
 

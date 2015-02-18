@@ -28,7 +28,6 @@ var InsideFooter = React.createClass({
     return (
       <div className="inside-footer">
         {this.props.user.getIn(['user', 'meta', 'displayName'])}
-        {this.props.user.getIn(['auth', 'provider'])}
         <div>
           <a href="#" onClick={this.handleClickLogOut}>
             Log out

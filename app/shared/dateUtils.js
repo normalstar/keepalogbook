@@ -31,6 +31,10 @@ function isInFuture(momentDate: Object): boolean {
   return moment().isBefore(momentDate, 'day');
 }
 
+function isToday(momentDate: Object): boolean {
+  return moment().isSame(momentDate, 'day');
+}
+
 function getDayParams(momentDate: Object): Object {
   return {
     year: formatMoment('YYYY')(momentDate),
@@ -61,6 +65,7 @@ module.exports = {
   getCurrentDayKey,
   parseDayKey,
   isInFuture,
+  isToday,
   getDayParams,
   getPreviousDay,
   getNextDay,
