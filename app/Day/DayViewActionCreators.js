@@ -8,11 +8,15 @@ var Dispatcher = require('../Dispatcher');
 var ActionTypes = require('../ActionTypes');
 var DayAPIUtils = require('./DayAPIUtils');
 
-function listenToDay(day: Object) {
+function transitionToDay(day: Object) {
+  Dispatcher.handleAction({
+    type: ActionTypes.TRANSITION_TO_DAY
+  });
+
   DayAPIUtils.listenToDay(day.toJS());
 }
 
-function stopListeningToDay(day: Object) {
+function transitionFromDay(day: Object) {
   DayAPIUtils.stopListeningToDay(day.toJS());
 }
 
@@ -37,8 +41,8 @@ function submitCurrentLog(day: Object, data: string, currentCount: number): Prom
 }
 
 module.exports = {
-  listenToDay,
-  stopListeningToDay,
+  transitionToDay,
+  transitionFromDay,
   changeCurrentLog,
   submitCurrentLog
 };

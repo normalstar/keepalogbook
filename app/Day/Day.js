@@ -23,14 +23,6 @@ var Day = React.createClass({
 
   mixins: [PureRenderMixin],
 
-  componentWillMount() {
-    DayViewActionCreators.listenToDay(this.props.day.get('day'));
-  },
-
-  componentWillUnmount() {
-    DayViewActionCreators.stopListeningToDay(this.props.day.get('day'));
-  },
-
   handleChangeCurrentLog(e: Object) {
     DayViewActionCreators.changeCurrentLog(e.target.value);
   },

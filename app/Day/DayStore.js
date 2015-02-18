@@ -111,18 +111,13 @@ actions[ActionTypes.SUBMIT_CURRENT_LOG] = submitCurrentLog;
 actions[ActionTypes.TOGGLE_EDIT_LOG] = toggleEditLog;
 actions[ActionTypes.CHANGE_EDITING_LOG] = changeEditingLog;
 actions[ActionTypes.SUBMIT_EDITING_LOG] = submitEditingLog;
+actions[ActionTypes.TRANSITION_TO_DAY] = function() {}; // So will emit change. Gross.
 actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 
 module.exports = assign(new Store(actions), {
   initialize(dayKey: ?string) {
     _dayKey = dayKey || '';
     _day = _day.merge(getFreshDay());
-    this.emitChange();
-  },
-
-  clear() {
-    _day = _day.clear();
-    this.emitChange();
   },
 
   get(): Immutable.Map {

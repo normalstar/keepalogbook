@@ -13,6 +13,7 @@ var StoresMixin = require('../StoresMixin');
 var DayStore = require('../Day/DayStore');
 var Day = require('../Day/Day');
 var DayHeader = require('../Day/DayHeader');
+var DayViewActionCreators = require('../Day/DayViewActionCreators');
 var dateUtils = require('../shared/dateUtils');
 
 var DayHandler = React.createClass({
@@ -33,15 +34,12 @@ var DayHandler = React.createClass({
       }
 
       DayStore.initialize(dayKey);
+      DayViewActionCreators.transitionToDay(DayStore.get().get('day'));
       callback();
     },
 
-    // We want to unmount and mount Day component if you move away from this
-    // and before you transition to next one if same route since this component
-    // won't unmount. This way it will stop listening and listen to a new day.
-    // Grosser than I'd like.
     willTransitionFrom(transition, component, callback) {
-      DayStore.clear();
+      DayViewActionCreators.transitionFromDay(component.state.day.get('day'));
       callback();
     }
   },

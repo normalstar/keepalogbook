@@ -19,6 +19,8 @@ module.exports = keyMirror({
   CHANGE_CURRENT_LOG: null,
   SUBMIT_CURRENT_LOG: null,
 
+  TRANSITION_TO_DAY: null,
+
   // log
   TOGGLE_EDIT_LOG: null,
   CHANGE_EDITING_LOG: null,

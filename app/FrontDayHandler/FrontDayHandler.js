@@ -9,10 +9,11 @@ var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 
 var StoresMixin = require('../StoresMixin');
+var Register = require('../Register/Register');
 var DayStore = require('../Day/DayStore');
 var Day = require('../Day/Day');
-var Register = require('../Register/Register');
 var DayHeader = require('../Day/DayHeader');
+var DayViewActionCreators = require('../Day/DayViewActionCreators');
 var dateUtils = require('../shared/dateUtils');
 
 var FrontDayHandler = React.createClass({
@@ -23,6 +24,12 @@ var FrontDayHandler = React.createClass({
   statics: {
     willTransitionTo(transition, params, query, callback) {
       DayStore.initialize(dateUtils.getCurrentDayKey());
+      DayViewActionCreators.transitionToDay(DayStore.get().get('day'));
+      callback();
+    },
+
+    willTransitionFrom(transition, component, callback) {
+      DayViewActionCreators.transitionFromDay(component.state.day.get('day'));
       callback();
     }
   },
