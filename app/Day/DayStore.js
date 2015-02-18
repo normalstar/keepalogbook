@@ -35,8 +35,12 @@ function receiveAddedLog(action: {rawLog: RawLog}) {
   });
 }
 
+function findLogIndexWithKey(key: string) {
+  return _day.get('logs').findIndex(log => log.get('key') === key);
+}
+
 function receiveRemovedLog(action: {rawLog: RawLog}) {
-  var index = DayUtils.getLogIndexFromKey(_day, action.rawLog.key);
+  var index = findLogIndexWithKey(action.rawLog.key);
   if (index === -1) { return; }
 
   _day = _day.update('logs', function(logs) {
@@ -45,7 +49,7 @@ function receiveRemovedLog(action: {rawLog: RawLog}) {
 }
 
 function receiveChangedLog(action: {rawLog: RawLog}) {
-  var index = DayUtils.getLogIndexFromKey(_day, action.rawLog.key);
+  var index = findLogIndexWithKey(action.rawLog.key);
   if (index === -1) { return; }
 
   var converted = LogUtils.convertRawLog(action.rawLog, _day.get('day').toJS());
@@ -63,8 +67,12 @@ function submitCurrentLog() {
   _day = _day.set('currentLog', '');
 }
 
+function findLogIndexWithLog(log) {
+  return _day.get('logs').indexOf(log);
+}
+
 function toggleEditLog(action: {log: Immutable.Map}) {
-  var index = _day.get('logs').indexOf(action.log);
+  var index = findLogIndexWithLog(action.log);
   if (index === -1) { return; }
 
   _day = _day.updateIn(['logs', index], function(log) {
@@ -76,7 +84,7 @@ function toggleEditLog(action: {log: Immutable.Map}) {
 }
 
 function changeEditingLog(action: {log: Immutable.Map; value: string}) {
-  var index = _day.get('logs').indexOf(action.log);
+  var index = findLogIndexWithLog(action.log);
   if (index === -1) { return; }
 
   _day = _day.updateIn(['logs', index], function(log) {
@@ -99,7 +107,7 @@ function submitEditingLog(action: {log: Immutable.Map}) {
 function receiveAuth() {
   Dispatcher.waitFor([UserStore.dispatchToken]);
   _user = UserStore.get();
-  _day = _day.merge(getFreshDay());
+  _day = getFreshDay();
 }
 
 var actions = {};
@@ -117,7 +125,7 @@ actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 module.exports = assign(new Store(actions), {
   initialize(dayKey: ?string) {
     _dayKey = dayKey || '';
-    _day = _day.merge(getFreshDay());
+    _day = getFreshDay();
   },
 
   get(): Immutable.Map {

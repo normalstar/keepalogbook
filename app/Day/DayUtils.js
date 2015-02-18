@@ -19,11 +19,6 @@ function convertDataForDay(dayKey: string, user: Immutable.Map): Immutable.Map {
   });
 }
 
-function getLogIndexFromKey(day: Immutable.Map, key: string): number {
-  return day.get('logs').findIndex(log => log.get('key') === key);
-}
-
 module.exports = {
-  convertDataForDay,
-  getLogIndexFromKey
+  convertDataForDay
 };
