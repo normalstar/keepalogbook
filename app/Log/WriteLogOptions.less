@@ -1,6 +1,10 @@
 @import "~mixins";
 @import "~vars";
 
+.write-log {
+  position: relative;
+}
+
 
 .write-log-options {
   margin-bottom: @base-spacing-unit * 1.5;
@@ -25,4 +29,19 @@
 .write-log-options__cancel {
   display: inline-block;
   float: right;
+}
+
+
+.write-log__pencil {
+  .font-size(@h6-size);
+  position: absolute;  
+  bottom: @base-spacing-unit / 4;
+  right: -@base-spacing-unit;
+  color: orange;
+  margin-top: -@base-spacing-unit / 2;
+  display: none;
+
+  .responsive(375px, {
+    display: inline-block; 
+  });
 }

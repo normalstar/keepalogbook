@@ -43,6 +43,7 @@ var WriteLog = React.createClass({
           onKeyDown={this.handleKeyDown}
           placeholder="Don't worry, you're awesome. So write something."
         />
+        <span className="icon-pencil write-log__pencil" />
       </div>
     );
   }

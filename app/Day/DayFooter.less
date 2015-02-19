@@ -1,7 +1,6 @@
 @import "~vars";
 @import "~mixins";
 
-
 .day-footer {
   margin-top: @base-spacing-unit;
 }
@@ -32,5 +31,21 @@
 .day-footer__link__label {
   .sans-serif();
   display: block;
+  .font-size(@milli-size);
+}
+
+
+.day-footer__calendar {
+  margin-top: @base-spacing-unit;
+
+  .responsive(375px, {
+    text-align: center;  
+    margin-top: -@base-spacing-unit;
+  })
+}
+
+
+.day-footer__calendar__label {
+  .sans-serif();
   .font-size(@milli-size);
 }

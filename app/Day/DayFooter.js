@@ -55,6 +55,11 @@ var DayFooter = React.createClass({
           {nextLabel}
           {nextLink}
         </span>
+        <div className="day-footer__calendar">
+          <a href="#">
+            <span className="icon-calendar" />
+          </a>
+        </div>
       </div>
     );
   }
