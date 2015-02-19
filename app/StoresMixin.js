@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  getInitialState: function() {
+  getInitialState() {
     if (this.getStateFromStores) {
       return this.getStateFromStores();
     }
@@ -9,19 +9,19 @@ module.exports = {
     return {};
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.stores.forEach(function(store) {
       store.addChangeListener(this._onChange);
     }.bind(this));
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     this.stores.forEach(function(store) {
       store.removeChangeListener(this._onChange);
     }.bind(this));
   },
 
-  _onChange: function() {
+  _onChange() {
     if (this.getStateFromStores) {
       this.setState(this.getStateFromStores());
     }

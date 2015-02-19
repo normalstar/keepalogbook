@@ -7,6 +7,7 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
+var { RouteHandler, Navigation } = require('react-router');
 
 var InsideHeader = require('./InsideHeader');
 var InsideFooter = require('./InsideFooter');
@@ -17,13 +18,25 @@ require('./Inside.less');
 
 var Inside = React.createClass({
   propTypes: {
-    user: PropTypes.object.isRequired,
-    children: PropTypes.any.isRequired
+    user: PropTypes.object.isRequired
   },
 
-  mixins: [PureRenderMixin],
+  mixins: [PureRenderMixin, Navigation],
+
+  _redirectIfLoggedOut() {
+    if (!this.props.user.get('auth')) {
+      this.replaceWith('front');
+    }
+  },
+
+  componentDidUpdate(prevProps: Object) {
+    if (!prevProps) { return; }
+    this._redirectIfLoggedOut();
+  },
 
   componentWillMount() {
+    this._redirectIfLoggedOut();
+    if (!this.props.user.get('user')) { return; }
     UserViewActionCreators.listenToUserMeta(
       this.props.user.get('user'),
       this.props.user.get('auth')
@@ -31,6 +44,7 @@ var Inside = React.createClass({
   },
 
   componentWillUnmount() {
+    if (!this.props.user.get('user')) { return; }
     UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user'));
   },
 
@@ -44,9 +58,7 @@ var Inside = React.createClass({
       <div className="inside">
         <InsideHeader />
 
-        <div>
-          {this.props.children}
-        </div>
+        <RouteHandler user={this.props.user} />
 
         <InsideFooter user={this.props.user} />
       </div>

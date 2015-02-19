@@ -14,7 +14,7 @@ var InsideHeader = React.createClass({
   render(): any {
     return (
       <div className="inside-header">
-        <Link to="frontDay" className="inside-header__link">
+        <Link to="today" className="inside-header__link">
           <Logo logoWidth="24px" logoHeight="24px" circle={false} />
         </Link>
       </div>

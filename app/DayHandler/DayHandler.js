@@ -34,7 +34,7 @@ var DayHandler = React.createClass({
           year.length !== 4 ||
           month.length !== 2 ||
           day.length !== 2) {
-        transition.redirect('frontDay');
+        transition.redirect('today');
       }
 
       DayStore.initialize(dayKey);

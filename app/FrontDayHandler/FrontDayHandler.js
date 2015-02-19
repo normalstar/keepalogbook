@@ -24,7 +24,7 @@ var FrontDayHandler = React.createClass({
   statics: {
     willTransitionTo(transition, params, query, callback) {
       DayStore.initialize(dateUtils.getCurrentDayKey());
-      DayViewActionCreators.transitionToDay(DayStore.get().get('day'));
+      DayViewActionCreators.transitionToDay(DayStore.get().get('day'), true);
       callback();
     },
 
