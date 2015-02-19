@@ -5,16 +5,16 @@ var { PureRenderMixin } = React.addons;
 
 var Logo = require('../Logo/Logo');
 
-require('./OutsideHandlerHeader.less');
+require('./OutsideHeader.less');
 
-var OutsideHandlerHeader = React.createClass({
+var OutsideHeader = React.createClass({
   mixins: [PureRenderMixin],
 
   render(): any {
     return (
-      <div className="outside-handler-header">
+      <div className="outside-header">
         <Logo logoWidth="36px" logoHeight="36px" circle={false} />
-        <h1 className="outside-handler-header__title">
+        <h1 className="outside-header__title">
           Keep a logbook
         </h1>
       </div>
@@ -22,4 +22,4 @@ var OutsideHandlerHeader = React.createClass({
   }
 });
 
-module.exports = OutsideHandlerHeader;
+module.exports = OutsideHeader;
