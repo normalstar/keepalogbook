@@ -13,7 +13,7 @@ var InsideFooter = require('./InsideFooter');
 var UserViewActionCreators = require('../User/UserViewActionCreators');
 var InsideViewActionCreators = require('./InsideViewActionCreators');
 
-var Calendar = require('../Calendar/Calendar');
+var Calendars = require('../Calendars/Calendars');
 
 require('./Inside.less');
 
@@ -45,12 +45,7 @@ var Inside = React.createClass({
       <div className="inside">
         <InsideHeader />
 
-        <Calendar year={2015} month={1} />
-        <Calendar year={2015} month={2} />
-        <Calendar year={2015} month={3} />
-        <Calendar year={2015} month={4} />
-        <Calendar year={2015} month={5} />
-        <Calendar year={2015} month={6} />
+        <Calendars />
 
         {this.props.children}
 
