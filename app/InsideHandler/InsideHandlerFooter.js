@@ -8,11 +8,11 @@ var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 
-var InsideViewActionCreators = require('./InsideViewActionCreators');
+var InsideHandlerViewActionCreators = require('./InsideHandlerViewActionCreators');
 
-require('./InsideFooter.less');
+require('./InsideHandlerFooter.less');
 
-var InsideFooter = React.createClass({
+var InsideHandlerFooter = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired
   },
@@ -21,12 +21,12 @@ var InsideFooter = React.createClass({
 
   handleClickLogOut(e: Object) {
     e.preventDefault();
-    InsideViewActionCreators.logOut();
+    InsideHandlerViewActionCreators.logOut();
   },
 
   render(): any {
     return (
-      <div className="inside-footer">
+      <div className="inside-handler-footer">
         {this.props.user.getIn(['user', 'meta', 'displayName'])}
         <div>
           <a href="#" onClick={this.handleClickLogOut}>
@@ -38,4 +38,4 @@ var InsideFooter = React.createClass({
   }
 });
 
-module.exports = InsideFooter;
+module.exports = InsideHandlerFooter;

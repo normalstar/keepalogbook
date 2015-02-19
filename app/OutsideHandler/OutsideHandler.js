@@ -9,11 +9,11 @@ var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 var { RouteHandler, Navigation } = require('react-router');
 
-var OutsideHeader = require('./OutsideHeader');
+var OutsideHandlerHeader = require('./OutsideHandlerHeader');
 
-require('./Outside.less');
+require('./OutsideHandler.less');
 
-var Outside = React.createClass({
+var OutsideHandler = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired
   },
@@ -22,12 +22,12 @@ var Outside = React.createClass({
 
   render(): any {
     return (
-      <div className="outside">
-        <OutsideHeader />
+      <div className="outside-handler">
+        <OutsideHandlerHeader />
         <RouteHandler />
       </div>
     );
   }
 });
 
-module.exports = Outside;
+module.exports = OutsideHandler;

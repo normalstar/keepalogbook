@@ -6,15 +6,15 @@ var { Link } = require('react-router');
 
 var Logo = require('../Logo/Logo');
 
-require('./InsideHeader.less');
+require('./InsideHandlerHeader.less');
 
-var InsideHeader = React.createClass({
+var InsideHandlerHeader = React.createClass({
   mixins: [PureRenderMixin],
 
   render(): any {
     return (
-      <div className="inside-header">
-        <Link to="today" className="inside-header__link">
+      <div className="inside-handler-header">
+        <Link to="today" className="inside-handler-header__link">
           <Logo logoWidth="24px" logoHeight="24px" circle={false} />
         </Link>
       </div>
@@ -22,4 +22,4 @@ var InsideHeader = React.createClass({
   }
 });
 
-module.exports = InsideHeader;
+module.exports = InsideHandlerHeader;

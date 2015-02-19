@@ -9,14 +9,14 @@ var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 var { RouteHandler, Navigation } = require('react-router');
 
-var InsideHeader = require('./InsideHeader');
-var InsideFooter = require('./InsideFooter');
+var InsideHandlerHeader = require('./InsideHandlerHeader');
+var InsideHandlerFooter = require('./InsideHandlerFooter');
 var UserViewActionCreators = require('../User/UserViewActionCreators');
-var InsideViewActionCreators = require('./InsideViewActionCreators');
+var InsideHandlerViewActionCreators = require('./InsideHandlerViewActionCreators');
 
-require('./Inside.less');
+require('./InsideHandler.less');
 
-var Inside = React.createClass({
+var InsideHandler = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired
   },
@@ -38,7 +38,7 @@ var Inside = React.createClass({
 
   handleClickLogOut(e: Object) {
     e.preventDefault();
-    InsideViewActionCreators.logOut();
+    InsideHandlerViewActionCreators.logOut();
   },
 
   render(): any {
@@ -46,15 +46,15 @@ var Inside = React.createClass({
       <RouteHandler user={this.props.user} /> : null;
 
     return (
-      <div className="inside">
-        <InsideHeader />
+      <div className="inside-handler">
+        <InsideHandlerHeader />
 
         {handler}
 
-        <InsideFooter user={this.props.user} />
+        <InsideHandlerFooter user={this.props.user} />
       </div>
     );
   }
 });
 
-module.exports = Inside;
+module.exports = InsideHandler;
