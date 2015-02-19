@@ -133,6 +133,11 @@ function receiveAuth() {
   _day = getFreshDay();
 }
 
+function receiveLoggedOut() {
+  _user = null;
+  _day = getFreshDay();
+}
+
 var actions = {};
 actions[ActionTypes.RECEIVE_ADDED_LOG] = receiveAddedLog;
 actions[ActionTypes.RECEIVE_REMOVED_LOG] = receiveRemovedLog;
@@ -146,6 +151,7 @@ actions[ActionTypes.CHANGE_EDITING_LOG] = changeEditingLog;
 actions[ActionTypes.SUBMIT_EDITING_LOG] = submitEditingLog;
 actions[ActionTypes.TRANSITION_TO_DAY] = function() {}; // So will emit change. Gross.
 actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
+actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;
 
 module.exports = assign(new Store(actions), {
   initialize(dayKey: ?string) {

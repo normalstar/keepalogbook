@@ -7,7 +7,6 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
-var { RouteHandler, Navigation } = require('react-router');
 
 var InsideHeader = require('./InsideHeader');
 var InsideFooter = require('./InsideFooter');
@@ -21,7 +20,7 @@ var Inside = React.createClass({
     user: PropTypes.object.isRequired
   },
 
-  mixins: [PureRenderMixin, Navigation],
+  mixins: [PureRenderMixin],
 
   componentWillMount() {
     UserViewActionCreators.listenToUserMeta(
@@ -30,10 +29,8 @@ var Inside = React.createClass({
     );
   },
 
-  componentWillUpdate(nextProps: any) {
-    if (!nextProps.user) {
-      UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user'));
-    }
+  componentWillUnmount() {
+    UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user'));
   },
 
   handleClickLogOut(e: Object) {
@@ -42,14 +39,11 @@ var Inside = React.createClass({
   },
 
   render(): any {
-    var handler = this.props.user.get('auth') ?
-      <RouteHandler user={this.props.user} /> : null;
-
     return (
       <div className="inside">
         <InsideHeader />
 
-        {handler}
+        {this.props.children}
 
         <InsideFooter user={this.props.user} />
       </div>

@@ -7,7 +7,6 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
-var { RouteHandler, Navigation } = require('react-router');
 
 var OutsideHeader = require('./OutsideHeader');
 
@@ -18,13 +17,13 @@ var Outside = React.createClass({
     user: PropTypes.object.isRequired
   },
 
-  mixins: [PureRenderMixin, Navigation],
+  mixins: [PureRenderMixin],
 
   render(): any {
     return (
       <div className="outside">
         <OutsideHeader />
-        <RouteHandler />
+        {this.props.children}
       </div>
     );
   }
