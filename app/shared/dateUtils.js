@@ -20,9 +20,21 @@ function getCurrentMoment() {
 
 var getCurrentDayKey = compose(formatMoment('YYYYMMDD'), getCurrentMoment);
 
-function parseDayKey(dayKey: string): any {
-  return moment(dayKey, 'YYYYMMDD');
+function parseStringDef(format: string, string: string) {
+  return moment(string, format);
 }
+
+var parseString = curry(parseStringDef);
+
+function parseDayKey(dayKey: string): any {
+  return parseString('YYYYMMDD', dayKey);
+}
+
+function getStartOfDef(unit: string, momentDate: Object) {
+  return momentDate.startOf(unit);
+}
+
+var getStartOf = curry(getStartOfDef);
 
 /**
  * momentDate should only be specific down to the day
@@ -63,7 +75,9 @@ module.exports = {
   formatMoment,
   getCurrentMoment,
   getCurrentDayKey,
+  parseString,
   parseDayKey,
+  getStartOf,
   isInFuture,
   isToday,
   getDayParams,
