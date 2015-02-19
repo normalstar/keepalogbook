@@ -8,17 +8,17 @@ var Dispatcher = require('../Dispatcher');
 var ActionTypes = require('../ActionTypes');
 var DayAPIUtils = require('./DayAPIUtils');
 
-function transitionToDay(day: Object, skipDispatch?: boolean) {
-  if (skipDispatch) {
-    Dispatcher.handleAction({
-      type: ActionTypes.TRANSITION_TO_DAY
-    });
-  }
+function transitionToDay() {
+  Dispatcher.handleAction({
+    type: ActionTypes.TRANSITION_TO_DAY
+  });
+}
 
+function loadDay(day: Object) {
   DayAPIUtils.listenToDay(day.toJS());
 }
 
-function transitionFromDay(day: Object) {
+function unloadDay(day: Object) {
   DayAPIUtils.stopListeningToDay(day.toJS());
 }
 
@@ -44,7 +44,8 @@ function submitCurrentLog(day: Object, data: string, currentCount: number): Prom
 
 module.exports = {
   transitionToDay,
-  transitionFromDay,
+  loadDay,
+  unloadDay,
   changeCurrentLog,
   submitCurrentLog
 };

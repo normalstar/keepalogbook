@@ -23,6 +23,21 @@ var Day = React.createClass({
 
   mixins: [PureRenderMixin],
 
+  componentWillMount() {
+    DayViewActionCreators.loadDay(this.props.day.get('day'));
+  },
+
+  componentWillUnmount() {
+    DayViewActionCreators.unloadDay(this.props.day.get('day'));
+  },
+
+  componentWillUpdate(nextProps: any) {
+    if (nextProps.day.getIn(['day', 'dayKey']) !== this.props.day.getIn(['day', 'dayKey'])) {
+      DayViewActionCreators.unloadDay(this.props.day.get('day'));
+      DayViewActionCreators.loadDay(nextProps.day.get('day'));
+    }
+  },
+
   handleChangeCurrentLog(e: Object) {
     DayViewActionCreators.changeCurrentLog(e.target.value);
   },

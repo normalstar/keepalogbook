@@ -20,21 +20,6 @@ var Outside = React.createClass({
 
   mixins: [PureRenderMixin, Navigation],
 
-  _redirectIfLoggedIn() {
-    if (this.props.user.get('auth')) {
-      this.replaceWith('today');
-    }
-  },
-
-  componentDidMount() {
-    this._redirectIfLoggedIn();
-  },
-
-  componentDidUpdate(prevProps: Object) {
-    if (!prevProps) { return; }
-    this._redirectIfLoggedIn();
-  },
-
   render(): any {
     return (
       <div className="outside">

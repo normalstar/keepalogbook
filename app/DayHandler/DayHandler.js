@@ -38,12 +38,7 @@ var DayHandler = React.createClass({
       }
 
       DayStore.initialize(dayKey);
-      DayViewActionCreators.transitionToDay(DayStore.get().get('day'));
-      callback();
-    },
-
-    willTransitionFrom(transition, component, callback) {
-      DayViewActionCreators.transitionFromDay(component.state.day.get('day'));
+      DayViewActionCreators.transitionToDay();
       callback();
     }
   },

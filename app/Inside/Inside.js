@@ -23,29 +23,17 @@ var Inside = React.createClass({
 
   mixins: [PureRenderMixin, Navigation],
 
-  _redirectIfLoggedOut() {
-    if (!this.props.user.get('auth')) {
-      this.replaceWith('front');
-    }
-  },
-
-  componentDidUpdate(prevProps: Object) {
-    if (!prevProps) { return; }
-    this._redirectIfLoggedOut();
-  },
-
   componentWillMount() {
-    this._redirectIfLoggedOut();
-    if (!this.props.user.get('user')) { return; }
     UserViewActionCreators.listenToUserMeta(
       this.props.user.get('user'),
       this.props.user.get('auth')
     );
   },
 
-  componentWillUnmount() {
-    if (!this.props.user.get('user')) { return; }
-    UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user'));
+  componentWillUpdate(nextProps: any) {
+    if (!nextProps.user) {
+      UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user'));
+    }
   },
 
   handleClickLogOut(e: Object) {
@@ -54,11 +42,14 @@ var Inside = React.createClass({
   },
 
   render(): any {
+    var handler = this.props.user.get('auth') ?
+      <RouteHandler user={this.props.user} /> : null;
+
     return (
       <div className="inside">
         <InsideHeader />
 
-        <RouteHandler user={this.props.user} />
+        {handler}
 
         <InsideFooter user={this.props.user} />
       </div>
