@@ -14,7 +14,7 @@ var Day = require('../Day/Day');
 var DayHeader = require('../Day/DayHeader');
 var dateUtils = require('../shared/dateUtils');
 
-var FrontDayHandler = React.createClass({
+var TodayHandler = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired
   },
@@ -62,4 +62,4 @@ var FrontDayHandler = React.createClass({
   }
 });
 
-module.exports = FrontDayHandler;
+module.exports = TodayHandler;
