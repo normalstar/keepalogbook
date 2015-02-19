@@ -1,5 +1,13 @@
 @import "~mixins";
+@import "~vars";
 
 .calendar {
   .sans-serif();
+  margin-bottom: @base-spacing-unit;
+}
+
+
+.calendar__month-name {
+  text-align: center;
+  .font-size(@milli-size);
 }

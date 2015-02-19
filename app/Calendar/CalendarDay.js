@@ -14,7 +14,7 @@ var { PureRenderMixin, classSet } = React.addons;
 
 require('./CalendarDay.less');
 
-var CalendarWeek = React.createClass({
+var CalendarDay = React.createClass({
   propTypes: {
     day: PropTypes.object.isRequired
   },
@@ -24,7 +24,9 @@ var CalendarWeek = React.createClass({
   render(): any {
     var classes = classSet({
       'calendar-day': true,
-      'calendar-day--other-month': this.props.day.isDifferentMonth
+      'calendar-day--other-month': this.props.day.isDifferentMonth,
+      'calendar-day--today': this.props.day.isToday,
+      'calendar-day--future': this.props.day.isFuture
     });
 
     return (
@@ -35,4 +37,4 @@ var CalendarWeek = React.createClass({
   }
 });
 
-module.exports = CalendarWeek;
+module.exports = CalendarDay;
