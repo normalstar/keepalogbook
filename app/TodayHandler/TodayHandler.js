@@ -12,6 +12,7 @@ var StoresMixin = require('../StoresMixin');
 var DayStore = require('../Day/DayStore');
 var Day = require('../Day/Day');
 var DayHeader = require('../Day/DayHeader');
+var DayViewActionCreators = require('../Day/DayViewActionCreators');
 var dateUtils = require('../shared/dateUtils');
 
 var TodayHandler = React.createClass({
@@ -22,6 +23,9 @@ var TodayHandler = React.createClass({
   statics: {
     willTransitionTo(transition, params, query, callback) {
       DayStore.initialize(dateUtils.getCurrentDayKey());
+      if (DayStore.get().getIn(['day', 'dayKey'])) {
+        DayViewActionCreators.transitionToDay();
+      }
       callback();
     }
   },
@@ -49,6 +53,7 @@ var TodayHandler = React.createClass({
     var day = this.state.day.getIn(['day', 'dayKey']) ?
         <Day day={this.state.day} /> : null;
 
+    console.log('render today');
     return (
       <div>
         <DayHeader

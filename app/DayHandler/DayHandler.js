@@ -38,7 +38,9 @@ var DayHandler = React.createClass({
       }
 
       DayStore.initialize(dayKey);
-      DayViewActionCreators.transitionToDay();
+      if (DayStore.get().getIn(['day', 'dayKey'])) {
+        DayViewActionCreators.transitionToDay();
+      }
       callback();
     }
   },
@@ -60,6 +62,7 @@ var DayHandler = React.createClass({
 
     var displayDate = compose(dateUtils.formatMoment('dddd, LL'), dateUtils.parseDayKey);
 
+    console.log('render day');
     return (
       <div>
         <DayHeader

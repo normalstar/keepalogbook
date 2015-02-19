@@ -6,11 +6,13 @@ var React = require('react/addons');
 var { Route } = require('react-router');
 
 var AppHandler = require('./AppHandler/AppHandler');
-var TodayHandler = require('./TodayHandler/TodayHandler');
-var DayHandler = require('./DayHandler/DayHandler');
-var InsideHandler = require('./InsideHandler/InsideHandler');
+
 var OutsideHandler = require('./OutsideHandler/OutsideHandler');
 var FrontHandler = require('./FrontHandler/FrontHandler');
+
+var InsideHandler = require('./InsideHandler/InsideHandler');
+var TodayHandler = require('./TodayHandler/TodayHandler');
+var DayHandler = require('./DayHandler/DayHandler');
 
 var routes = (
   <Route handler={AppHandler}>
