@@ -14,9 +14,16 @@ Get this going:
 ```javascript
 npm install
 bower install
-npm run dev-server // keep this instance running
+npm run dev-server // keep this one running
 npm run start-dev
 ```
 
 Then go to `http://localhost:8080`. React hot-loading? Hell yeah.
+
+To build
+
+```javascript
+npm run build // Builds js and css
+npm run build-index // Everything else. I should probably change the name
+```
 
