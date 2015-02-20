@@ -9,8 +9,8 @@ var LogUtils = require('./LogUtils');
 var Dispatcher = require('../Dispatcher');
 var ActionTypes = require('../ActionTypes');
 
-function removeLog(log: Object): Promise {
-  return LogAPIUtils.removeLog(log.toJS());
+function removeLog(log: Object, day: Day, currentCount: number): Promise {
+  return LogAPIUtils.removeLog(log.toJS(), day.toJS(), currentCount);
 }
 
 function toggleViewLogOptions(log: Object) {

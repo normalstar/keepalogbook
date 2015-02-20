@@ -13,6 +13,7 @@ var { PureRenderMixin } = React.addons;
 var DayFooter = require('./DayFooter');
 var DayViewActionCreators = require('./DayViewActionCreators');
 var Log = require('../Log/Log');
+var LogViewActionCreators = require('../Log/LogViewActionCreators');
 var WriteLog = require('../Log/WriteLog');
 var WriteLogOptions = require('../Log/WriteLogOptions');
 
@@ -52,10 +53,19 @@ var Day = React.createClass({
     );
   },
 
+  handleRemoveLog(log: Object) {
+    LogViewActionCreators.removeLog(
+      log,
+      this.props.day.get('day'),
+      this.props.day.get('logs').size
+    );
+  },
+
   render(): any {
     var logs = this.props.day.get('logs').map(log =>
       <Log key={log.get('key')}
         log={log}
+        onRemove={this.handleRemoveLog}
       />
     ).toArray();
 

@@ -20,7 +20,8 @@ require('./Log.less');
 
 var Log = React.createClass({
   propTypes: {
-    log: PropTypes.object.isRequired
+    log: PropTypes.object.isRequired,
+    onRemove: PropTypes.func.isRequired
   },
 
   mixins: [PureRenderMixin],
@@ -32,7 +33,7 @@ var Log = React.createClass({
 
   handleConfirmRemove(e: Object) {
     e.preventDefault();
-    LogViewActionCreators.removeLog(this.props.log);
+    this.props.onRemove(this.props.log);
   },
 
   handleToggleEdit(e: Object) {
