@@ -66,10 +66,7 @@ function toggleEditLog(action: {log: Immutable.Map}) {
 }
 
 function changeEditingLog(action: {log: Immutable.Map; value: string}) {
-  _day = _day.updateIn(
-    ['logs', action.log.get('key')],
-    log => log.set('editingValue', action.value)
-  );
+  _day = _day.updateIn(['logs', action.log.get('key')], log => log.set('editingValue', action.value));
 }
 
 function submitEditingLog(action: {log: Immutable.Map}) {
