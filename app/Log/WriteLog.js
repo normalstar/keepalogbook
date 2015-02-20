@@ -1,5 +1,5 @@
 /**
- * A single log in a day
+ * Box to create/edit a log
  *
  * @flow
  */
