@@ -34,7 +34,7 @@ function receiveAddedLog(action: {rawLog: RawLog}) {
 }
 
 function receiveRemovedLog(action: {rawLog: RawLog}) {
-  _day = _day.deleteIn(['logs', action.rawLog.key]);
+  _day = _day.removeIn(['logs', action.rawLog.key]);
 }
 
 function changeCurrentLog(action: {value: string}) {

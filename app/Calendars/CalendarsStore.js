@@ -25,6 +25,11 @@ function receiveAddedDay(action: {rawDay: RawDay}) {
   });
 }
 
+function receiveRemovedDay(action: {rawDay: RawDay}) {
+  var { yearKey, monthKey, dayKey } = CalendarsUtils.splitDayKey(action.rawDay.key);
+  _calendars = _calendars.updateIn([yearKey + monthKey, dayKey], day => day.remove('count'));
+}
+
 function transitionToDay(action: {dayKey: string}) {
   var prevKeys = _currentDayKey !== '' ? CalendarsUtils.splitDayKey(_currentDayKey) : null;
   var { yearKey, monthKey, dayKey } = CalendarsUtils.splitDayKey(action.dayKey);
@@ -64,6 +69,7 @@ function receiveLoggedOut() {
 var actions = {};
 actions[ActionTypes.RECEIVE_ADDED_DAY] = receiveAddedDay;
 actions[ActionTypes.RECEIVE_CHANGED_DAY] = receiveAddedDay;
+actions[ActionTypes.RECEIVE_REMOVED_DAY] = receiveRemovedDay;
 actions[ActionTypes.TRANSITION_TO_DAY] = transitionToDay;
 actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;

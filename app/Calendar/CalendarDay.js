@@ -31,7 +31,6 @@ var CalendarDay = React.createClass({
     if (this.props.isDifferentMonthDay) {
       return (
         <span className="calendar-day calendar-day--other-month">
-          {displayDate}
         </span>
       );
     }
