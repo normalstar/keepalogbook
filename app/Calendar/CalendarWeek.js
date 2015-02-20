@@ -23,12 +23,13 @@ var CalendarWeek = React.createClass({
   mixins: [PureRenderMixin],
 
   render(): any {
-    var days = range(0, 7).map(function(plus, index) {
+    var days = range(0, 7).map((plus, index) => {
       var moment = this.props.sunday.clone().add(plus, 'day');
       var isDifferentMonthDay = !moment.isSame(this.props.monthDay, 'month');
       var dateString = moment.format('YYYYMMD');
-      var display = dateString.slice(6, dateString.length);
-      var dayData = this.props.monthData && this.props.monthData.get(display) || null;
+      var dayString = dateString.slice(6, dateString.length);
+      var dayData = this.props.monthData && this.props.monthData.get(dayString) || null;
+
       return (
         <CalendarDay
           dateString={dateString}
@@ -38,7 +39,7 @@ var CalendarWeek = React.createClass({
           dayData={dayData}
         />
       );
-    }.bind(this));
+    });
 
     return (
       <div>

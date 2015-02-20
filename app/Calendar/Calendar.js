@@ -49,7 +49,7 @@ var Calendar = React.createClass({
     }
 
     var sundayMoments = getSundaysInMonth(firstWeekSunday, monthMoment);
-    var sundays = sundayMoments.map(function(sunday, index) {
+    var sundays = sundayMoments.map((sunday, index) => {
       return (
         <CalendarWeek sunday={sunday}
           monthDay={monthMoment}
@@ -58,7 +58,7 @@ var Calendar = React.createClass({
           monthData={this.props.monthData}
         />
       );
-    }.bind(this));
+    });
 
     return (
       <div className="calendar">
