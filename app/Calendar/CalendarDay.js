@@ -51,6 +51,7 @@ var CalendarDay = React.createClass({
     var classes = classSet({
       'calendar-day': true,
       'calendar-day--today': isToday,
+      'calendar-day--has-count': this.props.dayData && this.props.dayData.get('count'),
       'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay')
     });
     var reformatted = moment.format('YYYY-MM-DD');
