@@ -13,6 +13,7 @@ var Store = require('../Store');
 var ActionTypes = require('../ActionTypes');
 
 var CalendarsUtils = require('./CalendarsUtils');
+var dateUtils = require('../shared/dateUtils');
 
 var _currentDayKey = '';
 var _calendars = Immutable.Map();
@@ -24,7 +25,7 @@ function receiveAddedDay(action: {rawDay: RawDay}) {
   });
 }
 
-function loadDay(action: {dayKey: string}) {
+function transitionToDay(action: {dayKey: string}) {
   var prevKeys = _currentDayKey !== '' ? CalendarsUtils.splitRawDay(_currentDayKey) : null;
   var { yearKey, monthKey, dayKey } = CalendarsUtils.splitRawDay(action.dayKey);
 
@@ -44,6 +45,15 @@ function loadDay(action: {dayKey: string}) {
 }
 
 /**
+ * We'll act like this is transitioning to another day, with the key for the
+ * current day. This is because we can't dispatch the transition to day event
+ * on log in.
+ */
+function receiveAuth() {
+  transitionToDay({dayKey: dateUtils.getCurrentDayKey()});
+}
+
+/**
  * Clear out calendar
  */
 function receiveLoggedOut() {
@@ -54,7 +64,8 @@ function receiveLoggedOut() {
 var actions = {};
 actions[ActionTypes.RECEIVE_ADDED_DAY] = receiveAddedDay;
 actions[ActionTypes.RECEIVE_CHANGED_DAY] = receiveAddedDay;
-actions[ActionTypes.LOAD_DAY] = loadDay;
+actions[ActionTypes.TRANSITION_TO_DAY] = transitionToDay;
+actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;
 
 module.exports = assign(new Store(actions), {

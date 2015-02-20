@@ -46,7 +46,7 @@ var DayHandler = React.createClass({
 
       // This will mean you weren't redirected from the front page.
       if (DayStore.get().getIn(['day', 'dayKey'])) {
-        DayViewActionCreators.transitionToDay();
+        DayViewActionCreators.transitionToDay(DayStore.get().getIn(['day', 'dayKey']));
       }
 
       callback();

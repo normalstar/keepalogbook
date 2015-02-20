@@ -8,17 +8,14 @@ var Dispatcher = require('../Dispatcher');
 var ActionTypes = require('../ActionTypes');
 var DayAPIUtils = require('./DayAPIUtils');
 
-function transitionToDay() {
+function transitionToDay(dayKey: string) {
   Dispatcher.handleAction({
-    type: ActionTypes.TRANSITION_TO_DAY
+    type: ActionTypes.TRANSITION_TO_DAY,
+    dayKey
   });
 }
 
 function loadDay(day: Object) {
-  Dispatcher.handleAction({
-    type: ActionTypes.LOAD_DAY,
-    dayKey: day.get('dayKey')
-  });
   DayAPIUtils.listenToDay(day.toJS());
 }
 
