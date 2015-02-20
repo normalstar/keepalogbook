@@ -14,7 +14,7 @@ var ActionTypes = require('../ActionTypes');
 
 var CalendarsUtils = require('./CalendarsUtils');
 
-var _calendars = Immutable.Map({});
+var _calendars = Immutable.Map();
 
 function receiveAddedDay(action: {rawDay: RawDay}) {
   _calendars = CalendarsUtils.addRawDayIntoCalendar(action.rawDay, _calendars);
@@ -24,7 +24,7 @@ function receiveAddedDay(action: {rawDay: RawDay}) {
  * Clear out calendar
  */
 function receiveLoggedOut() {
-  _calendars = Immutable.Map({});
+  _calendars = Immutable.Map();
 }
 
 var actions = {};

@@ -21,7 +21,7 @@ var _user: ?Immutable.Map = null;
 function getFreshDay(): Immutable.Map {
   return Immutable.Map({
     day: DayUtils.convertDataForDay(_dayKey, _user),
-    logs: Immutable.List(),
+    logs: Immutable.Map(),
     currentLog: ''
   });
 }
@@ -30,33 +30,11 @@ var _day: Immutable.Map = getFreshDay();
 
 function receiveAddedLog(action: {rawLog: RawLog}) {
   var converted = LogUtils.convertRawLog(action.rawLog, _day.get('day').toJS());
-  _day = _day.update('logs', function(logs) {
-    return logs.push(converted);
-  });
-}
-
-function findLogIndexWithKey(key: string) {
-  return _day.get('logs').findIndex(log => log.get('key') === key);
+  _day = _day.setIn(['logs', action.rawLog.key], converted);
 }
 
 function receiveRemovedLog(action: {rawLog: RawLog}) {
-  var index = findLogIndexWithKey(action.rawLog.key);
-  if (index === -1) { return; }
-
-  _day = _day.update('logs', function(logs) {
-    return logs.remove(index);
-  });
-}
-
-function receiveChangedLog(action: {rawLog: RawLog}) {
-  var index = findLogIndexWithKey(action.rawLog.key);
-  if (index === -1) { return; }
-
-  var converted = LogUtils.convertRawLog(action.rawLog, _day.get('day').toJS());
-
-  _day = _day.updateIn(['logs', index], function() {
-    return converted;
-  });
+  _day = _day.deleteIn(['logs', action.rawLog.key]);
 }
 
 function changeCurrentLog(action: {value: string}) {
@@ -67,15 +45,8 @@ function submitCurrentLog() {
   _day = _day.set('currentLog', '');
 }
 
-function findLogIndexWithLog(log) {
-  return _day.get('logs').indexOf(log);
-}
-
 function toggleViewLogOptions(action: {log: Immutable.Map}) {
-  var index = findLogIndexWithLog(action.log);
-  if (index === -1) { return; }
-
-  _day = _day.updateIn(['logs', index], function(log) {
+  _day = _day.updateIn(['logs', action.log.get('key')], function(log) {
     return log.merge({
       isViewingOptions: !log.get('isViewingOptions')
     });
@@ -83,10 +54,7 @@ function toggleViewLogOptions(action: {log: Immutable.Map}) {
 }
 
 function toggleConfirmRemoveLog(action: {log: Immutable.Map}) {
-  var index = findLogIndexWithLog(action.log);
-  if (index === -1) { return; }
-
-  _day = _day.updateIn(['logs', index], function(log) {
+  _day = _day.updateIn(['logs', action.log.get('key')], function(log) {
     return log.merge({
       isConfirmingRemove: !log.get('isConfirmingRemove')
     });
@@ -94,10 +62,7 @@ function toggleConfirmRemoveLog(action: {log: Immutable.Map}) {
 }
 
 function toggleEditLog(action: {log: Immutable.Map}) {
-  var index = findLogIndexWithLog(action.log);
-  if (index === -1) { return; }
-
-  _day = _day.updateIn(['logs', index], function(log) {
+  _day = _day.updateIn(['logs', action.log.get('key')], function(log) {
     return log.merge({
       isViewingOptions: false,
       isEditing: !log.get('isEditing'),
@@ -107,19 +72,13 @@ function toggleEditLog(action: {log: Immutable.Map}) {
 }
 
 function changeEditingLog(action: {log: Immutable.Map; value: string}) {
-  var index = findLogIndexWithLog(action.log);
-  if (index === -1) { return; }
-
-  _day = _day.updateIn(['logs', index], function(log) {
+  _day = _day.updateIn(['logs', action.log.get('key')], function(log) {
     return log.set('editingValue', action.value);
   });
 }
 
 function submitEditingLog(action: {log: Immutable.Map}) {
-  var index = findLogIndexWithLog(action.log);
-  if (index === -1) { return; }
-
-  _day = _day.updateIn(['logs', index], function(log) {
+  _day = _day.updateIn(['logs', action.log.get('key')], function(log) {
     return log.merge({
       isEditing: !log.get('isEditing'),
       editingValue: ''
@@ -141,7 +100,7 @@ function receiveLoggedOut() {
 var actions = {};
 actions[ActionTypes.RECEIVE_ADDED_LOG] = receiveAddedLog;
 actions[ActionTypes.RECEIVE_REMOVED_LOG] = receiveRemovedLog;
-actions[ActionTypes.RECEIVE_CHANGED_LOG] = receiveChangedLog;
+actions[ActionTypes.RECEIVE_CHANGED_LOG] = receiveAddedLog;
 actions[ActionTypes.CHANGE_CURRENT_LOG] = changeCurrentLog;
 actions[ActionTypes.SUBMIT_CURRENT_LOG] = submitCurrentLog;
 actions[ActionTypes.TOGGLE_VIEW_LOG_OPTIONS] = toggleViewLogOptions;
