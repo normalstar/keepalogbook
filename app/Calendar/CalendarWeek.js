@@ -18,7 +18,8 @@ var CalendarWeek = React.createClass({
   propTypes: {
     sunday: PropTypes.object.isRequired,
     monthDay: PropTypes.object.isRequired,
-    isCurrentMonth: PropTypes.bool.isRequired
+    isCurrentMonth: PropTypes.bool.isRequired,
+    monthData: PropTypes.object
   },
 
   mixins: [PureRenderMixin],
@@ -33,9 +34,11 @@ var CalendarWeek = React.createClass({
         isFuture: currentMoment && currentMoment.isBefore(moment, 'day'),
         isToday: currentMoment && currentMoment.isSame(moment, 'day')
       };
+      var dayData = this.props.monthData && this.props.monthData.get(moment.format('D')) || null;
       return (
         <CalendarDay day={day}
           key={index}
+          dayData={dayData}
         />
       );
     }.bind(this));

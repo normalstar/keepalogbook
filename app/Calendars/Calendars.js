@@ -47,16 +47,19 @@ var Calendars = React.createClass({
     var currentMonth = dateUtils.getCurrentMoment();
     var months = range(0, 13).map(function(minus) {
       var month = currentMonth.clone().subtract(minus, 'months');
-      var monthNum = parseInt(month.format('M'), 10);
-      var yearNum = parseInt(month.format('YYYY'), 10);
+      var formatted = month.format('YYYY-M');
+      var monthNum = parseInt(formatted.split('-')[1], 10);
+      var yearNum = parseInt(formatted.split('-')[0], 10);
+      var monthData = this.state.calendars.get('' + yearNum + monthNum) || null;
       return (
         <Calendar year={yearNum}
           month={monthNum}
           key={'' + yearNum + monthNum}
           isCurrentMonth={minus === 0}
+          monthData={monthData}
         />
       );
-    });
+    }.bind(this));
 
     return (
       <div className="calendars">

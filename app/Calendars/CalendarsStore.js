@@ -29,6 +29,7 @@ function receiveLoggedOut() {
 
 var actions = {};
 actions[ActionTypes.RECEIVE_ADDED_DAY] = receiveAddedDay;
+actions[ActionTypes.RECEIVE_CHANGED_DAY] = receiveAddedDay;
 actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;
 
 module.exports = assign(new Store(actions), {

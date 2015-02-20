@@ -16,7 +16,8 @@ require('./CalendarDay.less');
 
 var CalendarDay = React.createClass({
   propTypes: {
-    day: PropTypes.object.isRequired
+    day: PropTypes.object.isRequired,
+    dayData: PropTypes.object
   },
 
   mixins: [PureRenderMixin],
@@ -32,6 +33,8 @@ var CalendarDay = React.createClass({
     return (
       <span className={classes}>
         {this.props.day.moment.format('D')}
+        {' '}
+        {this.props.dayData && this.props.dayData.get('count')}
       </span>
     );
   }

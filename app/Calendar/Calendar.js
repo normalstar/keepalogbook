@@ -21,17 +21,14 @@ var Calendar = React.createClass({
   propTypes: {
     year: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
-    isCurrentMonth: PropTypes.bool.isRequired
+    isCurrentMonth: PropTypes.bool.isRequired,
+    monthData: PropTypes.object
   },
 
   mixins: [PureRenderMixin],
 
   render(): any {
-    var monthNumberString = this.props.month >= 10 ?
-      '' + this.props.month :
-      '' + '0' + this.props.month;
-
-    var monthMoment = dateUtils.parseString('YYYYMM', '' + this.props.year + monthNumberString);
+    var monthMoment = dateUtils.parseString('YYYYM', '' + this.props.year + this.props.month);
     var firstWeekSunday = monthMoment.clone().startOf('week');
 
     function getSundaysInMonth(startSunday, monthDay) {
@@ -58,6 +55,7 @@ var Calendar = React.createClass({
           monthDay={monthMoment}
           key={index}
           isCurrentMonth={this.props.isCurrentMonth}
+          monthData={this.props.monthData}
         />
       );
     }.bind(this));
