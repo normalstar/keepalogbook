@@ -9,6 +9,7 @@ var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 var { Link } = require('react-router');
 var dateUtils = require('../shared/dateUtils');
+var DayViewActionCreators = require('./DayViewActionCreators');
 
 require ('./DayFooter.less');
 
@@ -18,6 +19,11 @@ var DayFooter = React.createClass({
   },
 
   mixins: [PureRenderMixin],
+
+  handleClickCalendar(e: Object) {
+    e.preventDefault();
+    DayViewActionCreators.toggleCalendar();
+  },
 
   render(): any {
     var momentDate = dateUtils.parseDayKey(this.props.day.getIn(['day', 'dayKey']));
@@ -56,7 +62,7 @@ var DayFooter = React.createClass({
           {nextLink}
         </span>
         <div className="day-footer__calendar">
-          <a href="#">
+          <a href="#" onClick={this.handleClickCalendar}>
             <span className="icon-calendar" />
           </a>
         </div>

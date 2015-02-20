@@ -5,7 +5,8 @@
 'use strict';
 
 var React = require('react/addons');
-var { RouteHandler, Navigation } = require('react-router');
+var { RouteHandler, Navigation, State } = require('react-router');
+var isEmpty = require('lodash/lang/isEmpty');
 
 var AppHandlerActionCreators = require('./AppHandlerViewActionCreators');
 var UserStore = require('../User/UserStore');
@@ -27,12 +28,22 @@ var AppHandler = React.createClass({
 
   stores: [UserStore],
 
-  mixins: [StoresMixin, Navigation],
+  mixins: [StoresMixin, Navigation, State],
 
   getStateFromStores(): Object {
     return {
       user: UserStore.get()
     };
+  },
+
+  componentDidMount() {
+    var params = this.getParams();
+    var pathname = this.getPathname();
+    if ((pathname.indexOf('today') === -1 || isEmpty(params)) && this.state.user.get('auth')) {
+      this.replaceWith('today');
+    } else if ((pathname.indexOf('today') > -1 || !isEmpty(params)) && !this.state.user.get('auth')) {
+      this.replaceWith('front');
+    }
   },
 
   componentDidUpdate(prevProps: any, prevState: any) {

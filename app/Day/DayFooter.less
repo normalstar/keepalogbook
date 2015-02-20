@@ -37,8 +37,10 @@
 
 .day-footer__calendar {
   margin-top: @base-spacing-unit;
+  display: none;
 
-  .responsive(375px, {
+  .responsive(1024px, {
+    display: block;
     text-align: center;  
     margin-top: -@base-spacing-unit;
   })

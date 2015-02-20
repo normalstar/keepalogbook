@@ -43,10 +43,17 @@ function submitCurrentLog(day: Object, data: string, currentCount: number): Prom
   return DayAPIUtils.createLog(day.toJS(), dataToSave, currentCount);
 }
 
+function toggleCalendar() {
+  Dispatcher.handleAction({
+    type: ActionTypes.TOGGLE_CALENDAR
+  });
+}
+
 module.exports = {
   transitionToDay,
   loadDay,
   unloadDay,
   changeCurrentLog,
-  submitCurrentLog
+  submitCurrentLog,
+  toggleCalendar
 };

@@ -15,7 +15,8 @@ var ActionTypes = require('../ActionTypes');
 
 var _user = Immutable.Map({
   user: null,
-  auth: null
+  auth: null,
+  showCalendar: false
 });
 
 function receiveAuth(action) {
@@ -28,15 +29,18 @@ function receiveLoggedOut() {
 }
 
 function receiveUserMeta(action) {
-  _user = _user.updateIn(['user'], function(userData) {
-    return userData.merge({meta: action.meta});
-  });
+  _user = _user.update('user', user => user.merge({meta: action.meta}));
+}
+
+function toggleCalendar() {
+  _user = _user.update('showCalendar', showCalendar => !showCalendar);
 }
 
 var actions = {};
 actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;
 actions[ActionTypes.RECEIVE_USER_META] = receiveUserMeta;
+actions[ActionTypes.TOGGLE_CALENDAR] = toggleCalendar;
 
 module.exports = assign(new Store(actions), {
   initialize() {

@@ -43,11 +43,14 @@ var Inside = React.createClass({
   },
 
   render(): any {
+    var calendar = this.props.user.get('showCalendar') ?
+        <Calendars user={this.props.user} /> : null;
+
     return (
       <div className="inside">
         <InsideHeader />
 
-        <Calendars user={this.props.user} />
+        {calendar}
 
         {this.props.children}
 

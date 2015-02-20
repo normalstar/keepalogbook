@@ -26,6 +26,8 @@ module.exports = keyMirror({
 
   TRANSITION_TO_DAY: null,
 
+  TOGGLE_CALENDAR: null,
+
   // log
   TOGGLE_VIEW_LOG_OPTIONS: null,
   TOGGLE_CONFIRM_REMOVE_LOG: null,
