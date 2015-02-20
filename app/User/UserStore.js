@@ -16,7 +16,8 @@ var ActionTypes = require('../ActionTypes');
 var _user = Immutable.Map({
   user: null,
   auth: null,
-  showCalendar: false
+  showCalendar: false,
+  calendarYears: 1
 });
 
 function receiveAuth(action) {
@@ -36,11 +37,16 @@ function toggleCalendar() {
   _user = _user.update('showCalendar', showCalendar => !showCalendar);
 }
 
+function addCalendarYear() {
+  _user = _user.update('calendarYears', years => years + 1);
+}
+
 var actions = {};
 actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;
 actions[ActionTypes.RECEIVE_USER_META] = receiveUserMeta;
 actions[ActionTypes.TOGGLE_CALENDAR] = toggleCalendar;
+actions[ActionTypes.ADD_CALENDAR_YEAR] = addCalendarYear;
 
 module.exports = assign(new Store(actions), {
   initialize() {

@@ -16,6 +16,8 @@ module.exports = keyMirror({
   RECEIVE_REMOVED_DAY: null,
   RECEIVE_CHANGED_DAY: null,
 
+  ADD_CALENDAR_YEAR: null,
+
   // day
   RECEIVE_ADDED_LOG: null,
   RECEIVE_REMOVED_LOG: null,

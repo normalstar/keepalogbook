@@ -14,6 +14,7 @@ var range = require('lodash/utility/range');
 var StoresMixin = require('../StoresMixin');
 var dateUtils = require('../shared/dateUtils');
 var CalendarsStore = require('./CalendarsStore');
+var CalendarsViewActionCreators = require('./CalendarsViewActionCreators');
 
 var Calendar = require('../Calendar/Calendar');
 
@@ -34,9 +35,14 @@ var Calendars = React.createClass({
     };
   },
 
+  handleClickAddYear(e: Object) {
+    e.preventDefault();
+    CalendarsViewActionCreators.addCalendarYear();
+  },
+
   render(): any {
     var currentMonth = dateUtils.getCurrentMoment();
-    var months = range(0, 13).map(minus => {
+    var months = range(0, 12 * this.props.user.get('calendarYears')).map(minus => {
       var month = currentMonth.clone().subtract(minus, 'months');
       var formatted = month.format('YYYY-M');
       var monthNum = parseInt(formatted.split('-')[1], 10);
@@ -56,6 +62,10 @@ var Calendars = React.createClass({
     return (
       <div className="calendars">
         {months}
+        <a href="#"
+          onClick={this.handleClickAddYear}>
+          More
+        </a>
       </div>
     );
   }
