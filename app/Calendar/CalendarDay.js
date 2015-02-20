@@ -26,15 +26,32 @@ var CalendarDay = React.createClass({
   mixins: [PureRenderMixin],
 
   render(): any {
+    var displayDate = this.props.dateString.slice(6, this.props.dateString.length);
+
+    if (this.props.isDifferentMonthDay) {
+      return (
+        <span className="calendar-day" style={{color: 'white'}}>
+          {displayDate}
+        </span>
+      );
+    }
+
     var currentMoment = this.props.isCurrentMonth ? dateUtils.getCurrentMoment() : null;
     var moment = dateUtils.parseString('YYYYMMD')(this.props.dateString);
     var isFuture = currentMoment && currentMoment.isBefore(moment, 'day');
+
+    if (isFuture) {
+      return (
+        <span className="calendar-day" style={{color: '#eee'}}>
+          {displayDate}
+        </span>
+      );
+    }
+
     var isToday = currentMoment && currentMoment.isSame(moment, 'day');
     var classes = classSet({
       'calendar-day': true,
-      'calendar-day--other-month': this.props.isDifferentMonthDay,
       'calendar-day--today': isToday,
-      'calendar-day--future': isFuture,
       'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay')
     });
     var reformatted = moment.format('YYYY-MM-DD');
@@ -47,7 +64,7 @@ var CalendarDay = React.createClass({
 
     return (
       <Link to="day" params={params} className={classes}>
-        {this.props.dateString.slice(6, this.props.dateString.length)}
+        {displayDate}
         {' '}
         {this.props.dayData && this.props.dayData.get('count')}
       </Link>
