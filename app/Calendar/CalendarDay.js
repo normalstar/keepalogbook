@@ -9,6 +9,7 @@
 var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin, classSet } = React.addons;
+var { Link } = require('react-router');
 
 var dateUtils = require('../shared/dateUtils');
 
@@ -36,13 +37,20 @@ var CalendarDay = React.createClass({
       'calendar-day--future': isFuture,
       'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay')
     });
+    var reformatted = moment.format('YYYY-MM-DD');
+    var split = reformatted.split('-');
+    var params = {
+      year: split[0],
+      month: split[1],
+      day: split[2]
+    };
 
     return (
-      <span className={classes}>
+      <Link to="day" params={params} className={classes}>
         {this.props.dateString.slice(6, this.props.dateString.length)}
         {' '}
         {this.props.dayData && this.props.dayData.get('count')}
-      </span>
+      </Link>
     );
   }
 });
