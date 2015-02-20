@@ -29,10 +29,12 @@ var Inside = React.createClass({
       this.props.user.get('user'),
       this.props.user.get('auth')
     );
+    UserViewActionCreators.listenToCalendar(this.props.user.get('user'));
   },
 
   componentWillUnmount() {
     UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user'));
+    UserViewActionCreators.stopListeningToCalendar(this.props.user.get('user'));
   },
 
   handleClickLogOut(e: Object) {

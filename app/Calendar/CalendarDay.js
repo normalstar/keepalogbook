@@ -48,12 +48,20 @@ var CalendarDay = React.createClass({
     }
 
     var isToday = currentMoment && currentMoment.isSame(moment, 'day');
-    var classes = classSet({
+    var count = this.props.dayData && this.props.dayData.get('count') || null;
+    var classesDef = {
       'calendar-day': true,
       'calendar-day--today': isToday,
-      'calendar-day--has-count': this.props.dayData && this.props.dayData.get('count'),
+      'calendar-day--has-count': count,
       'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay')
-    });
+    };
+
+    if (count && count < 10) {
+      classesDef['calendar-day--has-count--' + count] = true;
+    } else if (count && count >= 10) {
+      classesDef['calendar-day--has-count--max'] = true;
+    }
+
     var reformatted = moment.format('YYYY-MM-DD');
     var split = reformatted.split('-');
     var params = {
@@ -63,10 +71,8 @@ var CalendarDay = React.createClass({
     };
 
     return (
-      <Link to="day" params={params} className={classes}>
+      <Link to="day" params={params} className={classSet(classesDef)}>
         {displayDate}
-        {' '}
-        {this.props.dayData && this.props.dayData.get('count')}
       </Link>
     );
   }

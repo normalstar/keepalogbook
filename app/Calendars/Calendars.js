@@ -13,7 +13,6 @@ var range = require('lodash/utility/range');
 
 var StoresMixin = require('../StoresMixin');
 var dateUtils = require('../shared/dateUtils');
-var UserViewActionCreators = require('../User/UserViewActionCreators');
 var CalendarsStore = require('./CalendarsStore');
 
 var Calendar = require('../Calendar/Calendar');
@@ -33,14 +32,6 @@ var Calendars = React.createClass({
     return {
       calendars: CalendarsStore.get()
     };
-  },
-
-  componentWillMount() {
-    UserViewActionCreators.listenToCalendar(this.props.user.get('user'));
-  },
-
-  componentWillUnmount() {
-    UserViewActionCreators.stopListeningToCalendar(this.props.user.get('user'));
   },
 
   render(): any {
