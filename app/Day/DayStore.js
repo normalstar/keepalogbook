@@ -46,44 +46,37 @@ function submitCurrentLog() {
 }
 
 function toggleViewLogOptions(action: {log: Immutable.Map}) {
-  _day = _day.updateIn(['logs', action.log.get('key')], log => {
-    return log.merge({
-      isViewingOptions: !log.get('isViewingOptions')
-    });
-  });
+  _day = _day.updateIn(['logs', action.log.get('key')], log => log.merge({
+    isViewingOptions: !log.get('isViewingOptions')
+  }));
 }
 
 function toggleConfirmRemoveLog(action: {log: Immutable.Map}) {
-  _day = _day.updateIn(['logs', action.log.get('key')], log => {
-    return log.merge({
-      isConfirmingRemove: !log.get('isConfirmingRemove')
-    });
-  });
+  _day = _day.updateIn(['logs', action.log.get('key')], log => log.merge({
+    isConfirmingRemove: !log.get('isConfirmingRemove')
+  }));
 }
 
 function toggleEditLog(action: {log: Immutable.Map}) {
-  _day = _day.updateIn(['logs', action.log.get('key')], log => {
-    return log.merge({
-      isViewingOptions: false,
-      isEditing: !log.get('isEditing'),
-      editingValue: log.get('log')
-    });
-  });
+  _day = _day.updateIn(['logs', action.log.get('key')], log => log.merge({
+    isViewingOptions: false,
+    isEditing: !log.get('isEditing'),
+    editingValue: log.get('log')
+  }));
 }
 
 function changeEditingLog(action: {log: Immutable.Map; value: string}) {
-  _day = _day.updateIn(['logs', action.log.get('key')], log => {
-    return log.set('editingValue', action.value);
-  });
+  _day = _day.updateIn(
+    ['logs', action.log.get('key')],
+    log => log.set('editingValue', action.value)
+  );
 }
 
 function submitEditingLog(action: {log: Immutable.Map}) {
-  _day = _day.updateIn(['logs', action.log.get('key')], log => {
-    return log.merge({
-      isEditing: !log.get('isEditing'),
-      editingValue: ''
-    });
-  });
+  _day = _day.updateIn(['logs', action.log.get('key')], log => log.merge({
+    isEditing: !log.get('isEditing'),
+    editingValue: ''
+  }));
 }
 
 function receiveAuth() {
