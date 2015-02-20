@@ -32,7 +32,7 @@ var Day = React.createClass({
   },
 
   componentWillUpdate(nextProps: any) {
-    if (nextProps.day.getIn(['day', 'dayKey']) !== this.props.day.getIn(['day', 'dayKey'])) {
+    if (nextProps.day.getIn(['day', 'dayUniqueId']) !== this.props.day.getIn(['day', 'dayUniqueId'])) {
       DayViewActionCreators.unloadDay(this.props.day.get('day'));
       DayViewActionCreators.loadDay(nextProps.day.get('day'));
     }

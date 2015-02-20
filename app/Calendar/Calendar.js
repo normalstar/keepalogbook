@@ -27,7 +27,7 @@ var Calendar = React.createClass({
   mixins: [PureRenderMixin],
 
   render(): any {
-    var monthNumberString = this.props.month.toString().length === 2 ?
+    var monthNumberString = this.props.month >= 10 ?
       '' + this.props.month :
       '' + '0' + this.props.month;
 
