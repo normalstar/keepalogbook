@@ -20,10 +20,12 @@ npm run start-dev
 
 Then go to `http://localhost:8080`. React hot-loading? Hell yeah.
 
-To build
+## Build
 
 ```javascript
 npm run build // Builds js and css
 npm run build-index // Everything else. I should probably change the name
 ```
+
+Start a server out of `build/` and you're golden.
 
