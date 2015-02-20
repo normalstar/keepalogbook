@@ -12,7 +12,13 @@
   display: none;
 
   .responsive(1024px, {
-    display: block
+    display: block;
+    padding-bottom: @base-spacing-unit;
   });
 }
 
+
+.calendars__more-button {
+  .font-size(@h6-size);
+  text-align: center;
+}

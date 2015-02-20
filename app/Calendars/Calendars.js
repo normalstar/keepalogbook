@@ -62,10 +62,12 @@ var Calendars = React.createClass({
     return (
       <div className="calendars">
         {months}
-        <a href="#"
-          onClick={this.handleClickAddYear}>
-          More
-        </a>
+        <div className="calendars__more-button">
+          <a href="#"
+            onClick={this.handleClickAddYear}>
+            Another year please
+          </a>
+        </div>
       </div>
     );
   }

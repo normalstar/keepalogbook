@@ -5,6 +5,7 @@ module.exports = function(options) {
   var express = require('express');
   var path = require('path');
   var fs = require('fs');
+  var ncp = require('ncp').ncp;
   var app = express();
   var html = fs.readFileSync(path.resolve(__dirname, './app/simple.html'), 'utf-8');
 
@@ -39,6 +40,13 @@ module.exports = function(options) {
           fs.unlink(path.resolve(__dirname, './build/stats.json'), function (err) {
             if (err) { throw err; }
             console.log('Deleted stats.json');
+          });
+
+          ncp(path.resolve(__dirname, './public/'), path.resolve(__dirname, './build/'), function (err) {
+            if (err) {
+              return console.error(err);
+            }
+            console.log('Copied public folder to build');
           });
         }
       });
