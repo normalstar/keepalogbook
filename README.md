@@ -9,10 +9,12 @@ would.
 
 ### Dev
 
-Get this running:
+Get this going:
 
 ```javascript
-npm run dev-server
+npm install
+bower install
+npm run dev-server // keep this instance running
 npm run start-dev
 ```
 
