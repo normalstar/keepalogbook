@@ -12,8 +12,6 @@ var { PureRenderMixin } = React.addons;
 var range = require('lodash/utility/range');
 var CalendarDay = require('./CalendarDay');
 
-var dateUtils = require('../shared/dateUtils');
-
 var CalendarWeek = React.createClass({
   propTypes: {
     sunday: PropTypes.object.isRequired,
@@ -25,18 +23,13 @@ var CalendarWeek = React.createClass({
   mixins: [PureRenderMixin],
 
   render(): any {
-    var currentMoment = this.props.isCurrentMonth ? dateUtils.getCurrentMoment() : null;
     var days = range(0, 7).map(function(plus, index) {
       var moment = this.props.sunday.clone().add(plus, 'day');
-      var day = {
-        moment: moment,
-        isDifferentMonth: !moment.isSame(this.props.monthDay, 'month'),
-        isFuture: currentMoment && currentMoment.isBefore(moment, 'day'),
-        isToday: currentMoment && currentMoment.isSame(moment, 'day')
-      };
-      var dayData = this.props.monthData && this.props.monthData.get(moment.format('D')) || null;
+      var display = moment.format('D');
+      var dayData = this.props.monthData && this.props.monthData.get(display) || null;
       return (
-        <CalendarDay day={day}
+        <CalendarDay
+          display={display}
           key={index}
           dayData={dayData}
         />
