@@ -33,7 +33,8 @@ var CalendarDay = React.createClass({
       'calendar-day': true,
       'calendar-day--other-month': this.props.isDifferentMonthDay,
       'calendar-day--today': isToday,
-      'calendar-day--future': isFuture
+      'calendar-day--future': isFuture,
+      'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay')
     });
 
     return (

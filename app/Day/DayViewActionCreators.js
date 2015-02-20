@@ -15,6 +15,10 @@ function transitionToDay() {
 }
 
 function loadDay(day: Object) {
+  Dispatcher.handleAction({
+    type: ActionTypes.LOAD_DAY,
+    dayKey: day.get('dayKey')
+  });
   DayAPIUtils.listenToDay(day.toJS());
 }
 
