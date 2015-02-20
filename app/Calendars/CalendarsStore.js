@@ -19,15 +19,15 @@ var _currentDayKey = '';
 var _calendars = Immutable.Map();
 
 function receiveAddedDay(action: {rawDay: RawDay}) {
-  var { yearKey, monthKey, dayKey } = CalendarsUtils.splitRawDay(action.rawDay.key);
+  var { yearKey, monthKey, dayKey } = CalendarsUtils.splitDayKey(action.rawDay.key);
   _calendars = _calendars.mergeIn([yearKey + monthKey, dayKey], {
     count: action.rawDay.value.count
   });
 }
 
 function transitionToDay(action: {dayKey: string}) {
-  var prevKeys = _currentDayKey !== '' ? CalendarsUtils.splitRawDay(_currentDayKey) : null;
-  var { yearKey, monthKey, dayKey } = CalendarsUtils.splitRawDay(action.dayKey);
+  var prevKeys = _currentDayKey !== '' ? CalendarsUtils.splitDayKey(_currentDayKey) : null;
+  var { yearKey, monthKey, dayKey } = CalendarsUtils.splitDayKey(action.dayKey);
 
   _calendars = _calendars.withMutations(calendars => {
     if (prevKeys) {

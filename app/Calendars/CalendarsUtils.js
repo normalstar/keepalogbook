@@ -11,7 +11,7 @@ function removeLeadingZero(string: string): string {
 /**
  * Key is always YYYYMMDD format.
  */
-function splitRawDay(key: string): Object {
+function splitDayKey(key: string): Object {
   var yearKey = key.slice(0, 4);
 
   var monthKey = key.slice(4, 6);
@@ -28,5 +28,5 @@ function splitRawDay(key: string): Object {
 }
 
 module.exports = {
-  splitRawDay
+  splitDayKey
 };
