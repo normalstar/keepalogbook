@@ -11,6 +11,11 @@ module.exports = keyMirror({
   // user
   RECEIVE_USER_META: null,
 
+  // calendar
+  RECEIVE_ADDED_DAY: null,
+  RECEIVE_REMOVED_DAY: null,
+  RECEIVE_CHANGED_DAY: null,
+
   // day
   RECEIVE_ADDED_LOG: null,
   RECEIVE_REMOVED_LOG: null,

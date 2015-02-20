@@ -24,7 +24,20 @@ function stopListeningToUserMeta(user: User) {
   return firebaseUtils.stopListeningToValue(user.dataUrl + '/meta');
 }
 
+function listenToCalendar(user: User) {
+  var daysUrl = user.dataUrl + '/days';
+  firebaseUtils.listenToChildAdded(daysUrl, UserServerActionCreators.receiveAddedDay);
+  firebaseUtils.listenToChildRemoved(daysUrl, UserServerActionCreators.receiveRemovedDay);
+  firebaseUtils.listenToChildChanged(daysUrl, UserServerActionCreators.receiveChangedDay);
+}
+
+function stopListeningToCalendar(user: User) {
+  firebaseUtils.stopListeningToChildren(user.dataUrl + '/days');
+}
+
 module.exports = {
   listenToUserMeta,
-  stopListeningToUserMeta
+  stopListeningToUserMeta,
+  listenToCalendar,
+  stopListeningToCalendar
 };
