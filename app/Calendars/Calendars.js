@@ -10,7 +10,11 @@ var React = require('react/addons');
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 var range = require('lodash/utility/range');
+
+var StoresMixin = require('../StoresMixin');
 var dateUtils = require('../shared/dateUtils');
+var UserViewActionCreators = require('../User/UserViewActionCreators');
+var CalendarsStore = require('./CalendarsStore');
 
 var Calendar = require('../Calendar/Calendar');
 
@@ -18,9 +22,26 @@ require('./Calendars.less');
 
 var Calendars = React.createClass({
   propTypes: {
+    user: PropTypes.object.isRequired
   },
 
-  mixins: [PureRenderMixin],
+  mixins: [StoresMixin, PureRenderMixin],
+
+  stores: [CalendarsStore],
+
+  getStateFromStores(): Object {
+    return {
+      calendars: CalendarsStore.get()
+    };
+  },
+
+  componentWillMount() {
+    UserViewActionCreators.listenToCalendar(this.props.user.get('user'));
+  },
+
+  componentWillUnmount() {
+    UserViewActionCreators.stopListeningToCalendar(this.props.user.get('user'));
+  },
 
   render(): any {
     var currentMonth = dateUtils.getCurrentMoment();

@@ -12,17 +12,19 @@ var assign = require('lodash/object/assign');
 var Store = require('../Store');
 var ActionTypes = require('../ActionTypes');
 
-var _calendar = Immutable.Map({});
+var CalendarsUtils = require('./CalendarsUtils');
 
-function receiveAddedDay(action: {day: Object}) {
-  console.log(action);
+var _calendars = Immutable.Map({});
+
+function receiveAddedDay(action: {rawDay: RawDay}) {
+  _calendars = CalendarsUtils.addRawDayIntoCalendar(action.rawDay, _calendars);
 }
 
 /**
  * Clear out calendar
  */
 function receiveLoggedOut() {
-  _calendar = Immutable.Map({});
+  _calendars = Immutable.Map({});
 }
 
 var actions = {};
@@ -34,6 +36,6 @@ module.exports = assign(new Store(actions), {
   },
 
   get() {
-    return _calendar;
+    return _calendars;
   }
 });

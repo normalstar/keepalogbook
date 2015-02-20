@@ -45,7 +45,7 @@ var Inside = React.createClass({
       <div className="inside">
         <InsideHeader />
 
-        <Calendars />
+        <Calendars user={this.props.user} />
 
         {this.props.children}
 

@@ -14,7 +14,17 @@ function stopListeningToUserMeta(user: Object) {
   return UserAPIUtils.stopListeningToUserMeta(user.toJS());
 }
 
+function listenToCalendar(user: Object) {
+  return UserAPIUtils.listenToCalendar(user.toJS());
+}
+
+function stopListeningToCalendar(user: Object) {
+  return UserAPIUtils.stopListeningToCalendar(user.toJS());
+}
+
 module.exports = {
   listenToUserMeta,
-  stopListeningToUserMeta
+  stopListeningToUserMeta,
+  listenToCalendar,
+  stopListeningToCalendar
 };
