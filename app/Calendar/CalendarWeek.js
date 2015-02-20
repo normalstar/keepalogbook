@@ -25,11 +25,13 @@ var CalendarWeek = React.createClass({
   render(): any {
     var days = range(0, 7).map(function(plus, index) {
       var moment = this.props.sunday.clone().add(plus, 'day');
-      var display = moment.format('D');
+      var dateString = moment.format('YYYYMMD');
+      var display = dateString.slice(6, dateString.length);
       var dayData = this.props.monthData && this.props.monthData.get(display) || null;
       return (
         <CalendarDay
-          display={display}
+          dateString={dateString}
+          isCurrentMonth={this.props.isCurrentMonth}
           key={index}
           dayData={dayData}
         />
