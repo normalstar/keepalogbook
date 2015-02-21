@@ -20,6 +20,7 @@ var CalendarDay = React.createClass({
     dateString: PropTypes.string.isRequired,
     isCurrentMonth: PropTypes.bool.isRequired,
     isDifferentMonthDay: PropTypes.bool.isRequired,
+    isCalendarPage: PropTypes.bool,
     dayData: PropTypes.object
   },
 
@@ -53,7 +54,8 @@ var CalendarDay = React.createClass({
       'calendar-day': true,
       'calendar-day--today': isToday,
       'calendar-day--has-count': count,
-      'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay')
+      'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay'),
+      'calendar-day--on-page': this.props.isCalendarPage
     };
 
     if (count && count < 10) {

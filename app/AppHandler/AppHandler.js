@@ -39,9 +39,10 @@ var AppHandler = React.createClass({
   componentDidMount() {
     var params = this.getParams();
     var pathname = this.getPathname();
-    if ((pathname.indexOf('today') === -1 || isEmpty(params)) && this.state.user.get('auth')) {
+
+    if (pathname.indexOf('today') === -1 && pathname.indexOf('calendar') === -1 && isEmpty(params) && this.state.user.get('auth')) {
       this.replaceWith('today');
-    } else if ((pathname.indexOf('today') > -1 || !isEmpty(params)) && !this.state.user.get('auth')) {
+    } else if ((pathname.indexOf('today') > -1 || pathname.indexOf('calendar') > -1 || !isEmpty(params)) && !this.state.user.get('auth')) {
       this.replaceWith('front');
     }
   },

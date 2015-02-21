@@ -22,6 +22,7 @@ var Calendar = React.createClass({
     year: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
     isCurrentMonth: PropTypes.bool.isRequired,
+    isCalendarPage: PropTypes.bool,
     monthData: PropTypes.object
   },
 
@@ -55,6 +56,7 @@ var Calendar = React.createClass({
           monthDay={monthMoment}
           key={index}
           isCurrentMonth={this.props.isCurrentMonth}
+          isCalendarPage={this.props.isCalendarPage}
           monthData={this.props.monthData}
         />
       );

@@ -8,7 +8,7 @@
 
 var React = require('react/addons');
 var { PropTypes } = React;
-var { PureRenderMixin } = React.addons;
+var { PureRenderMixin, classSet } = React.addons;
 var range = require('lodash/utility/range');
 
 var StoresMixin = require('../StoresMixin');
@@ -22,7 +22,8 @@ require('./Calendars.less');
 
 var Calendars = React.createClass({
   propTypes: {
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    isCalendarPage: PropTypes.bool
   },
 
   mixins: [StoresMixin, PureRenderMixin],
@@ -54,13 +55,19 @@ var Calendars = React.createClass({
           month={monthNum}
           key={'' + yearNum + monthNum}
           isCurrentMonth={minus === 0}
+          isCalendarPage={this.props.isCalendarPage}
           monthData={monthData}
         />
       );
     });
 
+    var classes = classSet({
+      'calendars': true,
+      'calendars--page': this.props.isCalendarPage
+    });
+
     return (
-      <div className="calendars">
+      <div className={classes}>
         {months}
         <div className="calendars__more-button">
           <a href="#"

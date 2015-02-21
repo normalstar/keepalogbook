@@ -4,7 +4,7 @@
 .calendar-day {
   .font-size(@micro-size);
   display: inline-block;
-  width: @base-spacing-unit * 1;
+  width: 14%;
   text-align: center;
   border: 1px solid white;
 }
@@ -49,4 +49,10 @@
 
 .calendar-day--has-count.calendar-day--today {
   color: red;
+}
+
+
+.calendar-day--on-page {
+  .font-size(@h6-size);
+  padding: @base-spacing-unit / 4 0;
 }
