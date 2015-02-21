@@ -11,7 +11,6 @@ var { PureRenderMixin } = React.addons;
 var InsideHeader = require('./InsideHeader');
 var InsideFooter = require('./InsideFooter');
 var UserViewActionCreators = require('../User/UserViewActionCreators');
-var InsideViewActionCreators = require('./InsideViewActionCreators');
 
 var Calendars = require('../Calendars/Calendars');
 
@@ -35,11 +34,6 @@ var Inside = React.createClass({
   componentWillUnmount() {
     UserViewActionCreators.stopListeningToUserMeta(this.props.user.get('user'));
     UserViewActionCreators.stopListeningToCalendar(this.props.user.get('user'));
-  },
-
-  handleClickLogOut(e: Object) {
-    e.preventDefault();
-    InsideViewActionCreators.logOut();
   },
 
   render(): any {
