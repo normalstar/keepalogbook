@@ -47,8 +47,7 @@ var AppHandler = React.createClass({
 
     var isInside = reduce(insidePaths, (inside, path) => {
       if (inside) { return inside; }
-      if (pathname.indexOf(path) > -1) { return true; }
-      return false;
+      return pathname.indexOf(path) > -1;
     }, false);
 
     if (!isInside && isEmpty(params) && this.state.user.get('auth')) {
