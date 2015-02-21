@@ -7,6 +7,7 @@
 var React = require('react/addons');
 var { RouteHandler, Navigation, State } = require('react-router');
 var isEmpty = require('lodash/lang/isEmpty');
+var reduce = require('lodash/collection/reduce');
 
 var AppHandlerActionCreators = require('./AppHandlerViewActionCreators');
 var UserStore = require('../User/UserStore');
@@ -39,10 +40,20 @@ var AppHandler = React.createClass({
   componentDidMount() {
     var params = this.getParams();
     var pathname = this.getPathname();
+    var insidePaths = [
+      'today',
+      'calendar'
+    ];
 
-    if (pathname.indexOf('today') === -1 && pathname.indexOf('calendar') === -1 && isEmpty(params) && this.state.user.get('auth')) {
+    var isInside = reduce(insidePaths, (inside, path) => {
+      if (inside) { return inside; }
+      if (pathname.indexOf(path) > -1) { return true; }
+      return false;
+    }, false);
+
+    if (!isInside && isEmpty(params) && this.state.user.get('auth')) {
       this.replaceWith('today');
-    } else if ((pathname.indexOf('today') > -1 || pathname.indexOf('calendar') > -1 || !isEmpty(params)) && !this.state.user.get('auth')) {
+    } else if ((isInside || !isEmpty(params)) && !this.state.user.get('auth')) {
       this.replaceWith('front');
     }
   },
