@@ -10,7 +10,7 @@ var Dispatcher = require('../Dispatcher');
 var ActionTypes = require('../ActionTypes');
 var firebaseUtils = require('../shared/firebaseUtils');
 
-function logIn(authData?: Auth) {
+function logIn(authData/*::?: Auth*/) {
   Dispatcher.handleAction({
     type: ActionTypes.RECEIVE_AUTH,
     auth: authData || null

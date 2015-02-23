@@ -53,7 +53,8 @@ var CalendarDay = React.createClass({
       'calendar-day': true,
       'calendar-day--today': isToday,
       'calendar-day--has-count': count,
-      'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay')
+      'calendar-day--current-day': this.props.dayData && this.props.dayData.get('isCurrentDay'),
+      'calendar-day--has-count--max': false
     };
 
     if (count && count < 10) {

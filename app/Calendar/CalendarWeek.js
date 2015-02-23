@@ -22,7 +22,7 @@ var CalendarWeek = React.createClass({
 
   mixins: [PureRenderMixin],
 
-  render(): any {
+  render()/*: any*/ {
     var days = range(0, 7).map((plus, index) => {
       var moment = this.props.sunday.clone().add(plus, 'day');
       var isDifferentMonthDay = !moment.isSame(this.props.monthDay, 'month');

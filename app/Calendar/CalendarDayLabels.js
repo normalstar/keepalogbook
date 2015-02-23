@@ -20,7 +20,7 @@ var CalendarDayLabels = React.createClass({
 
   mixins: [PureRenderMixin],
 
-  render(): any {
+  render()/*: any*/ {
     var days = range(0, 7).map((plus, index) => {
       var moment = this.props.sunday.clone().add(plus, 'day');
       var label = moment.format('dd');

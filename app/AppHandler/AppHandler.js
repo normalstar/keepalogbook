@@ -54,7 +54,7 @@ var AppHandler = React.createClass({
     }
   },
 
-  render(): any {
+  render()/*: any*/ {
     var insideHandler = this.state.user.get('user') ?
       <RouteHandler user={this.state.user} key='inside' /> : null;
 

@@ -4,14 +4,14 @@
 
 'use strict';
 
-function removeLeadingZero(string: string): string {
+function removeLeadingZero(string/*: string*/)/*: string*/ {
   return string.charAt(0) === '0' ? string.slice(1, 2) : string;
 }
 
 /**
  * Key is always YYYYMMDD format.
  */
-function splitDayKey(key: string): Object {
+function splitDayKey(key/*: string*/)/*: Object*/ {
   var yearKey = key.slice(0, 4);
 
   var monthKey = key.slice(4, 6);
