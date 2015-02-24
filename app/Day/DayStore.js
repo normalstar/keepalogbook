@@ -21,7 +21,7 @@ var _user: ?Immutable.Map = null;
 function getFreshDay(): Immutable.Map {
   return Immutable.Map({
     day: DayUtils.convertDataForDay(_dayKey, _user),
-    logs: Immutable.Map(),
+    logs: Immutable.OrderedMap(),
     currentLog: ''
   });
 }
