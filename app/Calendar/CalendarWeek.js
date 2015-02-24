@@ -17,6 +17,7 @@ var CalendarWeek = React.createClass({
     sunday: PropTypes.object.isRequired,
     monthDay: PropTypes.object.isRequired,
     isCurrentMonth: PropTypes.bool.isRequired,
+    isCalendarPage: PropTypes.bool,
     monthData: PropTypes.object
   },
 
@@ -34,6 +35,7 @@ var CalendarWeek = React.createClass({
         <CalendarDay
           dateString={dateString}
           isCurrentMonth={this.props.isCurrentMonth}
+          isCalendarPage={this.props.isCalendarPage}
           isDifferentMonthDay={isDifferentMonthDay}
           key={index}
           dayData={dayData}

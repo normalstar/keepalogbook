@@ -62,9 +62,16 @@ var DayFooter = React.createClass({
           {nextLink}
         </span>
         <div className="day-footer__calendar">
-          <a href="#" onClick={this.handleClickCalendar}>
-            <span className="icon-calendar" />
+          <a href="#"
+            onClick={this.handleClickCalendar}
+            className="day-footer__calendar__button day-footer__calendar__button--toggle">
+            <span className="icon-calendar day-footer__calendar__button-icon"/>
           </a>
+
+          <Link to="calendar"
+            className="day-footer__calendar__button day-footer__calendar__button--link">
+            <span className="icon-calendar day-footer__calendar__button-icon"/>
+          </Link>
         </div>
       </div>
     );

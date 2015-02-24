@@ -36,14 +36,44 @@
 
 
 .day-footer__calendar {
-  margin-top: @base-spacing-unit;
-  display: none;
+  margin-top: @base-spacing-unit * 1.5;
 
   .responsive(1024px, {
-    display: block;
     text-align: center;  
-    margin-top: -@base-spacing-unit;
+    margin-top: -@base-spacing-unit * 1.5;
   })
+}
+
+
+.day-footer__calendar__button {
+  display: inline-block;
+  text-align: center;
+  width: @base-spacing-unit * 1.5;
+  height: @base-spacing-unit * 1.5;
+  background: orange;
+  padding-top: @base-spacing-unit * .35;
+  border-radius: @base-spacing-unit * .75;
+}
+
+
+.day-footer__calendar__button--toggle {
+  display: none;
+  .responsive(1024px, {
+    display: inline-block;
+  })
+}
+
+
+.day-footer__calendar__button--link {
+  .responsive(1024px, {
+    display: none;
+  })
+}
+
+
+.day-footer__calendar__button-icon {
+  display: inline-block;
+  color: #fff;
 }
 
 
