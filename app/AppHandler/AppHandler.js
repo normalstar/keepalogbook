@@ -45,10 +45,11 @@ var AppHandler = React.createClass({
       'calendar'
     ];
 
-    var isInside = reduce(insidePaths, (inside, path) => {
-      if (inside) { return inside; }
-      return pathname.indexOf(path) > -1;
-    }, false);
+    var isInside = reduce(
+      insidePaths,
+      (inside, path) => inside || pathname.indexOf(path) > -1,
+      false
+    );
 
     if (!isInside && isEmpty(params) && this.state.user.get('auth')) {
       this.replaceWith('today');
