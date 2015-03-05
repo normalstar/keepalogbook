@@ -32,10 +32,10 @@ var Calendar = React.createClass({
     var monthMoment = dateUtils.parseString('YYYYM', '' + this.props.year + this.props.month);
     var firstWeekSunday = monthMoment.clone().startOf('week');
 
-    function getSundaysInMonth(startSunday, monthDay) {
+    function getSundaysInMonth(startSunday, currentMonthDay) {
       var weeks = [startSunday];
 
-      var addNextSunday = function(sunday, monthDay) {
+      return function addNextSunday(sunday, monthDay) {
         var nextSunday = sunday.clone().add(1, 'w');
 
         if (nextSunday.isSame(monthDay, 'month')) {
@@ -44,12 +44,10 @@ var Calendar = React.createClass({
         } else {
           return weeks;
         }
-      };
-
-      return addNextSunday(startSunday, monthDay);
+      }(startSunday, currentMonthDay);
     }
 
-    var sundayMoments = getSundaysInMonth(firstWeekSunday, monthMoment);
+    var sundayMoments: Array<Object> = getSundaysInMonth(firstWeekSunday, monthMoment);
     var sundays = sundayMoments.map((sunday, index) => {
       return (
         <CalendarWeek sunday={sunday}

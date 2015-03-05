@@ -32,7 +32,7 @@ module.exports = function(grunt) {
       flow: {
         options: {
           experimental: true,
-          blacklist: ['flow']
+          blacklist: ['flow', 'es6.tailCall']
         },
 
         files: [
