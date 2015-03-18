@@ -2,8 +2,6 @@
  * @flow
  */
 
-'use strict';
-
 /**
  * http://stackoverflow.com/questions/7467840/nl2br-equivalent-in-javascript
  */

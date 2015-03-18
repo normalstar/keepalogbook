@@ -2,8 +2,6 @@
  * @flow
  */
 
-'use strict';
-
 var firebaseUtils = require('../shared/firebaseUtils');
 
 function removeLog(log: Log, day: Day, currentCount: number): Promise {

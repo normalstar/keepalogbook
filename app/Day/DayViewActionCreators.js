@@ -2,8 +2,6 @@
  * @flow
  */
 
-'use strict';
-
 var Dispatcher = require('../Dispatcher');
 var ActionTypes = require('../ActionTypes');
 var DayAPIUtils = require('./DayAPIUtils');

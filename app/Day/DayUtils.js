@@ -2,8 +2,6 @@
  * @flow
  */
 
-'use strict';
-
 var Immutable = require('immutable');
 var uniqueId = require('lodash/utility/uniqueId');
 

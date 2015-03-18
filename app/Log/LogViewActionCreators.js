@@ -2,8 +2,6 @@
  * @flow
  */
 
-'use strict';
-
 var LogAPIUtils = require('./LogAPIUtils');
 var LogUtils = require('./LogUtils');
 var Dispatcher = require('../Dispatcher');

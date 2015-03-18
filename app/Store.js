@@ -2,8 +2,6 @@
  * @flow
  */
 
-'use strict';
-
 const uniqueId = require('lodash/utility/uniqueId');
 const Dispatcher = require('./Dispatcher');
 const { EventEmitter } = require('events');

@@ -4,8 +4,6 @@
  * @flow
  */
 
-'use strict';
-
 var Dispatcher = require('../Dispatcher');
 var ActionTypes = require('../ActionTypes');
 var firebaseUtils = require('../shared/firebaseUtils');

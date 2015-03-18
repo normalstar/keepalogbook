@@ -2,8 +2,6 @@
  * @flow
  */
 
-'use strict';
-
 function removeLeadingZero(string/*: string*/)/*: string*/ {
   return string.charAt(0) === '0' ? string.slice(1, 2) : string;
 }
