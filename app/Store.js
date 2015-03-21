@@ -11,9 +11,9 @@ class Store extends EventEmitter {
     this.setMaxListeners(0);
     this.changeEvent = uniqueId('store_');
     this.dispatchToken = Dispatcher.register(payload => {
-      const action = payload.action;
+      var action = payload.action;
       if (dispatchTypes[action.type]) {
-        const emitChange = dispatchTypes[action.type](action);
+        var emitChange = dispatchTypes[action.type](action);
         if (emitChange !== false) {
           this.emitChange();
         }

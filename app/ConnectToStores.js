@@ -2,16 +2,16 @@
  * @flow
  */
 
-const React = require('react/addons');
-const each = require('lodash/collection/each');
+var React = require('react/addons');
+var each = require('lodash/collection/each');
 
-const { Component } = React;
+var { Component } = React;
 
 /*::
 type Stores = Array<Object>;
 */
 
-const ConnectToStores: (
+var ConnectToStores: (
 	x: Component,
 	y: Stores,
 	z: Function

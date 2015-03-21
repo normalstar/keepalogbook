@@ -5,7 +5,6 @@
  */
 
 var Immutable = require('immutable');
-var assign = require('lodash/object/assign');
 
 var Store = require('../Store');
 var ActionTypes = require('../ActionTypes');
@@ -72,11 +71,13 @@ actions[ActionTypes.TRANSITION_TO_DAY] = transitionToDay;
 actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;
 
-module.exports = assign(new Store(actions), {
+class CalendarsStore extends Store {
   initialize() {
-  },
+  }
 
   get() {
     return _calendars;
   }
-});
+}
+
+module.exports = new CalendarsStore(actions);

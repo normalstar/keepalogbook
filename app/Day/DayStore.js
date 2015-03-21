@@ -3,7 +3,6 @@
  */
 
 var Immutable = require('immutable');
-var assign = require('lodash/object/assign');
 
 var Store = require('../Store');
 var ActionTypes = require('../ActionTypes');
@@ -100,13 +99,15 @@ actions[ActionTypes.TRANSITION_TO_DAY] = function() {}; // So will emit change. 
 actions[ActionTypes.RECEIVE_AUTH] = receiveAuth;
 actions[ActionTypes.RECEIVE_LOGGED_OUT] = receiveLoggedOut;
 
-module.exports = assign(new Store(actions), {
+class DayStore extends Store {
   initialize(dayKey: ?string) {
     _dayKey = dayKey || '';
     _day = getFreshDay();
-  },
+  }
 
   get(): Immutable.Map {
     return _day;
   }
-});
+}
+
+module.exports = new DayStore(actions);

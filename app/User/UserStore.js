@@ -5,7 +5,6 @@
  */
 
 var Immutable = require('immutable');
-var assign = require('lodash/object/assign');
 
 var UserUtils = require('./UserUtils');
 var Store = require('../Store');
@@ -46,11 +45,13 @@ actions[ActionTypes.RECEIVE_USER_META] = receiveUserMeta;
 actions[ActionTypes.TOGGLE_CALENDAR] = toggleCalendar;
 actions[ActionTypes.ADD_CALENDAR_YEAR] = addCalendarYear;
 
-module.exports = assign(new Store(actions), {
+class UserStore extends Store {
   initialize() {
-  },
+  }
 
   get() {
     return _user;
   }
-});
+}
+
+module.exports = new UserStore(actions);
