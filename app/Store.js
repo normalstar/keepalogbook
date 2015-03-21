@@ -2,9 +2,9 @@
  * @flow
  */
 
-const uniqueId = require('lodash/utility/uniqueId');
-const Dispatcher = require('./Dispatcher');
-const { EventEmitter } = require('events');
+var uniqueId = require('lodash/utility/uniqueId');
+var Dispatcher = require('./Dispatcher');
+var { EventEmitter } = require('events');
 
 class Store extends EventEmitter {
   constructor(dispatchTypes: {[key:string]: Function}) {
