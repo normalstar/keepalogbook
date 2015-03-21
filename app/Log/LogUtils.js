@@ -1,5 +1,3 @@
-'use strict';
-
 var Immutable = require('immutable');
 
 function convertRawLog(rawLog: RawLog, day: Day): Immutable.Map {

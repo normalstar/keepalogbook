@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function(options) {
   options = options || {};
   var express = require('express');
